@@ -155,9 +155,9 @@ Scratch `NonDGTransformBaseline` (49.9M) reaches 47.4 ± 1.3% seen and 41.3 ± 4
 
 ## 7. Reusable Resources & Verifiable Artifacts
 
-- **`dgg_latent`, `dgg_codebook`, `dgg_vit_decoder`:** Three standalone Python packages for continuous latent diffusion losses and final-SC readout (`stock_generate_with_readout`), debiased patch codebooks/teachers, and the 34.15M ViT+Conv $h_v \to 768^2$ decoder.
-- **Upstream `transformers` Bugfix (`dg_attn_fix`):** Fixes dropped `create_masks_for_generate(...)` assignment in `DiffusionGemmaEncoderModel.forward` when given a 2D `attention_mask` (`0001-fix-diffusion-gemma-prefill-multimodal-masks.patch` + `src/dg_attn_fix.py`).
-- **931-Asset Open Bundle & Raw Predictions:** SHA-256 cataloged (`outputs/m4/staging_manifest.json`) across GitHub (`bumblebeers`), Hugging Face (`bumblebeer`), and Kaggle (`unclebumblebeer`), **including raw `.npy` prediction arrays and decoded grids** for independent rescoring via `cg/cg_score_preds.py` and `cg/cg_node_metrics.py`.
+- **Standalone Python Libraries (`v0.1.0`):** [`dgg-latent`](https://github.com/bumblebeers/dgg-latent) (continuous latent diffusion losses, readout heads, and `stock_generate_with_readout`), [`dgg-codebook`](https://github.com/bumblebeers/dgg-codebook) (continuous vocabulary chords, de-biasing, and spatial teachers), and [`dgg-vit-decoder`](https://github.com/bumblebeers/dgg-vit-decoder) (572.8M SigLIP vision-stack loader and 34.15M ViT+Conv $h_v \to 768^2$ decoder).
+- **Upstream `transformers` Bugfix (`dg_attn_fix`):** Fixes dropped `create_masks_for_generate(...)` assignment in `DiffusionGemmaEncoderModel.forward` under 2D `attention_mask` ([`bumblebeers/transformers` branch `fix/diffusion-gemma-prefill-multimodal-masks`](https://github.com/bumblebeers/transformers/tree/fix/diffusion-gemma-prefill-multimodal-masks)).
+- **931-Asset Open Bundle & Raw Predictions:** SHA-256 cataloged across [`bumblebeers/dgg2-latent-code-graphs`](https://github.com/bumblebeers/dgg2-latent-code-graphs) (code, `PREREG.json`, offline scorers `cg/cg_score_preds.py` & `cg/cg_node_metrics.py`), [`bumblebeer/dgg2-code-graph-benchmarks`](https://huggingface.co/datasets/bumblebeer/dgg2-code-graph-benchmarks) and [`unclebumblebeer/dgg2-code-graph-benchmarks`](https://www.kaggle.com/datasets/unclebumblebeer/dgg2-code-graph-benchmarks) (benchmark packs & raw `.npy` predictions), and [`bumblebeer/dgg2-latent-code-graphs-adapters`](https://huggingface.co/bumblebeer/dgg2-latent-code-graphs-adapters) (LoRA adapters, readout heads, and `ImageDecoder` weights).
 
 ---
 
