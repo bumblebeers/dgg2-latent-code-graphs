@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """src/cg_gemma4_ar_runner.py -- Gemma 4 Autoregressive Baseline Runner.
 
-Implements two matched Gemma 4 (26B total / 4B active MoE) autoregressive baselines:
+Implements two Gemma 4 (26B total / 4B active MoE) autoregressive baselines sharing the 26B-A4B trunk and SigLIP vision stack:
 1. Arm 1 (--mode prompted):
    - Gemma4ForConditionalGeneration + AutoProcessor in bfloat16.
    - 8-class palette legend (0=empty, 1=mod_header, 2=function, 3=class, 4=method, 5=test, 6=call_edge, 7=marked).

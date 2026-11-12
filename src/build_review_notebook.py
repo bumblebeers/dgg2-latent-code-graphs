@@ -63,9 +63,8 @@ def build() -> Dict[str, Any]:
     # =========================================================================
     # Section 1: The Latent Roadmap Paradigm
     # =========================================================================
-    cells.append(md_cell(r"""# DiffusionGemma 2: Latent Code Graphs & Embeddings
-## Autonomous Code Refactoring via Multimodal Latent Space Diffusion
-### Kaggle Gemma 4 Developer Agent Paper Track Demonstration
+    cells.append(md_cell(r"""# Latent Roadmaps: Soft-Token Re-Feeding in DiffusionGemma for Code Graphs
+## Chaining AST Call-Graph Edits Across Generations via Predicted Vision Latents
 
 **Author:** bumblebeers (GitHub: @bumblebeers)  
 **Date:** November 2026  
@@ -73,16 +72,15 @@ def build() -> Dict[str, Any]:
 
 ---
 
-### 1. The Latent Roadmap Paradigm
-Traditional Code Large Language Models (LLMs) operate autoregressively, predicting one token at a time without an explicit structural plan. When performing complex architectural refactorings—such as removing deprecated methods, pruning dead-code subgraphs, inverting dependency flows, or migrating interfaces—pure token-level generation often suffers from cascading syntax drifts and localized hallucination.
+### 1. The Latent Roadmap Paradigm & Cross-Generation Soft-Token Re-Feeding
+To our knowledge, this work presents the first adaptation of a pretrained text-diffusion LLM (`google/diffusiongemma-26B-A4B-it`) to execute chained latent state transitions by **re-feeding its own predicted vision latents** across complete generations. Unlike DiffusionGemma's built-in self-conditioning between denoising steps within a single generation, soft-token re-feeding maps the predicted vision latents ($\hat{\mathbf{h}}_v \in \mathbb{R}^{256 \times 1152}$) back through frozen `embed_vision` onto the next generation's canvas alongside the next natural-language instruction:
 
-**DiffusionGemma 2 (DGG2)** introduces the **Latent Roadmap Paradigm**:
 1. **Structural Abstract Syntax Tree (AST) Extraction**: Source code is parsed into a directed call graph of functions, methods, classes, and tests.
-2. **Visual & Symbolic Representation**: The graph is encoded as a $16 \\times 16$ adjacency matrix and rendered as a $768 \\times 768$ RGB canvas where **one cell corresponds exactly to one ViT patch** ($48 \\times 48$ px).
-3. **Latent Space Refactoring**: DiffusionGemma diffuses in continuous latent space ($\\mathbf{h}_v \\in \\mathbb{R}^{256 \\times 1152}$ or token distributions $\\mathbf{p} \\in \\Delta^{256 \\times K}$), conditioning on natural-language refactoring instructions.
-4. **Instant Verification & Readout**: A fast linear ridge reader or 34.15M parameter ViT decoder instantly projects the latent roadmap back into discrete graph states and verified code changes.
+2. **Visual & Symbolic Representation**: The graph is encoded as a $16 \\times 16$ adjacency matrix and rendered as a $768 \\times 768$ RGB canvas where **one cell corresponds to one ViT patch** ($48 \\times 48$ px).
+3. **Cross-Generation Soft-Token Re-Feeding**: Holding model weights fixed, caller-decomposed 2-step re-feeding lifts 5-compound AST accuracy from $48.0\\pm 1.7\\%$ (1-pass) to $82.1\\pm 1.0\\%$ ($0.3\\% \\to 100.0\\%$ on `reverse_edges + keep_callees`), and 3-step re-feeding lifts unseen `keep_callers` from $0.0\\%$ to $90.8\\pm 4.2\\%$ 22-way ($0.0\\%$ exact).
+4. **Verification & Readout (`dgg_latent` + `dgg_vit_decoder`)**: A closed-form Ridge reader (`reader.npz`) or 34.15M parameter ViT+Conv decoder projects the latent roadmap back into discrete graph states or RGB images.
 
-Below is the **Hero Architecture Roadmap (Figure 1)** illustrating the full end-to-end framework."""))
+Below is **Figure 1** illustrating single-pass collapse vs. 3-step cross-generation soft-token re-feeding."""))
 
     cells.append(code_cell("""# Display Hero Figure 1: The Multimodal Latent Roadmap Paradigm
 import os
@@ -448,39 +446,39 @@ else:
 
     # =========================================================================
     # =========================================================================
-    # Section 6: Baseline Controls & Matched Gemma 4 Autoregressive (AR) Comparison
+    # Section 6: Baseline Controls & Preliminary Gemma 4 Autoregressive (AR) Reference
     # =========================================================================
-    cells.append(md_cell(r"""### 6. Baseline Controls & Matched Gemma 4 Autoregressive (AR) Comparison
-To establish rigorous empirical controls across model families, we evaluated:
-1. **Non-Diffusion Spatial Transformer Baselines (~26.8M params)**: 2D spatial self-attention and unpooled cross-attention to instruction tokens (`all-MiniLM-L6-v2`), trained under direct regression against target latents $\mathbf{h}_v$.
-2. **Matched Gemma 4 26B-A4B-it Autoregressive Baselines**: Evaluated under both zero-shot prompting (`gemma4_ar_prompted`) and LoRA fine-tuning ($r=64$, seed 42, `gemma4_ar_lora_r64_s42`) generating serialized $16 \times 16$ adjacency tokens under causal left-to-right attention.
+    cells.append(md_cell(r"""### 6. Baseline Controls & Preliminary Gemma 4 Autoregressive (AR) Reference
+To establish empirical controls across model families, we evaluated:
+1. **Non-Diffusion Spatial Transformer Baselines (~49.9M params)**: 2D spatial self-attention and unpooled cross-attention to instruction tokens (`all-MiniLM-L6-v2`), trained under direct regression against target latents $\mathbf{h}_v$ for the full 4,824-step schedule (`p < 1e-8` vs. LoRA DG across all splits).
+2. **Preliminary Gemma 4 26B-A4B-it Autoregressive References**: Sharing the 26B-A4B trunk and SigLIP vision stack, evaluated under 2-shot prompting (`gemma4_ar_prompted`, 2 deterministic training exemplars) and single-seed LoRA fine-tuning ($r=64$, seed 42, `gemma4_ar_lora_r64_s42`), which stopped at **354 of 4,824 planned steps** (`cutoff_hit: true` in `training_meta.json`, ~7% of DiffusionGemma's schedule).
 
 #### Complete 4-Split Benchmark Comparison ($N=360$ Each, Frozen Results)
 
-| Evaluation Split ($N=360$) | Metric | Gemma 4 AR Prompted (`gemma4_ar_prompted`) | Gemma 4 AR LoRA $r=64$ (`gemma4_ar_lora_r64_s42`) | Best Non-DG Control (Spatial XAttn + EncLoRA) | **LoRA DiffusionGemma (2-Seed Mean)** | DiffusionGemma Advantage |
+| Evaluation Split ($N=360$) | Metric | Gemma 4 AR Prompted (2-Shot) | Gemma 4 AR LoRA $r=64$ (354/4,824 steps, s42) | Best Non-DG Control (2-Seed Mean) | **LoRA DiffusionGemma (2-Seed Mean)** | Empirical Notes |
 | :--- | :--- | :---: | :---: | :---: | :---: | :--- |
-| **Split 1: `seen_bal360`** | $K$-way Accuracy | $15.56\%$ | $73.89\%$ | $74.58\%$ | $\mathbf{91.9 \pm 1.1\%}$ | **$+18.0\text{ pp}$** over LoRA AR ($+17.3\text{ pp}$ over Non-DG) |
-| | Exact Match | $7.50\%$ | $13.61\%$ | $\sim 10.0\%$ | $\mathbf{62.2 \pm 4.2\%}$ | **$4.6\times$ higher exact match** |
-| | Edge F1 Score | $0.3778$ | $0.8130$ | — | $\mathbf{0.9625}$ | $+0.1495$ over LoRA AR |
-| | Parse Rate | $99.44\%$ | $89.44\%$ | $100.0\%$ | $\mathbf{100.0\%}$ | Perfect ridge grid recovery |
-| **Split 2: `unseen_para_bal360`** | $K$-way Accuracy | $13.33\%$ | $70.56\%$ | $48.33\%$ | $\mathbf{78.5 \pm 3.2\%}$ | **$+7.9\text{ pp}$** over LoRA AR ($+30.2\text{ pp}$ over Non-DG) |
-| | Exact Match | $6.39\%$ | $10.83\%$ ($14.72\%$ cand) | $\sim 10.0\%$ | $\mathbf{47.1 \pm 3.7\%}$ | **$4.3\times$ higher exact match** |
-| | Edge F1 Score | $0.3551$ | $0.7818$ | — | $\mathbf{0.8965}$ | $+0.1147$ over LoRA AR |
-| | Parse Rate | $99.44\%$ | $83.89\%$ | $100.0\%$ | $\mathbf{100.0\%}$ | Perfect ridge grid recovery |
-| **Split 3: `unseen_infer_360`** | $K$-way Accuracy | $17.50\%$ | $72.22\%$ | $26.11\%$ | $\mathbf{61.4 \pm 2.5\%}$ | **$+35.3\text{ pp}$** over Non-DG ($61.4\%$ vs $72.2\%$ AR) |
-| | Exact Match | $8.89\%$ | $10.56\%$ ($13.61\%$ cand) | $\sim 8.0\%$ | $\mathbf{41.2 \pm 1.2\%}$ | **$3.9\times$ higher exact match** |
-| | Edge F1 Score | $0.4576$ | $0.8033$ | — | $\mathbf{0.8528}$ | $+0.0495$ over LoRA AR |
-| | Parse Rate | $99.44\%$ | $85.28\%$ | $100.0\%$ | $\mathbf{100.0\%}$ | Perfect ridge grid recovery |
-| **Split 4: `refeed_heldout_comp_bal360`** | $K$-way Accuracy | $0.56\%$ | $55.00\%$ | $41.11\%$ | $\mathbf{82.1 \pm 1.0\%}$ | **$+27.1\text{ pp}$** over LoRA AR ($+41.0\text{ pp}$ over Non-DG) |
-| | Exact Match | $0.00\%$ | $6.39\%$ | $0.00\%$ | $\mathbf{47.8 \pm 2.2\%}$ | **$7.5\times$ higher exact match** |
-| | Edge F1 Score | $0.1896$ | $0.7867$ | — | $\mathbf{0.8996}$ | $+0.1129$ over LoRA AR |
-| | Parse Rate | $99.44\%$ | $86.94\%$ | $100.0\%$ | $\mathbf{100.0\%}$ | Perfect ridge grid recovery |
-| | Source Copy Rate | $23.06\%$ | $0.56\%$ | $0.00\%$ | $\mathbf{0.00\%}$ | **Zero unedited source copies** across 720 trials |
+| **Split 1: `seen_bal360`** | $K$-way Accuracy | $15.56\%$ | $73.89\%$ | $75.69\%$ | $\mathbf{91.9 \pm 1.1\%}$ | $+16.2\text{ pp}$ vs best Non-DG ($p<10^{-8}$) |
+| | Exact Match | $7.50\%$ | $13.61\%$ | $7.22\%$ | $\mathbf{62.2 \pm 4.2\%}$ | $62.2\%$ vs $7.2\%$ Non-DG ($13.6\%$ at 354 AR steps) |
+| | Edge F1 Score | $0.3778$ | $0.8130$ | — | $\mathbf{0.9625}$ | $+0.1495$ vs 354-step AR |
+| | Parse Rate | $99.44\%$ | $89.44\%$ | $100.0\%$ | $\mathbf{100.0\%}$ | Deterministic Ridge recovery |
+| **Split 2: `unseen_para_bal360`** | $K$-way Accuracy | $13.33\%$ | $70.56\%$ | $49.17\%$ | $\mathbf{78.5 \pm 3.2\%}$ | $+29.3\text{ pp}$ vs best Non-DG ($p<10^{-8}$) |
+| | Exact Match | $6.39\%$ | $10.83\%$ ($14.72\%$ cand) | $3.33\%$ | $\mathbf{47.1 \pm 3.7\%}$ | $47.1\%$ vs $3.3\%$ Non-DG |
+| | Edge F1 Score | $0.3551$ | $0.7818$ | — | $\mathbf{0.8965}$ | $+0.1147$ vs 354-step AR |
+| | Parse Rate | $99.44\%$ | $83.89\%$ | $100.0\%$ | $\mathbf{100.0\%}$ | Deterministic Ridge recovery |
+| **Split 3: `unseen_infer_360`** | $K$-way Accuracy | $17.50\%$ | $72.22\%$ | $23.19\%$ | $\mathbf{61.4 \pm 2.5\%}$ | $+38.2\text{ pp}$ vs Non-DG; 354-step AR leads 22-way ($72.2\%$) |
+| | Exact Match | $8.89\%$ | $10.56\%$ ($13.61\%$ cand) | $0.00\%$ | $\mathbf{41.2 \pm 1.2\%}$ | $41.2\%$ vs $0.0\%$ Non-DG |
+| | Edge F1 Score | $0.4576$ | $0.8033$ | — | $\mathbf{0.8528}$ | $+0.0495$ vs 354-step AR |
+| | Parse Rate | $99.44\%$ | $85.28\%$ | $100.0\%$ | $\mathbf{100.0\%}$ | Deterministic Ridge recovery |
+| **Split 4: `refeed_heldout_comp_bal360`** | $K$-way Accuracy | $0.56\%$ | $55.00\%$ | $34.58\%$ | $\mathbf{82.1 \pm 1.0\%}$ | $+47.5\text{ pp}$ vs Non-DG; 2-step re-feed helps all trained arms |
+| | Exact Match | $0.00\%$ | $6.39\%$ | $0.00\%$ | $\mathbf{47.8 \pm 2.2\%}$ | $47.8\%$ vs $0.0\%$ Non-DG ($6.4\%$ at 354 AR steps) |
+| | Edge F1 Score | $0.1896$ | $0.7867$ | — | $\mathbf{0.8996}$ | $+0.1129$ vs 354-step AR |
+| | Parse Rate | $99.44\%$ | $86.94\%$ | $100.0\%$ | $\mathbf{100.0\%}$ | Deterministic Ridge recovery |
+| | Source Copy Rate | $23.06\%$ | $0.56\%$ | $0.00\%$ | $\mathbf{0.00\%}$ | Zero unedited source copies across 720 DG trials |
 
-#### Key Insights: Bidirectional Diffusion vs. Causal Autoregression
-1. **The Exact Match Chasm**: Causal AR models suffer from error cascading across sequential tokens, stalling exact match between $10.56\%$ and $13.61\%$. LoRA DiffusionGemma refines all 256 tokens simultaneously under full bidirectional attention, yielding **$62.2 \pm 4.2\%$ exact match on seen** ($4.6\times$ higher) and **$47.1 \pm 3.7\%$ on unseen** ($4.3\times$ higher).
-2. **Zero-Shot Prompting Collapse**: Zero-shot prompted Gemma 4 AR parses reliably ($99.44\%$) but achieves only $0.56\%$ $K$-way on compound refactorings, reverting to unedited source copies $23.06\%$ of the time.
-3. **Multi-Step Refactoring Supremacy**: Closed-loop soft-token re-feeding in DiffusionGemma achieves **$82.1 \pm 1.0\%$ $K$-way** and **$47.8 \pm 2.2\%$ exact match** on compound operations ($7.5\times$ higher exact match than LoRA AR's $6.39\%$), with **$0.00\%$ source copy rate** across all 720 trials.
+#### Empirical Takeaways & Training-Budget Caveat
+1. **Budget-Confounded AR Reference**: At 354 of 4,824 optimizer steps (7% of DG's schedule), Gemma 4 AR LoRA already leads LoRA DG on `unseen_infer_360` 22-way accuracy ($72.2\%$ vs. $61.4\%$), while trailing by $3.0\times\text{–}7.5\times$ on exact-grid match across splits ($10.6\%–14.7\%$ vs. $41.2\%–62.2\%$). Because of the $7\%$ step budget, the cause of these differences is untested; also note AR LoRA scores $0/14$ on depth-1 `mark_reachable` items, so its `mark_reachable` deficit is not multi-hop-specific.
+2. **2-Shot Prompting**: 2-shot prompted Gemma 4 AR parses reliably ($99.44\%$) and scores $13.3\%–17.5\%$ 22-way on single edits ($0.56\%$ on 2-step re-feeding).
+3. **Cross-Generation Soft-Token Re-Feeding**: Two-step re-feeding lifts LoRA DG from $48.0\pm 1.7\%$ (1-pass) to **$82.1 \pm 1.0\%$ $K$-way** and **$47.8 \pm 2.2\%$ exact match** ($0.00\%$ source copy rate), while also assisting AR LoRA ($55.0\%$) and Non-DG ($34.6\%$).
 
 Below, we load `outputs/m2/checkpoints/nondg_enc_lora_s42.pt` and run a zero-target-peeking forward pass conditioned on the real natural language instruction `"Delete all method symbols and their calls."` (held-out operation `"delete_methods"`) on a held-out graph from `httpx`. The predicted $\hat{\mathbf{h}}_v$ is decoded with `reader.npz` and scored against all 22 candidate states in the pre-registered candidate pool."""))
 
@@ -567,19 +565,19 @@ if os.path.exists(ckpt_path) and os.path.exists(hv_path) and os.path.exists(pack
 else:
     print("Checkpoint or test data not found locally.")
 
-# Print matched Gemma 4 Autoregressive benchmark comparison table
-print("\\n" + "=" * 80)
-print("Matched Gemma 4 AR Baseline Comparison Across All 4 Splits (N=360 Each)")
-print("=" * 80)
-print(f"{'Split':<28} | {'Prompted AR':<12} | {'LoRA AR r=64':<14} | {'Non-DG Best':<12} | {'LoRA DG (2-Seed)':<18}")
+# Print preliminary Gemma 4 Autoregressive benchmark comparison table
+print("\\n" + "=" * 84)
+print("Preliminary Gemma 4 AR Reference Across All 4 Splits (N=360; LoRA AR = 354/4,824 steps)")
+print("=" * 84)
+print(f"{'Split':<28} | {'2-Shot AR':<12} | {'AR LoRA (354s)':<14} | {'Non-DG Best':<12} | {'LoRA DG (2-Seed)':<18}")
 print("-" * 92)
-print(f"{'1. seen_bal360 (K-way/Exact)':<28} | {'15.6% / 7.5%':<12} | {'73.9% / 13.6%':<14} | {'74.6% / ~10%':<12} | {'91.9% / 62.2% (+18.0pp)':<18}")
-print(f"{'2. unseen_para (K-way/Exact)':<28} | {'13.3% / 6.4%':<12} | {'70.6% / 10.8%':<14} | {'48.3% / ~10%':<12} | {'78.5% / 47.1% (+7.9pp)':<18}")
-print(f"{'3. unseen_infer (K-way/Exact)':<28} | {'17.5% / 8.9%':<12} | {'72.2% / 10.6%':<14} | {'26.1% / ~8%':<12} | {'61.4% / 41.2% (+35.3pp)':<18}")
-print(f"{'4. refeed_comp (K-way/Exact)':<28} | {'0.6% / 0.0%':<12} | {'55.0% / 6.4%':<14} | {'41.1% / 0.0%':<12} | {'82.1% / 47.8% (+27.1pp)':<18}")
+print(f"{'1. seen_bal360 (K-way/Exact)':<28} | {'15.6% / 7.5%':<12} | {'73.9% / 13.6%':<14} | {'75.7% / 7.2%':<12} | {'91.9% / 62.2%':<18}")
+print(f"{'2. unseen_para (K-way/Exact)':<28} | {'13.3% / 6.4%':<12} | {'70.6% / 14.7%':<14} | {'49.2% / 3.3%':<12} | {'78.5% / 47.1%':<18}")
+print(f"{'3. unseen_infer (K-way/Exact)':<28} | {'17.5% / 8.9%':<12} | {'72.2% / 13.6%':<14} | {'23.2% / 0.0%':<12} | {'61.4% / 41.2%':<18}")
+print(f"{'4. refeed_comp (K-way/Exact)':<28} | {'0.6% / 0.0%':<12} | {'55.0% / 6.4%':<14} | {'34.6% / 0.0%':<12} | {'82.1% / 47.8%':<18}")
 print("-" * 92)
-print("Core Finding: DiffusionGemma achieves 4.5x-7.5x higher exact match over causal AR.")
-print("Composition: 2-step soft-token re-feeding delivers 82.1% K-way (0.00% copy rate).")"""))
+print("Note: AR LoRA stopped at 354 of 4,824 steps (7% of DG budget); cause of gap is untested.")
+print("Composition: 2-step soft-token re-feeding lifts DG from 48.0% (1-pass) to 82.1% K-way.")"""))
 
     # =========================================================================
     # Section 7: Google Water Bottle Showcase
@@ -647,17 +645,18 @@ print("Code Graphs   : Each cell is an atomic 48x48 px token patch -> 100% discr
     # =========================================================================
     cells.append(md_cell(r"""### 8. Summary and Resources
 This interactive demonstration showed:
-1. **The Latent Roadmap Paradigm**: Formulating code refactoring as diffusion across multimodal latent graph representations.
-2. **Upstream Contribution**: The identification and turnkey resolution of the multimodal attention mask dropping bug in HuggingFace `transformers` (PR [#50684](https://github.com/huggingface/transformers/pull/50684)).
-3. **Modular Toolkits**: The release of `dgg_latent`, `dgg_codebook`, and `dgg_vit_decoder` for continuous latent diffusion and visual decoding.
-4. **Empirical Gate A1 & Controls**: 100% cell readability on held-out codebases (`httpx`), rigorous spatial transformer controls, and matched causal autoregressive baselines (`gemma-4-26B-A4B-it` AR prompted and LoRA).
-5. **Architectural Insight (Claim C06)**: Explaining why diffusion transformers excel at discrete graph transformations via macroscopic patch permutation (4.5x–7.3x higher exact match over autoregressive generation).
+1. **Cross-Generation Soft-Token Re-Feeding**: Adapting a pretrained text-diffusion LLM (`google/diffusiongemma-26B-A4B-it`) to chain AST call-graph state transitions across generations by re-feeding its own predicted vision latents (`h_v_hat` -> frozen `embed_vision`).
+2. **Upstream Contribution**: Identification and turnkey resolution of the multimodal attention mask dropping bug in HuggingFace `transformers` through 5.22.2 (PR [#50684](https://github.com/huggingface/transformers/pull/50684)).
+3. **Modular Toolkits**: Release of `dgg_latent`, `dgg_codebook`, and `dgg_vit_decoder` (`v0.1.0`) implementing the continuous readout and re-feeding loop.
+4. **Empirical Gate A1 & Controls**: 100% clean cell readability on held-out codebases (`httpx`), scratch spatial transformer controls (`p < 1e-8`), and preliminary `google/gemma-4-26B-A4B-it` autoregressive references (2-shot prompted and 354-of-4,824-step single-seed LoRA).
+5. **Architectural Insight (Claim C06)**: Why macroscopic $16 \times 16$ patch permutation aligns cleanly with 1-cell-per-patch discrete graph transformations while blurring sub-patch natural-image detail.
 
 **Links & Artifacts**:
-- GitHub Repository & Patches: `src/patches/` and `src/`
+- Main Repository & Patches: `src/patches/` and `src/` (`https://github.com/bumblebeers/dgg2-latent-code-graphs`)
 - Upstream PR: [huggingface/transformers#50684](https://github.com/huggingface/transformers/pull/50684) (`[DiffusionGemma] Assign prefill multimodal mask in DiffusionGemmaEncoderModel.forward`)
-- Checkpoint Releases: `outputs/m2/checkpoints/` and `outputs/m2/arms/`
-- Kaggle Paper Submission: *"DiffusionGemma 2: Latent Code Graphs & Embeddings"*"""))
+- Benchmark Dataset & Raw Predictions: `https://huggingface.co/datasets/bumblebeer/dgg2-code-graph-benchmarks`
+- Adapters & Readout Checkpoints: `https://huggingface.co/bumblebeer/dgg2-latent-code-graphs-adapters`
+- Manuscript (`docs/paper_draft.md`): *"Latent Roadmaps: Soft-Token Re-Feeding in DiffusionGemma for Code Graphs"*"""))
 
     return {
         "cells": cells,

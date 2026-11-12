@@ -277,42 +277,42 @@ The per-target mechanistic breakdown reveals dramatic recovery across operation 
 
 ---
 
-### 5.3 Gemma 4 Autoregressive (AR) Baseline Comparison Across All 4 Splits ($N=360$)
+### 5.3 Preliminary Gemma 4 Autoregressive (AR) Reference Across All 4 Splits ($N=360$)
 
-To establish a direct, apples-to-apples baseline against standard causal autoregressive generation, we evaluated the matched instruction-tuned model **`google/gemma-4-26B-A4B-it`** under both zero-shot prompting (`gemma4_ar_prompted`) and parameter-efficient fine-tuning with identical rank ($r=64$, seed 42, `gemma4_ar_lora_r64_s42`). In these AR baselines, the $16 \times 16$ adjacency matrix is serialized into 256 tokens and generated token-by-token under causal left-to-right attention.
+To provide a preliminary autoregressive reference sharing the 26B-A4B trunk and SigLIP vision stack (though not the full training budget), we evaluated **`google/gemma-4-26B-A4B-it`** under 2-shot prompting (`gemma4_ar_prompted`, 2 deterministic training exemplars) and single-seed LoRA fine-tuning ($r=64$, seed 42, `gemma4_ar_lora_r64_s42`), which stopped at **354 of 4,824 planned optimizer steps** (`cutoff_hit: true` in `training_meta.json`, ~7% of DiffusionGemma's 3-epoch schedule). In these AR baselines, the $16 \times 16$ adjacency matrix is serialized into 256 tokens and generated token-by-token under causal left-to-right attention.
 
 #### 5.3.1 Complete 4-Split Benchmark Ledger ($N=360$ Each, Frozen Numbers)
 
-| Evaluation Split ($N=360$) | Metric | Gemma 4 AR Prompted (`gemma4_ar_prompted`) | Gemma 4 AR LoRA $r=64$ (`gemma4_ar_lora_r64_s42`) | Best Non-DG Control (Spatial XAttn + EncLoRA) | **LoRA DiffusionGemma (2-Seed Mean)** | DiffusionGemma Advantage |
+| Evaluation Split ($N=360$) | Metric | Gemma 4 AR Prompted (2-Shot, `gemma4_ar_prompted`) | Gemma 4 AR LoRA $r=64$ (354 of 4,824 steps, single seed) | Best Non-DG Control (Spatial XAttn + EncLoRA) | **LoRA DiffusionGemma (2-Seed Mean)** | Empirical Gap (Confounded w/ 7% AR Step Budget) |
 | :--- | :--- | :---: | :---: | :---: | :---: | :--- |
-| **Split 1: `seen_bal360`** | $K$-way Accuracy | $15.56\%$ | $73.89\%$ | $74.58\%$ | $\mathbf{91.9 \pm 1.1\%}$ | **$+18.0\text{ pp}$** over LoRA AR ($+17.3\text{ pp}$ over Non-DG) |
-| | Exact Match | $7.50\%$ | $13.61\%$ | $\sim 10.0\%$ | $\mathbf{62.2 \pm 4.2\%}$ | **$4.6\times$ higher exact match** |
-| | Edge F1 Score | $0.3778$ | $0.8130$ | — | $\mathbf{0.9625}$ | $+0.1495$ over LoRA AR |
-| | Parse Rate | $99.44\%$ | $89.44\%$ | $100.0\%$ | $\mathbf{100.0\%}$ | Perfect ridge grid recovery |
-| **Split 2: `unseen_para_bal360`** | $K$-way Accuracy | $13.33\%$ | $70.56\%$ | $48.33\%$ | $\mathbf{78.5 \pm 3.2\%}$ | **$+7.9\text{ pp}$** over LoRA AR ($+30.2\text{ pp}$ over Non-DG) |
-| | Exact Match | $6.39\%$ | $10.83\%$ ($14.72\%$ cand) | $\sim 10.0\%$ | $\mathbf{47.1 \pm 3.7\%}$ | **$4.3\times$ higher exact match** |
-| | Edge F1 Score | $0.3551$ | $0.7818$ | — | $\mathbf{0.8965}$ | $+0.1147$ over LoRA AR |
-| | Parse Rate | $99.44\%$ | $83.89\%$ | $100.0\%$ | $\mathbf{100.0\%}$ | Perfect ridge grid recovery |
-| **Split 3: `unseen_infer_360`** | $K$-way Accuracy | $17.50\%$ | $72.22\%$ | $26.11\%$ | $\mathbf{61.4 \pm 2.5\%}$ | **$+35.3\text{ pp}$** over Non-DG ($61.4\%$ vs $72.2\%$ AR) |
-| | Exact Match | $8.89\%$ | $10.56\%$ ($13.61\%$ cand) | $\sim 8.0\%$ | $\mathbf{41.2 \pm 1.2\%}$ | **$3.9\times$ higher exact match** |
-| | Edge F1 Score | $0.4576$ | $0.8033$ | — | $\mathbf{0.8528}$ | $+0.0495$ over LoRA AR |
-| | Parse Rate | $99.44\%$ | $85.28\%$ | $100.0\%$ | $\mathbf{100.0\%}$ | Perfect ridge grid recovery |
-| **Split 4: `refeed_heldout_comp_bal360`** | $K$-way Accuracy | $0.56\%$ | $55.00\%$ | $41.11\%$ | $\mathbf{82.1 \pm 1.0\%}$ | **$+27.1\text{ pp}$** over LoRA AR ($+41.0\text{ pp}$ over Non-DG) |
-| | Exact Match | $0.00\%$ | $6.39\%$ | $0.00\%$ | $\mathbf{47.8 \pm 2.2\%}$ | **$7.5\times$ higher exact match** |
-| | Edge F1 Score | $0.1896$ | $0.7867$ | — | $\mathbf{0.8996}$ | $+0.1129$ over LoRA AR |
-| | Parse Rate | $99.44\%$ | $86.94\%$ | $100.0\%$ | $\mathbf{100.0\%}$ | Perfect ridge grid recovery |
-| | Source Copy Rate | $23.06\%$ | $0.56\%$ | $0.00\%$ | $\mathbf{0.00\%}$ | **Zero unedited source copies** across 720 trials |
+| **Split 1: `seen_bal360`** | $K$-way Accuracy | $15.56\%$ | $73.89\%$ | $74.58\%$ | $\mathbf{91.9 \pm 1.1\%}$ | $+18.0\text{ pp}$ vs 354-step AR ($+16.2\text{ pp}$ vs best Non-DG, $p<10^{-8}$) |
+| | Exact Match | $7.50\%$ | $13.61\%$ | $7.22\%$ | $\mathbf{62.2 \pm 4.2\%}$ | $4.6\times$ vs 354-step AR ($62.2\%$ vs $7.2\%$ Non-DG) |
+| | Edge F1 Score | $0.3778$ | $0.8130$ | — | $\mathbf{0.9625}$ | $+0.1495$ vs 354-step AR |
+| | Parse Rate | $99.44\%$ | $89.44\%$ | $100.0\%$ | $\mathbf{100.0\%}$ | Deterministic Ridge recovery |
+| **Split 2: `unseen_para_bal360`** | $K$-way Accuracy | $13.33\%$ | $70.56\%$ | $49.17\%$ | $\mathbf{78.5 \pm 3.2\%}$ | $+7.9\text{ pp}$ vs 354-step AR ($+29.3\text{ pp}$ vs Non-DG, $p<10^{-8}$) |
+| | Exact Match | $6.39\%$ | $10.83\%$ ($14.72\%$ cand) | $3.33\%$ | $\mathbf{47.1 \pm 3.7\%}$ | $3.2\times\text{–}4.3\times$ vs 354-step AR |
+| | Edge F1 Score | $0.3551$ | $0.7818$ | — | $\mathbf{0.8965}$ | $+0.1147$ vs 354-step AR |
+| | Parse Rate | $99.44\%$ | $83.89\%$ | $100.0\%$ | $\mathbf{100.0\%}$ | Deterministic Ridge recovery |
+| **Split 3: `unseen_infer_360`** | $K$-way Accuracy | $17.50\%$ | $72.22\%$ | $23.19\%$ | $\mathbf{61.4 \pm 2.5\%}$ | $+38.2\text{ pp}$ vs Non-DG ($p<10^{-8}$); AR leads 22-way ($72.2\%$ vs $61.4\%$) |
+| | Exact Match | $8.89\%$ | $10.56\%$ ($13.61\%$ cand) | $0.00\%$ | $\mathbf{41.2 \pm 1.2\%}$ | $3.0\times\text{–}3.9\times$ vs 354-step AR |
+| | Edge F1 Score | $0.4576$ | $0.8033$ | — | $\mathbf{0.8528}$ | $+0.0495$ vs 354-step AR |
+| | Parse Rate | $99.44\%$ | $85.28\%$ | $100.0\%$ | $\mathbf{100.0\%}$ | Deterministic Ridge recovery |
+| **Split 4: `refeed_heldout_comp_bal360`** | $K$-way Accuracy | $0.56\%$ | $55.00\%$ | $34.58\%$ | $\mathbf{82.1 \pm 1.0\%}$ | $+27.1\text{ pp}$ vs 354-step AR ($+47.5\text{ pp}$ vs Non-DG, $p<10^{-8}$) |
+| | Exact Match | $0.00\%$ | $6.39\%$ | $0.00\%$ | $\mathbf{47.8 \pm 2.2\%}$ | $7.5\times$ vs 354-step AR |
+| | Edge F1 Score | $0.1896$ | $0.7867$ | — | $\mathbf{0.8996}$ | $+0.1129$ vs 354-step AR |
+| | Parse Rate | $99.44\%$ | $86.94\%$ | $100.0\%$ | $\mathbf{100.0\%}$ | Deterministic Ridge recovery |
+| | Source Copy Rate | $23.06\%$ | $0.56\%$ | $0.00\%$ | $\mathbf{0.00\%}$ | Zero unedited source copies across 720 DG trials |
 
-#### 5.3.2 Comparative Analysis: Bidirectional Diffusion vs. Causal Autoregression
+#### 5.3.2 Empirical Observations & Budget Caveat
 
-1. **The Exact-Match Chasm (Structural Precision):**
-   While causal AR fine-tuning with LoRA achieves respectable candidate classification ($70.56\%–73.89\%$ $K$-way on single edits), its generative exact match hovers between $10.56\%$ and $13.61\%$. Because autoregressive generation produces tokens sequentially with left-to-right causal masking, an error in early rows cascades down subsequent adjacency entries. In contrast, DiffusionGemma refines the entire 256-patch canvas simultaneously under full bidirectional self-attention, achieving **$62.2 \pm 4.2\%$ exact match on seen** ($4.6\times$ higher) and **$47.1 \pm 3.7\%$ on unseen paraphrases** ($4.3\times$ higher), with Edge F1 exceeding $0.896$ across all single-edit splits.
+1. **Exact-Match Gap under Truncated AR Training:**
+   At 354 of 4,824 optimizer steps (7% of DG's training budget, single seed), Gemma 4 AR LoRA achieves $70.56\%–73.89\%$ 22-way accuracy on single edits (and leads LoRA DG on `unseen_infer_360` 22-way at $72.22\%$ vs. $61.4\%$, driven by `delete_tests` $95.0\%$ vs. $40.0\%$ and `delete_classes` $77.5\%$ vs. $60.0\%$), while exact-grid match is $10.56\%–14.72\%$ vs. $41.2\%–62.2\%$ for fully trained LoRA DG ($3.0\times\text{–}7.5\times$ across splits). Because the AR LoRA run completed only 7% of DG's step schedule, the underlying cause of these differences (decoding architecture vs. optimizer steps vs. text serialization) is untested. Furthermore, AR LoRA scores $0/14$ on depth-1 `mark_reachable` items in `seen_bal360`, showing its `mark_reachable` deficit ($0.0\%–7.5\%$) is not specific to multi-hop transitive closure.
 
-2. **Zero-Shot Prompting Collapse on Compound Logic:**
-   The zero-shot prompted AR model (`gemma4_ar_prompted`) reliably outputs syntactically valid JSON/grids (parse rate $99.44\%$), but completely fails on semantic graph manipulation ($13.33\%–17.50\%$ $K$-way, chance is $4.55\%$). On the 5-operation compound refactoring split (`refeed_heldout_comp_bal360`), prompted AR collapses to **$0.56\%$ $K$-way** ($2/360$), with **$23.06\%$ unedited source copies** and **$0.00\%$ exact match**.
+2. **2-Shot Prompted AR:**
+   The 2-shot prompted AR model (`gemma4_ar_prompted`) parses reliably ($99.44\%$), scoring $13.33\%–17.50\%$ 22-way on single edits and $0.56\%$ ($2/360$) on 2-step re-feeding (`23.06%` source copies).
 
-3. **Multi-Step Refactoring Supremacy (Split 4):**
-   On multi-step compound refactorings, LoRA AR achieves only $55.00\%$ $K$-way and $6.39\%$ exact match in a single causal pass. In contrast, closed-loop soft-token re-feeding in DiffusionGemma achieves **$82.1 \pm 1.0\%$ $K$-way** ($+27.1\text{ pp}$ advantage) and **$47.8 \pm 2.2\%$ exact match** ($7.5\times$ advantage), with **$0.00\%$ source copy rate** across 720 trials (Seed 42 and Seed 1337). Closed-loop latent re-feeding allows the model to commit to topological rearrangement before evaluating downstream reachability, whereas causal AR cannot backtrack once early tokens are committed.
+3. **2-Step Soft-Token Re-Feeding:**
+   Two-step re-feeding assists all fine-tuned arms (`55.00%` AR LoRA, `34.58%` Non-DG EncLoRA, `82.1±1.0%` LoRA DG), with LoRA DG reaching `47.8±2.2%` exact match and `0.00%` source copy rate across 720 trials.
 
 ---
 

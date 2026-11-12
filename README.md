@@ -1,10 +1,12 @@
-# Latent Roadmaps: DiffusionGemma State Transitions for Code-Graph Refactoring
+# Latent Roadmaps: Soft-Token Re-Feeding in DiffusionGemma for Code Graphs
+
+> *We adapt DiffusionGemma to chain code-graph edits by re-feeding its own predicted vision latents, recovering edits that fail in one pass.*
 
 **Author:** [`bumblebeers`](https://github.com/bumblebeers)
 
 ![Latent Roadmaps Overview](docs/figures/figure1_hero_multimodal_roadmap.png)
 
-This repository contains the benchmark specification, pre-registration (`PREREG.json`), training/evaluation runners, offline scoring suite, and analysis artifacts for studying **multi-step AST call-graph state transitions** on DiffusionGemma's (`google/diffusiongemma-26B-A4B-it`) 256-token bidirectional canvas alongside matched `google/gemma-4-26B-A4B-it` autoregressive and scratch transformer baselines.
+This repository contains the benchmark specification, pre-registration (`PREREG.json`), training/evaluation runners, offline scoring suite, and analysis artifacts for studying **cross-generation soft-token re-feeding of AST call-graph state transitions** on DiffusionGemma's (`google/diffusiongemma-26B-A4B-it`) 256-token bidirectional canvas alongside scratch transformer and preliminary `google/gemma-4-26B-A4B-it` autoregressive (2-shot prompted and 354-of-4,824-step LoRA) baselines.
 
 ---
 
@@ -13,13 +15,13 @@ This repository contains the benchmark specification, pre-registration (`PREREG.
 | Resource | Platform | Link |
 | :--- | :--- | :--- |
 | **`dgg2-latent-code-graphs`** (Main Benchmark, Runners & Paper) | GitHub | [bumblebeers/dgg2-latent-code-graphs](https://github.com/bumblebeers/dgg2-latent-code-graphs) |
-| **`dgg-latent`** (Continuous Latent Diffusion, Losses & Readout Heads) | GitHub (`v0.1.0`) | [bumblebeers/dgg-latent](https://github.com/bumblebeers/dgg-latent) |
+| **`dgg-latent`** (Continuous Latent Diffusion, Losses & Readout Heads for Re-Feeding) | GitHub (`v0.1.0`) | [bumblebeers/dgg-latent](https://github.com/bumblebeers/dgg-latent) |
 | **`dgg-codebook`** (Continuous Vocabulary Chords, De-Biasing & Spatial Teachers) | GitHub (`v0.1.0`) | [bumblebeers/dgg-codebook](https://github.com/bumblebeers/dgg-codebook) |
 | **`dgg-vit-decoder`** (Loader for 572.8M SigLIP Vision Stack & 34.15M ViT+Conv Decoder) | GitHub (`v0.1.0`) | [bumblebeers/dgg-vit-decoder](https://github.com/bumblebeers/dgg-vit-decoder) |
 | **Multimodal Prefill Mask Fix (`DiffusionGemmaEncoderModel`)** | GitHub PR & Fork | [huggingface/transformers#50684](https://github.com/huggingface/transformers/pull/50684) · [bumblebeers/transformers (`fix/diffusion-gemma-prefill-multimodal-masks`)](https://github.com/bumblebeers/transformers/tree/fix/diffusion-gemma-prefill-multimodal-masks) |
 | **AST Code-Graph Benchmark Packs & Raw `.npy`/`.npz` Predictions** | Hugging Face Datasets | [bumblebeer/dgg2-code-graph-benchmarks](https://huggingface.co/datasets/bumblebeer/dgg2-code-graph-benchmarks) |
 | **AST Code-Graph Benchmark Packs (Mirror)** | Kaggle Datasets | [unclebumblebeer/dgg2-code-graph-benchmarks](https://www.kaggle.com/datasets/unclebumblebeer/dgg2-code-graph-benchmarks) |
-| **Trained Two-Seed LoRA Adapters, Readout Heads & `ImageDecoder` Weights** | Hugging Face Models | [bumblebeer/dgg2-latent-code-graphs-adapters](https://huggingface.co/bumblebeer/dgg2-latent-code-graphs-adapters) |
+| **Trained Two-Seed DG LoRA Adapters, 354-Step Gemma 4 AR LoRA, Readouts & `ImageDecoder`** | Hugging Face Models | [bumblebeer/dgg2-latent-code-graphs-adapters](https://huggingface.co/bumblebeer/dgg2-latent-code-graphs-adapters) |
 
 ---
 

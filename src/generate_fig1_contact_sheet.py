@@ -210,7 +210,7 @@ def generate_figure1():
 
     header_ax.text(
         0.5, 0.90,
-        "Figure 1: Multimodal Code-Graph Visual Reasoning (DiffusionGemma 26B-A4B vs. Non-DG Baselines)",
+        "Code-Graph Visual Transitions: DiffusionGemma 26B-A4B vs. Scratch Non-DG Baseline",
         ha="center", va="center", fontsize=14, fontweight="bold", color="#111827"
     )
     header_ax.text(

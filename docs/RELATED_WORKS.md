@@ -1,6 +1,10 @@
-# Related Works & Literature Synthesis: Grounding DiffusionGemma Latent Roadmaps
+# Related Works & Literature Synthesis: Latent Roadmaps via Soft-Token Re-Feeding in DiffusionGemma
 
-This document provides a comprehensive literature synthesis for the research paper writeup submitted to the Kaggle Gemma 4 Developer Agent Paper Track. It situates the "Latent Roadmap" paradigm within five intersecting bodies of research: (1) Visual Program Synthesis & Latent World Models, (2) Code Graph Representation Learning, (3) Diffusion Language Models & Discrete Denoising, (4) Multimodal LLMs for Software Engineering, and (5) Representation Degeneration, Anisotropy, and Latent Alignment.
+This document synthesizes the related literature surrounding cross-generation soft-token re-feeding in DiffusionGemma across five intersecting bodies of research: (1) Visual Program Synthesis & Latent World Models, (2) Code Graph Representation Learning, (3) Diffusion Language Models & Discrete Denoising, (4) Multimodal LLMs for Software Engineering, and (5) Representation Degeneration, Anisotropy, and Latent Alignment.
+
+> **Two Key Methodological Distinctions:**
+> 1. **Intra-generation self-conditioning vs. cross-generation vision-latent re-feeding:** DiffusionGemma's stock self-conditioning feeds soft token embeddings back between denoising steps *within* a single generation pass; our re-feeding projects the predicted vision latents ($\hat{\mathbf{h}}_v \in \mathbb{R}^{256 \times 1152}$) back through frozen `embed_vision` *across* complete generations alongside the next natural-language instruction.
+> 2. **Purpose-trained discrete-diffusion world models vs. pretrained text-diffusion LLM adaptation:** Discrete-diffusion world models such as **Discrete-WAM** (Z. Yao et al., *arXiv:2606.05645*, 2026) train unified vision-action token editors specifically for world-policy rollouts; to our knowledge, our work is the first adaptation of a pretrained text-diffusion LLM (`google/diffusiongemma-26B-A4B-it`) via parameter-efficient LoRA and a lightweight readout head to execute chained vision-latent state transitions.
 
 ---
 

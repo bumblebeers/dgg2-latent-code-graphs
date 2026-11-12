@@ -136,7 +136,7 @@ def generate_pipeline_flowchart() -> None:
     t_cards = [
         (29.0, 39.0, "1. Multinomial Canvas Corruption", "Corrupt 256-token target canvas under stock\ndiscrete schedule; source image stays clean."),
         (71.0, 39.0, "2. Self-Conditioning (p = 0.5)", "Feed prior-pass logits on 50% of steps\n(when off, pass None/False — never zeros)."),
-        (113.0, 40.0, "3. Full-Vocab CE + Latent Regression", "262,144-vocab token CE on stock LM head +\ncontinuous loss against clean target h_v."),
+        (113.0, 40.0, "3. Token CE + Latent Regression", "Full-vocab token CE on stock LM head +\ncontinuous loss against clean target h_v."),
     ]
     for tx, tw, t_head, t_body in t_cards:
         rbox(tx, 79.8, tw, 7.8, fc="#FFFFFF", ec="#86EFAC", lw=1.0, r=0.7)
@@ -304,9 +304,9 @@ def generate_pipeline_flowchart() -> None:
     rbox(4.5, 5.5, 79.5, 17.0, fc="#FFFFFF", ec="#EF4444", lw=1.2, ls="--", r=0.8)
     ax.text(6.5, 20.4, "Diagnostic Outcome Across Two Seeds (Seeds 42 & 1337):", fontsize=7.8, fontweight="bold", ha="left", va="center", color="#B91C1C")
     expb_lines = [
-        "• 8-Way Centered Cosine: 26.4% ± 0.3% seen / 27.6% ± 1.0% unseen — matches constant mean-vector floor (25.0%).",
+        "• 8-Way Centered Cosine: 26.4% ± 0.3% seen / 27.6% ± 1.0% unseen — at constant mean-vector floor (25.0%).",
         "• Delete vs. Non-Delete Split: 100% accuracy on delete operations vs. 1.5%–4.8% on non-delete operations.",
-        "• Unchanged-Slot Drift: 17.9x ± 0.1x higher drift than true edits (3-symbol canvas marks deletions accurately at 82% F1).",
+        "• Unchanged-Slot Drift: 17.9x ± 0.1x higher drift than target (despite 98.5% ± 0.3% 3-class canvas token accuracy).",
         "• Takeaway: Suggests a slot-wise residual skip or pretraining-aligned input projector is needed beyond frozen vision.",
     ]
     for idx, line in enumerate(expb_lines):
@@ -341,19 +341,18 @@ def generate_pipeline_flowchart() -> None:
             "Re-embeds predicted 256x1152 patch latents directly into soft tokens with the next edit prompt, avoiding intermediate quantization.",
         ),
         (
-            "4. Compositional Recovery Where Single-Pass Fails",
-            "Grids: 82.1% on 2-step compounds; 90.8% on 3-step keep_callers (vs. 0.0% 1-pass). Photos: 88.3% on flip_h+rot90 (vs. 0.0% 1-pass).",
+            "4. Within-Model Recovery: 1-Pass vs. Multi-Step Soft-Token Re-Feed",
+            "Grids: 48.0% -> 82.1% (2-step compounds), 0.0% -> 90.8% (3-step keep_callers). Photos: 0.5% -> 88.3% (flip_h+rot90).",
         ),
     ]
     for idx, (c_title, c_body) in enumerate(inf_cards):
         cy_top = 35.2 - idx * 7.6
         rbox(92.0, cy_top - 6.7, 83.5, 6.7, fc="#FFFFFF", ec="#CBD5E1", lw=1.0, r=0.7)
         ax.text(93.8, cy_top - 1.8, c_title, fontsize=7.3, fontweight="bold", ha="left", va="center", color="#0F172A")
-        ax.text(93.8, cy_top - 4.4, c_body, fontsize=6.6, ha="left", va="center", color="#334155")
+        ax.text(93.8, cy_top - 4.4, c_body, fontsize=6.5, ha="left", va="center", color="#334155")
 
     out_paths = [
         REPO_ROOT / "docs" / "figures" / "fig4_pipeline_flowchart.png",
-        REPO_ROOT / "docs" / "figures" / "figure1_hero_multimodal_roadmap.png",
     ]
     for p in out_paths:
         p.parent.mkdir(parents=True, exist_ok=True)

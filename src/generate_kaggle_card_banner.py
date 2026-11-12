@@ -73,51 +73,49 @@ def create_kaggle_card_banner(out_path: str = "docs/figures/kaggle_card_thumbnai
     font_bold = "/usr/share/fonts/liberation-sans-fonts/LiberationSans-Bold.ttf"
     font_reg = "/usr/share/fonts/liberation-sans-fonts/LiberationSans-Regular.ttf"
 
-    f_h1 = ImageFont.truetype(font_bold, 31 * S)
-    f_sub = ImageFont.truetype(font_reg, 13 * S)
-    f_metric = ImageFont.truetype(font_bold, 14 * S)
+    f_h1 = ImageFont.truetype(font_bold, 30 * S)
+    f_sub = ImageFont.truetype(font_reg, 12.5 * S if False else 13 * S)
+    f_metric = ImageFont.truetype(font_bold, 12 * S)
     f_cap = ImageFont.truetype(font_bold, 11 * S)
-    f_instr = ImageFont.truetype(font_bold, 10 * S)
+    f_instr = ImageFont.truetype(font_bold, 9 * S)
 
     # ------------------------------------------------------------------
-    # Left Column: Title + Subtitle + Single Number
+    # Left Column: Title + Subtitle + Single Re-Feeding Metric
     # ------------------------------------------------------------------
-    lx = 20 * S
-    draw.text((lx, 44 * S), "LATENT", font=f_h1, fill=(255, 255, 255))
-    draw.text((lx, 82 * S), "ROADMAPS", font=f_h1, fill=(96, 165, 250))
+    lx = 18 * S
+    draw.text((lx, 42 * S), "LATENT", font=f_h1, fill=(255, 255, 255))
+    draw.text((lx, 79 * S), "ROADMAPS", font=f_h1, fill=(96, 165, 250))
 
-    draw.text((lx, 136 * S), "DiffusionGemma", font=f_sub, fill=(226, 232, 240))
-    draw.text((lx, 155 * S), "AST Call-Graph Transitions", font=f_sub, fill=(148, 163, 184))
+    draw.text((lx, 132 * S), "Soft-Token Re-Feeding", font=f_sub, fill=(226, 232, 240))
+    draw.text((lx, 151 * S), "in DiffusionGemma", font=f_sub, fill=(148, 163, 184))
 
-    # Single focal metric badge (at most one number per spec)
-    m_w = 186 * S
+    # Re-feeding focal badge
+    m_w = 196 * S
     draw.rounded_rectangle(
-        [lx, 194 * S, lx + m_w, 240 * S],
+        [lx, 192 * S, lx + m_w, 240 * S],
         radius=10 * S,
         fill=(13, 24, 44),
         outline=(74, 222, 128),
         width=2 * S,
     )
     draw.text(
-        (lx + m_w // 2, 217 * S),
-        "91.9% Seen Accuracy",
+        (lx + m_w // 2, 216 * S),
+        "1-pass 0.3% -> re-feed 100%",
         font=f_metric,
         fill=(134, 239, 172),
         anchor="mm",
     )
 
     # ------------------------------------------------------------------
-    # Right Column: Source Grid -> Instruction Arrow -> Predicted Grid
+    # Right Column: Source Grid -> Re-Feed Arrow -> Predicted Grid
     # ------------------------------------------------------------------
     pack = SP.load_pack(str(REPO_ROOT / "data" / "gridA_test360_httpx.npz"))
-    mans = SP.build_cg_eval_manifests(pack)
-    m_seen = mans["seen_bal360"]
-    item_idx = 4  # First keep_callees item in seen_bal360 (Exact: HIT)
-    img_idx = int(m_seen["img_indices"][item_idx])
+    item_idx = 72  # First reverse_edges+keep_callees item in refeed_heldout_comp_bal360 (Exact: HIT)
+    img_idx = 72
 
     z_pred = np.load(REPO_ROOT / "outputs" / "m2" / "decoded_grids_all_arms.npz")
     src_grid = pack["src_grid"][img_idx]
-    pred_grid = z_pred["arms__cg_lora_dg_seed42_ep3__preds_cg_lora_dg_seed42_ep3_seen_bal360"][item_idx]
+    pred_grid = z_pred["arms__cg_lora_dg_seed42_ep3__preds_cg_lora_dg_seed42_ep3_refeed_heldout_comp_bal360"][item_idx]
 
     im_src = Image.fromarray(render_grid_u8(src_grid, cell_px=20))
     im_pred = Image.fromarray(render_grid_u8(pred_grid, cell_px=20))
@@ -151,7 +149,7 @@ def create_kaggle_card_banner(out_path: str = "docs/figures/kaggle_card_thumbnai
     acx = (ax0 + ax1) // 2
 
     # Instruction pill above arrow
-    pill_hw = 38 * S
+    pill_hw = 40 * S
     draw.rounded_rectangle(
         [acx - pill_hw, ay - 28 * S, acx + pill_hw, ay - 10 * S],
         radius=6 * S,
@@ -161,7 +159,7 @@ def create_kaggle_card_banner(out_path: str = "docs/figures/kaggle_card_thumbnai
     )
     draw.text(
         (acx, ay - 19 * S),
-        "keep_callees",
+        "2-step re-feed",
         font=f_instr,
         fill=(219, 234, 254),
         anchor="mm",

@@ -92,29 +92,29 @@ def generate_fig5() -> Path:
         }
     )
 
-    fig, (ax_k, ax_e) = plt.subplots(1, 2, figsize=(14.0, 5.8), dpi=300, sharey=True)
-    fig.subplots_adjust(left=0.19, right=0.98, top=0.80, bottom=0.14, wspace=0.08)
+    fig, (ax_k, ax_e) = plt.subplots(1, 2, figsize=(15.0, 6.8), dpi=300, sharey=True)
+    fig.subplots_adjust(left=0.18, right=0.98, top=0.75, bottom=0.11, wspace=0.10)
 
     fig.suptitle(
-        "Table 5 Overview: 22-Way Candidate Selection vs. 256-Cell Exact-Grid Match (httpx, N=360)",
+        "Code-Graph Evaluation Summary: 22-Way Selection vs. 256-Cell Exact Match (httpx, N=360)",
         fontsize=13.0,
         fontweight="bold",
         color="#0f172a",
-        y=0.95,
+        y=0.96,
     )
 
     y_pos = np.arange(len(rows))[::-1]
     offsets = {
-        "dg": +0.18,
-        "ar_lora": +0.06,
-        "nondg": -0.06,
-        "ar_prom": -0.18,
+        "dg": +0.26,
+        "ar_lora": +0.09,
+        "nondg": -0.09,
+        "ar_prom": -0.26,
     }
     styles = [
         ("dg", "LoRA DG (2-Seed Mean)", "#059669", "o", 80),
-        ("ar_lora", "Gemma 4 AR LoRA (r=64)", "#2563eb", "D", 64),
+        ("ar_lora", "Gemma 4 AR LoRA (r=64, 354 steps)", "#2563eb", "D", 64),
         ("nondg", "Best Non-DG (~50M, 2-Seed)", "#d97706", "s", 64),
-        ("ar_prom", "Gemma 4 AR Prompted (3-Shot)", "#64748b", "^", 60),
+        ("ar_prom", "Gemma 4 AR Prompted (2-Shot)", "#64748b", "^", 60),
     ]
 
     for panel_idx, (ax, title) in enumerate(
@@ -123,8 +123,9 @@ def generate_fig5() -> Path:
             (ax_e, "B. Exact 256-Cell Grid Match (%)"),
         ]
     ):
-        ax.set_title(title, fontsize=11.0, fontweight="bold", color="#1e293b", pad=10)
-        ax.set_xlim(-4, 106)
+        ax.set_title(title, fontsize=11.0, fontweight="bold", color="#1e293b", pad=12)
+        ax.set_xlim(-4, 109)
+        ax.set_ylim(-0.55, len(rows) - 0.45)
         ax.set_xticks([0, 20, 40, 60, 80, 100])
         ax.grid(axis="x", linestyle="--", alpha=0.45, color="#cbd5e1")
         for y in range(len(rows) - 1):
@@ -140,12 +141,12 @@ def generate_fig5() -> Path:
                     xs.append(val)
                     ys.append(y + offsets[arm_key])
                     ax.text(
-                        val + 1.8,
+                        val + 1.9,
                         y + offsets[arm_key],
                         f"{val:.1f}%",
                         va="center",
                         ha="left",
-                        fontsize=7.6,
+                        fontsize=7.3,
                         fontweight="bold" if arm_key in ("dg", "ar_lora") else "normal",
                         color=color,
                     )
@@ -175,12 +176,12 @@ def generate_fig5() -> Path:
         handles,
         labels,
         loc="upper center",
-        bbox_to_anchor=(0.55, 0.89),
-        ncol=5,
+        bbox_to_anchor=(0.56, 0.90),
+        ncol=3,
         frameon=True,
         facecolor="white",
         edgecolor="#cbd5e1",
-        fontsize=8.5,
+        fontsize=8.4,
     )
 
     plt.savefig(out_png, dpi=300)

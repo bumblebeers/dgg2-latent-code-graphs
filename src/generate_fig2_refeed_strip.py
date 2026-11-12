@@ -146,12 +146,12 @@ def generate_figure2():
     header_ax.axis("off")
     header_ax.text(
         0.5, 0.85,
-        "Figure 2: Multi-Step Mirror Re-Feeding Resolves Held-Out Architectural Operations",
+        "Multi-Step Soft-Token Re-Feeding Resolves Held-Out Code-Graph Operations",
         ha="center", va="center", fontsize=13.5, fontweight="bold", color="#111827"
     )
     header_ax.text(
         0.5, 0.48,
-        r"Compositional Equivalence: $\mathbf{keep\_callers}(G) \equiv \mathbf{reverse\_edges}(\mathbf{keep\_callees}(\mathbf{reverse\_edges}(G)))$ — First Paired Manifest Item (idx 72, Seed 42).",
+        "Compositional Equivalence: keep_callers(G) = reverse_edges(keep_callees(reverse_edges(G))) — First Paired Manifest Item (idx 72, Seed 42).",
         ha="center", va="center", fontsize=9.5, color="#374151"
     )
 
@@ -231,14 +231,14 @@ def generate_figure2():
     ax_s2.set_xlabel("Original Graph", fontsize=7.5, color="#6b7280")
     for sp in ax_s2.spines.values(): sp.set_color("#9ca3af")
 
-    # Col 1: Step 1
+    # Col 1: Step 1 (explicitly labeled as ground truth intermediate state)
     ax_st1 = fig.add_subplot(gs[3, 1])
     ax_st1.set_xticks([]); ax_st1.set_yticks([])
     err_s1 = step1_pred != tgt_step1
     ax_st1.imshow(render_grid_pil(step1_pred, cell_px=14, error_mask=err_s1))
-    ax_st1.set_title("2. After reverse_edges", fontsize=8.5, fontweight="bold", pad=6, color="#2563eb")
-    ax_st1.set_xlabel("Step 1 (Target State)\nTranspose call edges", fontsize=7.5, color="#1e40af", labelpad=3)
-    for sp in ax_st1.spines.values(): sp.set_color("#3b82f6"); sp.set_linewidth(1.2)
+    ax_st1.set_title("2. Step 1 (Ground Truth)", fontsize=8.5, fontweight="bold", pad=6, color="#475569")
+    ax_st1.set_xlabel("Ground-Truth reverse_edges(G)\n(intermediate reference)", fontsize=7.3, color="#475569", labelpad=3)
+    for sp in ax_st1.spines.values(): sp.set_color("#64748b"); sp.set_linewidth(1.2)
 
     # Col 2: Step 2
     ax_st2 = fig.add_subplot(gs[3, 2])
@@ -281,15 +281,17 @@ def generate_figure2():
     caption_ax = fig.add_subplot(gs[5, :])
     caption_ax.axis("off")
     caption_text = (
-        f"Deterministic Selection Rule: First graph appearing in both 2-step re-feed and 3-step chain manifests (idx 72, Seed 42).\n"
-        f"Row A (1-pass): Model confuses unseen 'keep_callers' with trained 'keep_callees' (8 errors). Row B (3-step mirror re-feed): Step 2 re-fed output has {n_err_s2} errors;\n"
-        f"Step 3 output hits 'keep_callers' in 22-way lookup ({cell_acc_s3:.1f}% cell acc) while red outlines expose the {n_err_s3} drifted cells explaining 90.8% 22-way alongside 0.0% exact match."
+        f"Deterministic Selection Rule: First graph appearing in both 2-step re-feed and 3-step chain manifests (idx 72, Seed 42; Panel 2 shows ground-truth Step 1).\n"
+        f"Row A (1-pass): Model confuses unseen 'keep_callers' with trained 'keep_callees' (8 errors). Row B (3-step mirror re-feed): Step 2 re-fed prediction has {n_err_s2} errors;\n"
+        f"Step 3 re-fed prediction hits 'keep_callers' in 22-way lookup ({cell_acc_s3:.1f}% cell acc) while red outlines expose the {n_err_s3} drifted cells explaining 90.8% 22-way vs. 0.0% exact."
     )
     caption_ax.text(0.5, 0.5, caption_text, ha="center", va="center", fontsize=8.0, color="#4b5563", style="italic")
 
-    plt.savefig(out_png, dpi=300)
+    hero_png = out_dir / "figure1_hero_multimodal_roadmap.png"
+    for p in (out_png, hero_png):
+        plt.savefig(p, dpi=300)
+        print(f"[Re-Feed Strip Saved] {p} ({p.stat().st_size / 1024:.1f} KB)")
     plt.close()
-    print(f"[Figure 2 Generated] Successfully saved: {out_png} ({out_png.stat().st_size / 1024:.1f} KB)")
     return out_png
 
 

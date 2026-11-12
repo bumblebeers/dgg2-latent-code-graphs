@@ -223,7 +223,7 @@ def build_archives() -> Tuple[Path, Path, dict]:
 
     manifest_obj = {
         "archive_name": ARCHIVE_PREFIX,
-        "project": "Latent Roadmaps: DiffusionGemma State Transitions for Code-Graph Refactoring",
+        "project": "Latent Roadmaps: Soft-Token Re-Feeding in DiffusionGemma for Code Graphs",
         "generated_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "author": "bumblebeers",
         "repository_url": "https://github.com/bumblebeers/dgg2-latent-code-graphs",
