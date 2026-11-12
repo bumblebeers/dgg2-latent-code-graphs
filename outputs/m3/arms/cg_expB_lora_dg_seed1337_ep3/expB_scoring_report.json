@@ -1,0 +1,113 @@
+{
+  "arm_name": "cg_expB_lora_dg_seed1337_ep3",
+  "manifests": {
+    "instr_seen": {
+      "n_items": 360,
+      "site_hit": 0.2611111111111111,
+      "all_sites_hit": 0.2611111111111111,
+      "top_is_site": 0.011111111111111112,
+      "changed_recall": 0.01335978835978836,
+      "drift": 17.852170864740867,
+      "canvas_3class_acc": 0.9879,
+      "site_hit_by_edit": {
+        "rename": 0.011111111111111112,
+        "add_param": 0.022222222222222223,
+        "delete": 1.0,
+        "add_decorator": 0.011111111111111112
+      },
+      "site_outcomes": {
+        "correct": 0.2611111111111111,
+        "identity": 0.011111111111111112,
+        "wrong_arg": 0.0,
+        "other_edit": 0.7277777777777777
+      },
+      "chance_site_hit": 0.125
+    },
+    "instr_unseen": {
+      "n_items": 360,
+      "site_hit": 0.26666666666666666,
+      "all_sites_hit": 0.26666666666666666,
+      "top_is_site": 0.013888888888888888,
+      "changed_recall": 0.017839336589336587,
+      "secondary_hit": 0.21647208041847857,
+      "drift": 17.78296714589028,
+      "site_outcomes": {
+        "correct": 0.26666666666666666,
+        "identity": 0.013888888888888888,
+        "wrong_arg": 0.0,
+        "other_edit": 0.7194444444444444
+      },
+      "site_hit_by_edit": {
+        "rename": 0.011111111111111112,
+        "add_param": 0.03333333333333333,
+        "delete": 1.0,
+        "add_decorator": 0.022222222222222223
+      },
+      "chance_site_hit": 0.125
+    },
+    "instr_shuf": {
+      "n_items": 360,
+      "site_hit": 0.24722222222222223,
+      "all_sites_hit": 0.24722222222222223,
+      "top_is_site": 0.022222222222222223,
+      "changed_recall": 0.021990740740740738,
+      "secondary_hit": 0.20522441755425305,
+      "drift": 17.856519319795414,
+      "site_outcomes": {
+        "correct": 0.24722222222222223,
+        "identity": 0.0,
+        "wrong_arg": 0.0,
+        "other_edit": 0.7527777777777778
+      },
+      "site_hit_by_edit": {
+        "rename": 0.0,
+        "add_param": 0.0,
+        "delete": 0.9888888888888889,
+        "add_decorator": 0.0
+      },
+      "chance_site_hit": 0.125
+    },
+    "unseenargs": {
+      "n_items": 360,
+      "site_hit": 0.25833333333333336,
+      "all_sites_hit": 0.25833333333333336,
+      "top_is_site": 0.002777777777777778,
+      "changed_recall": 0.005652816682228446,
+      "secondary_hit": 0.1647625014918248,
+      "drift": 17.888077565631143,
+      "site_outcomes": {
+        "correct": 0.25833333333333336,
+        "identity": 0.008333333333333333,
+        "wrong_arg": 0.008333333333333333,
+        "other_edit": 0.725
+      },
+      "site_hit_by_edit": {
+        "rename": 0.03333333333333333,
+        "add_param": 0.0,
+        "delete": 1.0,
+        "add_decorator": 0.0
+      },
+      "chance_site_hit": 0.125
+    },
+    "renameclass": {
+      "n_items": 180,
+      "site_hit": 0.5,
+      "all_sites_hit": 0.5,
+      "top_is_site": 0.0,
+      "changed_recall": 0.0044444444444444444,
+      "secondary_hit": 0.15092592592592594,
+      "drift": 18.203843243097744,
+      "site_outcomes": {
+        "correct": 0.5,
+        "identity": 0.0,
+        "wrong_arg": 0.0,
+        "other_edit": 0.5
+      },
+      "site_hit_by_edit": {
+        "rename": 0.0,
+        "delete": 1.0
+      },
+      "chance_site_hit": 0.25
+    }
+  }
+}

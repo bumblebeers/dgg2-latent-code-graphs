@@ -127,6 +127,17 @@
       "exact": null,
       "edge_f1": null,
       "status": "VERIFIED_EXACT_MATCH"
+    },
+    "refeed_chain_keep_callers_180": {
+      "n": 180,
+      "acc_kway": 0.95,
+      "exact": 0.0,
+      "cell_acc": 0.9690538194444445,
+      "changed_acc": 0.7700747583992301,
+      "unchanged_acc": 0.9932021139673787,
+      "edge_f1": 0.7108575375242042,
+      "node_acc": 0.6034722222222222,
+      "status": "VERIFIED_EXACT_MATCH"
     }
   },
   "cg_lora_dg_seed1337_ep3": {
@@ -233,6 +244,33 @@
       "exact": null,
       "edge_f1": null,
       "status": "VERIFIED_EXACT_MATCH"
+    },
+    "refeed_chain_keep_callers_180": {
+      "n": 180,
+      "acc_kway": 0.8666666666666667,
+      "exact": 0.0,
+      "cell_acc": 0.9749565972222223,
+      "changed_acc": 0.7962724676908423,
+      "unchanged_acc": 0.996617517069471,
+      "edge_f1": 0.7503723745390413,
+      "node_acc": 0.6447916666666667,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "refeed_heldout_comp_bal360": {
+      "acc_kway": 0.8111111111111111,
+      "cell_acc": 0.9952365451388889,
+      "changed_acc": 0.9519595833325738,
+      "exact": 0.5,
+      "edge_f1": 0.9816011962882609,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "refeed_chain_heldout_ops_360": {
+      "acc_kway": 0.43333333333333335,
+      "cell_acc": 0.9761393229166667,
+      "changed_acc": 0.39813623384542113,
+      "exact": 0.0,
+      "edge_f1": 0.8509647980576016,
+      "status": "VERIFIED_EXACT_MATCH"
     }
   },
   "cg_frozen_dg_ep3": {
@@ -307,6 +345,32 @@
       "exact": 0.0,
       "edge_f1": 0.0,
       "status": "VERIFIED_EXACT_MATCH"
+    }
+  },
+  "keep_callers_180_2seed_summary": {
+    "acc_kway": {
+      "mean": 0.9083333333333333,
+      "half_range": 0.04166666666666663
+    },
+    "exact": {
+      "mean": 0.0,
+      "half_range": 0.0
+    },
+    "cell_acc": {
+      "mean": 0.9720052083333334,
+      "half_range": 0.002951388888888906
+    },
+    "changed_acc": {
+      "mean": 0.7831736130450362,
+      "half_range": 0.013098854645806068
+    },
+    "edge_f1": {
+      "mean": 0.7306149560316227,
+      "half_range": 0.019757418507418523
+    },
+    "node_acc": {
+      "mean": 0.6241319444444444,
+      "half_range": 0.020659722222222232
     }
   }
 }

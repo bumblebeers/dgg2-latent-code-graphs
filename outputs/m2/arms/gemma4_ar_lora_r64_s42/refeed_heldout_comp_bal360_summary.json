@@ -1,0 +1,111 @@
+{
+  "n": 360,
+  "acc_kway": 0.55,
+  "chance": 0.045454545454545456,
+  "exact": 0.06388888888888888,
+  "cell_acc": 0.95556640625,
+  "changed_acc": 0.8236159452782388,
+  "unchanged_acc": 0.9682655634373668,
+  "edge_f1": 0.786729469267531,
+  "node_acc": 0.8157986111111111,
+  "per_target": {
+    "reverse_order+delete_selected": {
+      "n": 72,
+      "acc": 0.9305555555555556,
+      "pred": {
+        "reverse_order+delete_selected": 67,
+        "reverse_order": 2,
+        "keep_callees": 1,
+        "keep_callers": 1,
+        "reverse_order+delete_tests": 1
+      }
+    },
+    "reverse_edges+keep_callees": {
+      "n": 72,
+      "acc": 0.8055555555555556,
+      "pred": {
+        "reverse_edges+keep_callees": 58,
+        "keep_callees": 6,
+        "keep_callers": 6,
+        "reverse_order+keep_callees": 1,
+        "reverse_edges": 1
+      }
+    },
+    "reverse_edges+mark_reachable": {
+      "n": 72,
+      "acc": 0.013888888888888888,
+      "pred": {
+        "reverse_edges": 58,
+        "keep_callers": 5,
+        "keep_callees": 3,
+        "reverse_order+keep_callees": 2,
+        "reverse_edges+delete_selected": 2,
+        "reverse_edges+keep_callees": 1,
+        "reverse_edges+mark_reachable": 1
+      }
+    },
+    "reverse_order+delete_tests": {
+      "n": 72,
+      "acc": 0.9861111111111112,
+      "pred": {
+        "reverse_order+delete_tests": 71,
+        "reverse_order": 1
+      }
+    },
+    "delete_tests+mark_reachable": {
+      "n": 72,
+      "acc": 0.013888888888888888,
+      "pred": {
+        "delete_tests": 67,
+        "identity": 2,
+        "delete_tests+mark_reachable": 1,
+        "delete_selected": 1,
+        "keep_callers": 1
+      }
+    }
+  },
+  "two_step": {
+    "n": 360,
+    "correct": 198,
+    "first_only": 129,
+    "second_only": 6,
+    "source_copy": 2,
+    "other": 25
+  },
+  "acc_by_changed_cells": [
+    {
+      "from": 0,
+      "to": 1,
+      "n": 0,
+      "acc": NaN
+    },
+    {
+      "from": 1,
+      "to": 8,
+      "n": 13,
+      "acc": 0.0
+    },
+    {
+      "from": 8,
+      "to": 32,
+      "n": 73,
+      "acc": 0.1506849315068493
+    },
+    {
+      "from": 32,
+      "to": 96,
+      "n": 274,
+      "acc": 0.6824817518248175
+    },
+    {
+      "from": 96,
+      "to": 1000000000.0,
+      "n": 0,
+      "acc": NaN
+    }
+  ],
+  "exact_256_parse_rate": 0.8694444444444445,
+  "elapsed_s": 1122.4920282363892,
+  "arm": "gemma4_ar_lora_r64_s42",
+  "manifest": "refeed_heldout_comp_bal360"
+}

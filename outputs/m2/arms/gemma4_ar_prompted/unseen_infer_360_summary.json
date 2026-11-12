@@ -1,0 +1,155 @@
+{
+  "n": 360,
+  "acc_kway": 0.175,
+  "chance": 0.045454545454545456,
+  "exact": 0.08888888888888889,
+  "cell_acc": 0.9245334201388888,
+  "changed_acc": 0.38350706193453776,
+  "unchanged_acc": 0.9669650349779327,
+  "edge_f1": 0.4576232334166144,
+  "node_acc": 0.6644097222222223,
+  "per_target": {
+    "identity": {
+      "n": 40,
+      "acc": 0.875,
+      "pred": {
+        "identity": 35,
+        "delete_methods": 3,
+        "delete_selected": 2
+      }
+    },
+    "reverse_edges": {
+      "n": 40,
+      "acc": 0.0,
+      "pred": {
+        "delete_methods": 17,
+        "delete_selected": 7,
+        "delete_classes": 7,
+        "keep_callees": 4,
+        "reverse_edges+delete_selected": 2,
+        "keep_callers": 2,
+        "identity": 1
+      }
+    },
+    "reverse_order": {
+      "n": 40,
+      "acc": 0.0,
+      "pred": {
+        "keep_callers": 15,
+        "keep_callees": 11,
+        "reverse_order+keep_callees": 7,
+        "reverse_edges+keep_callees": 4,
+        "delete_methods": 3
+      }
+    },
+    "delete_selected": {
+      "n": 40,
+      "acc": 0.0,
+      "pred": {
+        "identity": 40
+      }
+    },
+    "keep_callees": {
+      "n": 40,
+      "acc": 0.025,
+      "pred": {
+        "identity": 28,
+        "delete_selected": 4,
+        "delete_methods": 4,
+        "delete_tests": 2,
+        "keep_callees": 1,
+        "keep_callers": 1
+      }
+    },
+    "mark_reachable": {
+      "n": 40,
+      "acc": 0.025,
+      "pred": {
+        "identity": 31,
+        "mark_ancestors": 8,
+        "mark_reachable": 1
+      }
+    },
+    "delete_tests": {
+      "n": 40,
+      "acc": 0.55,
+      "pred": {
+        "delete_tests": 22,
+        "identity": 13,
+        "keep_callees": 4,
+        "keep_callers": 1
+      }
+    },
+    "delete_classes": {
+      "n": 40,
+      "acc": 0.1,
+      "pred": {
+        "delete_methods": 11,
+        "delete_selected": 8,
+        "delete_classes": 6,
+        "identity": 6,
+        "keep_callees": 5,
+        "keep_callers": 3,
+        "reverse_order+keep_callees": 1
+      }
+    },
+    "selected_first": {
+      "n": 40,
+      "acc": 0.0,
+      "pred": {
+        "identity": 17,
+        "keep_callees": 11,
+        "keep_callers": 7,
+        "reverse_edges+keep_callees": 4,
+        "delete_selected": 1
+      }
+    }
+  },
+  "two_step": null,
+  "acc_by_changed_cells": [
+    {
+      "from": 0,
+      "to": 1,
+      "n": 40,
+      "acc": 0.875
+    },
+    {
+      "from": 1,
+      "to": 8,
+      "n": 122,
+      "acc": 0.14754098360655737
+    },
+    {
+      "from": 8,
+      "to": 32,
+      "n": 95,
+      "acc": 0.10526315789473684
+    },
+    {
+      "from": 32,
+      "to": 96,
+      "n": 103,
+      "acc": 0.0
+    },
+    {
+      "from": 96,
+      "to": 1000000000.0,
+      "n": 0,
+      "acc": NaN
+    }
+  ],
+  "marking_acc_by_reach_depth": {
+    "depth_1": {
+      "n": 23,
+      "acc": 0.0
+    },
+    "depth_2_plus": {
+      "n": 17,
+      "acc": 0.058823529411764705
+    }
+  },
+  "exact_256_parse_rate": 0.9944444444444445,
+  "elapsed_s": 955.048632144928,
+  "arm": "gemma4_ar_prompted",
+  "manifest": "unseen_infer_360"
+}

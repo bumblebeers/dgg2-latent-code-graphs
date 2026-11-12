@@ -1,0 +1,8 @@
+{
+  "completed_steps": 354,
+  "total_planned_steps": 4824,
+  "completed_examples": 2832,
+  "final_loss": 0.009192884899675846,
+  "total_training_time_s": 1282.940036535263,
+  "cutoff_hit": true
+}

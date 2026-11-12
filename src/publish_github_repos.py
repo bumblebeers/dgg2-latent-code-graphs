@@ -293,7 +293,7 @@ def stage_main_repo(commit_message: str, push: bool = True) -> None:
             if jf.stat().st_size <= 5 * 1024 * 1024:  # <= 5 MB JSON summaries
                 rel = jf.relative_to(REPO_ROOT)
                 sanitize_json_copy(jf, target / rel)
-        for extra_rel in ["outputs/m1/reader.npz", "outputs/m2/decoded_grids_all_arms.npz"]:
+        for extra_rel in ["outputs/m1/reader.npz", "outputs/m2/decoded_grids_all_arms.npz", "outputs/m2/refeed_trace_item0.npz"]:
             ef = REPO_ROOT / extra_rel
             if ef.exists():
                 dst_ef = target / extra_rel

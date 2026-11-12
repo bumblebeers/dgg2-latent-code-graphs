@@ -1,6 +1,6 @@
 # Upstream Bug Fix PR: DiffusionGemma Multimodal Attention Mask Dropping During Prefill
 
-- **Target Repository:** [huggingface/transformers](https://github.com/huggingface/transformers)
+- **Target Repository:** [huggingface/transformers](https://github.com/huggingface/transformers) ([PR #50684](https://github.com/huggingface/transformers/pull/50684))
 - **Target Subsystem:** `transformers.models.diffusion_gemma.modeling_diffusion_gemma`
 - **Affected Versions:** `transformers>=5.11.0` through `5.22.2` and current `main`
 - **Associated Patch File:** `src/patches/0001-fix-diffusion-gemma-prefill-multimodal-masks.patch`

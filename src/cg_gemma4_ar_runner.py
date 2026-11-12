@@ -379,6 +379,7 @@ def evaluate_manifest_prompted(
     do_sample = stochastic_seed is not None
     if do_sample:
         torch.manual_seed(stochastic_seed)
+    eos_ids = list({int(processor.tokenizer.eos_token_id), 106}) if processor.tokenizer.eos_token_id is not None else [106]
 
     # Check for multi-step manifests
     is_2step_refeed = "step1_instructions" in manifest and "step2_instructions" in manifest
@@ -402,10 +403,11 @@ def evaluate_manifest_prompted(
             with torch.inference_mode():
                 outputs = model.generate(
                     **inputs,
-                    max_new_tokens=320,
+                    max_new_tokens=288,
                     do_sample=do_sample,
                     temperature=0.7 if do_sample else None,
                     top_p=0.95 if do_sample else None,
+                    eos_token_id=eos_ids,
                     pad_token_id=processor.tokenizer.pad_token_id,
                     use_cache=True,
                 )
@@ -415,6 +417,7 @@ def evaluate_manifest_prompted(
                 idx = b_start + j
                 fallback = test_pack["src_grid"][manifest["img_indices"][idx]]
                 g, _ = parse_16x16_grid(text, fallback)
+                s1_grids[idx] = g
             del inputs, outputs, gen_ids, decoded
             torch.cuda.empty_cache()
 
@@ -434,10 +437,11 @@ def evaluate_manifest_prompted(
             with torch.inference_mode():
                 outputs = model.generate(
                     **inputs,
-                    max_new_tokens=320,
+                    max_new_tokens=288,
                     do_sample=do_sample,
                     temperature=0.7 if do_sample else None,
                     top_p=0.95 if do_sample else None,
+                    eos_token_id=eos_ids,
                     pad_token_id=processor.tokenizer.pad_token_id,
                     use_cache=True,
                 )
@@ -475,10 +479,11 @@ def evaluate_manifest_prompted(
                 with torch.inference_mode():
                     outputs = model.generate(
                         **inputs,
-                        max_new_tokens=320,
+                        max_new_tokens=288,
                         do_sample=do_sample,
                         temperature=0.7 if do_sample else None,
                         top_p=0.95 if do_sample else None,
+                        eos_token_id=eos_ids,
                         pad_token_id=processor.tokenizer.pad_token_id,
                         use_cache=True,
                     )
@@ -514,10 +519,11 @@ def evaluate_manifest_prompted(
             with torch.inference_mode():
                 outputs = model.generate(
                     **inputs,
-                    max_new_tokens=320,
+                    max_new_tokens=288,
                     do_sample=do_sample,
                     temperature=0.7 if do_sample else None,
                     top_p=0.95 if do_sample else None,
+                    eos_token_id=eos_ids,
                     pad_token_id=processor.tokenizer.pad_token_id,
                     use_cache=True,
                 )
@@ -547,8 +553,9 @@ def run_prompted_arm(
     batch_size: int = 32,
     device: str = "cuda:0",
     token: Optional[str] = None,
+    splits: Optional[List[str]] = None,
 ):
-    """Run full evaluation suite for Arm 1 (Prompted) across 9 Exp A splits."""
+    """Run full evaluation suite for Arm 1 (Prompted) across Exp A splits."""
     os.makedirs(output_dir, exist_ok=True)
     preds_dir = os.path.join(output_dir, "preds")
     os.makedirs(preds_dir, exist_ok=True)
@@ -564,27 +571,33 @@ def run_prompted_arm(
     legend = PALETTE_LEGEND
     in_context_text = build_in_context_examples(train_pack)
 
-    target_splits = [
+    target_splits = splits if splits else [
         "seen_bal360",
-        "seen_shuf360",
         "unseen_para_bal360",
         "unseen_infer_360",
+        "refeed_heldout_comp_bal360",
+        "seen_shuf360",
         "heldout_reverse_order+delete_selected_360",
         "heldout_reverse_edges+keep_callees_360",
-        "refeed_heldout_comp_bal360",
         "refeed_chain_heldout_ops_360",
         "open_unseen_360",
     ]
 
     all_summaries: Dict[str, Any] = {}
 
-    eval_batch_size = min(batch_size, 12)
-    if batch_size > 12:
-        print(f"[cg_gemma4_ar] Note: Clamping eval batch size from {batch_size} to safe KV cache limit 12")
+    eval_batch_size = min(batch_size, 36)
+    if batch_size > 36:
+        print(f"[cg_gemma4_ar] Note: Clamping eval batch size from {batch_size} to safe KV cache limit 36")
 
     for split in target_splits:
         if split not in manifests:
             print(f"[cg_gemma4_ar] Warning: split {split} not found in manifests; skipping.")
+            continue
+        split_out_file = os.path.join(output_dir, f"{split}_summary.json")
+        if os.path.exists(split_out_file):
+            print(f"[cg_gemma4_ar] Split {split} already exists at {split_out_file}; loading and skipping.")
+            with open(split_out_file) as f:
+                all_summaries[split] = json.load(f)
             continue
 
         print(f"\n{'='*70}\n[cg_gemma4_ar] Evaluating Arm 1 on split: {split}\n{'='*70}")
@@ -661,6 +674,7 @@ def run_lora_train_and_eval_arm(
     device: str = "cuda:0",
     seed: int = 42,
     token: Optional[str] = None,
+    splits: Optional[List[str]] = None,
 ):
     """Run LoRA fine-tuning and evaluation for Arm 2 across 9 Exp A splits."""
     os.makedirs(output_dir, exist_ok=True)
@@ -808,8 +822,8 @@ def run_lora_train_and_eval_arm(
                 peft_model.save_pretrained(step_ckpt)
                 print(f"[cg_gemma4_ar] Saved intermediate checkpoint to {step_ckpt}")
 
-            # Hard wall-clock cutoff check (21:52 UTC / 15:52 CST = 1763070720)
-            if time.time() >= 1763070720:
+            # Hard wall-clock cutoff check (2026-11-12 21:52:00 UTC / 15:52 CST = 1794520320)
+            if time.time() >= 1794520320:
                 print(f"\n[cg_gemma4_ar] !!! HARD WALL-CLOCK CUTOFF REACHED (21:52:00 UTC) !!!")
                 print(f"[cg_gemma4_ar] Halting training loop cleanly at step {global_step} to begin 9-split evaluation.")
                 cutoff_hit = True
@@ -836,26 +850,61 @@ def run_lora_train_and_eval_arm(
     with open(os.path.join(output_dir, "training_meta.json"), "w") as meta_f:
         json.dump(training_meta, meta_f, indent=2)
     print(f"[cg_gemma4_ar] Saved final PEFT checkpoint and training_meta.json to {output_dir}")
-    print(f"\n[cg_gemma4_ar] Training Complete/Cutoff! Total Steps: {global_step}. Starting 9-Split Evaluation...")
+    print(f"\n[cg_gemma4_ar] Training Complete/Cutoff! Total Steps: {global_step}. Starting Evaluation...")
+    return _evaluate_lora_splits(
+        peft_model=peft_model,
+        processor=processor,
+        test_pack=test_pack,
+        manifests=manifests,
+        inst_preamble=inst_preamble,
+        output_dir=output_dir,
+        eval_batch_size=eval_batch_size,
+        device=device,
+        splits=splits,
+    )
 
-    # Evaluation across 9 Exp A splits
+
+def _evaluate_lora_splits(
+    peft_model,
+    processor,
+    test_pack: Dict[str, np.ndarray],
+    manifests: Dict[str, Any],
+    inst_preamble: str,
+    output_dir: str,
+    eval_batch_size: int = 12,
+    device: str = "cuda:0",
+    splits: Optional[List[str]] = None,
+):
+    """Evaluate a trained PEFT Gemma 4 AR model across requested Exp A splits."""
+    os.makedirs(output_dir, exist_ok=True)
+    preds_dir = os.path.join(output_dir, "preds")
+    os.makedirs(preds_dir, exist_ok=True)
+    eval_batch_size = min(eval_batch_size, 36)
     peft_model.eval()
-    target_splits = [
+
+    target_splits = splits if splits else [
         "seen_bal360",
-        "seen_shuf360",
         "unseen_para_bal360",
         "unseen_infer_360",
+        "refeed_heldout_comp_bal360",
+        "seen_shuf360",
         "heldout_reverse_order+delete_selected_360",
         "heldout_reverse_edges+keep_callees_360",
-        "refeed_heldout_comp_bal360",
         "refeed_chain_heldout_ops_360",
         "open_unseen_360",
     ]
 
+    eos_ids = list({int(processor.tokenizer.eos_token_id), 106}) if processor.tokenizer.eos_token_id is not None else [106]
     all_summaries: Dict[str, Any] = {}
 
     for split in target_splits:
         if split not in manifests:
+            continue
+        split_out_file = os.path.join(output_dir, f"{split}_summary.json")
+        if os.path.exists(split_out_file):
+            print(f"[cg_gemma4_ar] Split {split} already exists at {split_out_file}; loading and skipping.")
+            with open(split_out_file) as f:
+                all_summaries[split] = json.load(f)
             continue
 
         print(f"\n{'='*70}\n[cg_gemma4_ar] Evaluating Arm 2 (LoRA) on split: {split}\n{'='*70}")
@@ -879,16 +928,17 @@ def run_lora_train_and_eval_arm(
                         inst = man["instructions"][i]
                         u_text = f"{inst_preamble}\nInstruction: {inst}\nOutput the resulting 16x16 grid as 16 rows of 16 digits (0-7):\n"
                         msg = [{"role": "user", "content": [{"type": "image"}, {"type": "text", "text": u_text}]}]
-                        b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False))
+                        b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False, enable_thinking=False))
 
                     inputs = processor(text=b_prompts, images=[[im] for im in b_imgs], return_tensors="pt", padding=True).to(device)
                     with torch.inference_mode():
                         outputs = peft_model.generate(
                             **inputs,
-                            max_new_tokens=320,
+                            max_new_tokens=288,
                             do_sample=True,
                             temperature=0.7,
                             top_p=0.95,
+                            eos_token_id=eos_ids,
                             pad_token_id=processor.tokenizer.pad_token_id,
                             use_cache=True,
                         )
@@ -925,14 +975,15 @@ def run_lora_train_and_eval_arm(
                     inst = man["step1_instructions"][i]
                     u_text = f"{inst_preamble}\nInstruction: {inst}\nOutput the resulting 16x16 grid as 16 rows of 16 digits (0-7):\n"
                     msg = [{"role": "user", "content": [{"type": "image"}, {"type": "text", "text": u_text}]}]
-                    b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False))
+                    b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False, enable_thinking=False))
 
                 inputs = processor(text=b_prompts, images=[[im] for im in b_imgs], return_tensors="pt", padding=True).to(device)
                 with torch.inference_mode():
                     outputs = peft_model.generate(
                         **inputs,
-                        max_new_tokens=320,
+                        max_new_tokens=288,
                         do_sample=False,
+                        eos_token_id=eos_ids,
                         pad_token_id=processor.tokenizer.pad_token_id,
                         use_cache=True,
                     )
@@ -955,14 +1006,15 @@ def run_lora_train_and_eval_arm(
                     inst = man["step2_instructions"][i]
                     u_text = f"{inst_preamble}\nInstruction: {inst}\nOutput the resulting 16x16 grid as 16 rows of 16 digits (0-7):\n"
                     msg = [{"role": "user", "content": [{"type": "image"}, {"type": "text", "text": u_text}]}]
-                    b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False))
+                    b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False, enable_thinking=False))
 
                 inputs = processor(text=b_prompts, images=[[im] for im in b_imgs], return_tensors="pt", padding=True).to(device)
                 with torch.inference_mode():
                     outputs = peft_model.generate(
                         **inputs,
-                        max_new_tokens=320,
+                        max_new_tokens=288,
                         do_sample=False,
+                        eos_token_id=eos_ids,
                         pad_token_id=processor.tokenizer.pad_token_id,
                         use_cache=True,
                     )
@@ -999,14 +1051,15 @@ def run_lora_train_and_eval_arm(
                         inst = man["chain_instructions"][i][step_idx]
                         u_text = f"{inst_preamble}\nInstruction: {inst}\nOutput the resulting 16x16 grid as 16 rows of 16 digits (0-7):\n"
                         msg = [{"role": "user", "content": [{"type": "image"}, {"type": "text", "text": u_text}]}]
-                        b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False))
+                        b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False, enable_thinking=False))
 
                     inputs = processor(text=b_prompts, images=[[im] for im in b_imgs], return_tensors="pt", padding=True).to(device)
                     with torch.inference_mode():
                         outputs = peft_model.generate(
                             **inputs,
-                            max_new_tokens=320,
+                            max_new_tokens=288,
                             do_sample=False,
+                            eos_token_id=eos_ids,
                             pad_token_id=processor.tokenizer.pad_token_id,
                             use_cache=True,
                         )
@@ -1042,14 +1095,15 @@ def run_lora_train_and_eval_arm(
                     inst = man["instructions"][i]
                     u_text = f"{inst_preamble}\nInstruction: {inst}\nOutput the resulting 16x16 grid as 16 rows of 16 digits (0-7):\n"
                     msg = [{"role": "user", "content": [{"type": "image"}, {"type": "text", "text": u_text}]}]
-                    b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False))
+                    b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False, enable_thinking=False))
 
                 inputs = processor(text=b_prompts, images=[[im] for im in b_imgs], return_tensors="pt", padding=True).to(device)
                 with torch.inference_mode():
                     outputs = peft_model.generate(
                         **inputs,
-                        max_new_tokens=320,
+                        max_new_tokens=288,
                         do_sample=False,
+                        eos_token_id=eos_ids,
                         pad_token_id=processor.tokenizer.pad_token_id,
                         use_cache=True,
                     )
@@ -1071,15 +1125,65 @@ def run_lora_train_and_eval_arm(
             summary["manifest"] = split
             print(f"[cg_gemma4_ar] {split}: K-way Acc={summary.get('acc_kway', 0.0):.4f} | Changed Acc={summary.get('changed_acc', 0.0):.4f} | Parse={summary['exact_256_parse_rate']:.4f} | Time={summary['elapsed_s']:.1f}s")
 
-        split_out_file = os.path.join(output_dir, f"{split}_summary.json")
         with open(split_out_file, "w") as f:
             json.dump(summary, f, indent=2)
         all_summaries[split] = summary
 
     master_file = os.path.join(output_dir, "manifest_summary.json")
+    merged = {}
+    if os.path.exists(master_file):
+        try:
+            with open(master_file) as f:
+                merged = json.load(f)
+        except Exception:
+            merged = {}
+    merged.update(all_summaries)
     with open(master_file, "w") as f:
-        json.dump(all_summaries, f, indent=2)
-    print(f"\n[cg_gemma4_ar] Arm 2 LoRA Training & Evaluation Complete. Summary saved to {master_file}")
+        json.dump(merged, f, indent=2)
+    print(f"\n[cg_gemma4_ar] Arm 2 LoRA Evaluation Complete ({len(all_summaries)} splits). Summary saved to {master_file}")
+    return merged
+
+
+def run_lora_eval_only_arm(
+    model_id: str,
+    adapter_dir: str,
+    train_pack_path: str,
+    test_pack_path: str,
+    output_dir: str,
+    eval_batch_size: int = 12,
+    device: str = "cuda:0",
+    token: Optional[str] = None,
+    splits: Optional[List[str]] = None,
+):
+    """Load a saved PEFT Gemma 4 AR adapter and evaluate requested splits."""
+    from transformers import Gemma4ForConditionalGeneration
+    from peft import PeftModel
+
+    train_pack = dict(np.load(train_pack_path))
+    test_pack = dict(np.load(test_pack_path))
+    manifests = SP.build_cg_eval_manifests(test_pack)
+    inst_preamble = SP.preamble(train_pack)
+
+    processor = load_gemma4_processor(model_id, token=token)
+    base_model = Gemma4ForConditionalGeneration.from_pretrained(
+        model_id,
+        torch_dtype=torch.bfloat16,
+        device_map=device,
+        token=token,
+    )
+    peft_model = PeftModel.from_pretrained(base_model, adapter_dir)
+    peft_model.eval()
+    return _evaluate_lora_splits(
+        peft_model=peft_model,
+        processor=processor,
+        test_pack=test_pack,
+        manifests=manifests,
+        inst_preamble=inst_preamble,
+        output_dir=output_dir,
+        eval_batch_size=eval_batch_size,
+        device=device,
+        splits=splits,
+    )
 
 
 # -----------------------------------------------------------------------------
@@ -1115,8 +1219,13 @@ def main():
                         help="Random seed")
     parser.add_argument("--device", type=str, default="cuda:0" if torch.cuda.is_available() else "cpu",
                         help="Compute device")
+    parser.add_argument("--adapter-dir", type=str, default=None,
+                        help="Path to saved PEFT adapter dir (required for --mode lora_eval_only)")
+    parser.add_argument("--splits", type=str, default=None,
+                        help="Optional comma-separated list of splits to evaluate (for multi-GPU sharding)")
 
     args = parser.parse_args()
+    split_list = [s.strip() for s in args.splits.split(",") if s.strip()] if args.splits else None
 
     token = find_hf_token()
     if token:
@@ -1132,6 +1241,8 @@ def main():
     print(f"[cg_gemma4_ar] Model: {args.model_id}")
     print(f"[cg_gemma4_ar] Output Dir: {args.output_dir}")
     print(f"[cg_gemma4_ar] Device: {args.device}")
+    if split_list:
+        print(f"[cg_gemma4_ar] Sharded Splits: {split_list}")
 
     if args.mode == "prompted":
         run_prompted_arm(
@@ -1142,8 +1253,23 @@ def main():
             batch_size=args.batch_size,
             device=args.device,
             token=token,
+            splits=split_list,
         )
-    elif args.mode in ["lora_train_and_eval", "lora_eval_only"]:
+    elif args.mode == "lora_eval_only":
+        if not args.adapter_dir:
+            raise ValueError("--adapter-dir is required when --mode lora_eval_only")
+        run_lora_eval_only_arm(
+            model_id=args.model_id,
+            adapter_dir=args.adapter_dir,
+            train_pack_path=args.train_pack,
+            test_pack_path=args.test_pack,
+            output_dir=args.output_dir,
+            eval_batch_size=args.batch_size,
+            device=args.device,
+            token=token,
+            splits=split_list,
+        )
+    elif args.mode == "lora_train_and_eval":
         run_lora_train_and_eval_arm(
             model_id=args.model_id,
             train_pack_path=args.train_pack,

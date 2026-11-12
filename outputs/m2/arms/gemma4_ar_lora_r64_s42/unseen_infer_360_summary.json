@@ -1,0 +1,142 @@
+{
+  "n": 360,
+  "acc_kway": 0.7222222222222222,
+  "chance": 0.045454545454545456,
+  "exact": 0.1361111111111111,
+  "cell_acc": 0.9604058159722222,
+  "changed_acc": 0.8310366999214015,
+  "unchanged_acc": 0.9675384676763467,
+  "edge_f1": 0.7903376668176394,
+  "node_acc": 0.8815972222222223,
+  "per_target": {
+    "identity": {
+      "n": 40,
+      "acc": 0.1,
+      "pred": {
+        "reverse_edges": 14,
+        "keep_callers": 6,
+        "delete_selected": 5,
+        "identity": 5,
+        "delete_methods": 5,
+        "delete_tests": 3,
+        "keep_callees": 2
+      }
+    },
+    "reverse_edges": {
+      "n": 40,
+      "acc": 1.0,
+      "pred": {
+        "reverse_edges": 40
+      }
+    },
+    "reverse_order": {
+      "n": 40,
+      "acc": 0.8,
+      "pred": {
+        "reverse_order": 34,
+        "reverse_order+delete_selected": 4,
+        "reverse_order+delete_tests": 1,
+        "reverse_order+keep_callees": 1
+      }
+    },
+    "delete_selected": {
+      "n": 40,
+      "acc": 0.925,
+      "pred": {
+        "delete_selected": 37,
+        "identity": 3
+      }
+    },
+    "keep_callees": {
+      "n": 40,
+      "acc": 1.0,
+      "pred": {
+        "keep_callees": 40
+      }
+    },
+    "mark_reachable": {
+      "n": 40,
+      "acc": 0.075,
+      "pred": {
+        "identity": 37,
+        "mark_reachable": 3
+      }
+    },
+    "delete_tests": {
+      "n": 40,
+      "acc": 0.95,
+      "pred": {
+        "delete_tests": 38,
+        "delete_methods": 1,
+        "delete_selected": 1
+      }
+    },
+    "delete_classes": {
+      "n": 40,
+      "acc": 0.775,
+      "pred": {
+        "delete_classes": 31,
+        "delete_selected": 7,
+        "reverse_order+keep_callees": 1,
+        "keep_callers": 1
+      }
+    },
+    "selected_first": {
+      "n": 40,
+      "acc": 0.875,
+      "pred": {
+        "selected_first": 36,
+        "delete_selected": 2,
+        "delete_classes": 1,
+        "keep_callers": 1
+      }
+    }
+  },
+  "two_step": null,
+  "acc_by_changed_cells": [
+    {
+      "from": 0,
+      "to": 1,
+      "n": 40,
+      "acc": 0.1
+    },
+    {
+      "from": 1,
+      "to": 8,
+      "n": 122,
+      "acc": 0.6311475409836066
+    },
+    {
+      "from": 8,
+      "to": 32,
+      "n": 95,
+      "acc": 0.9368421052631579
+    },
+    {
+      "from": 32,
+      "to": 96,
+      "n": 103,
+      "acc": 0.8737864077669902
+    },
+    {
+      "from": 96,
+      "to": 1000000000.0,
+      "n": 0,
+      "acc": NaN
+    }
+  ],
+  "marking_acc_by_reach_depth": {
+    "depth_1": {
+      "n": 23,
+      "acc": 0.13043478260869565
+    },
+    "depth_2_plus": {
+      "n": 17,
+      "acc": 0.0
+    }
+  },
+  "exact_256_parse_rate": 0.8527777777777777,
+  "elapsed_s": 583.182783126831,
+  "arm": "gemma4_ar_lora_r64_s42",
+  "manifest": "unseen_infer_360"
+}

@@ -1,0 +1,201 @@
+{
+  "n": 360,
+  "acc_kway": 0.7055555555555556,
+  "chance": 0.045454545454545456,
+  "exact": 0.14722222222222223,
+  "cell_acc": 0.9483289930555555,
+  "changed_acc": 0.7683866223001732,
+  "unchanged_acc": 0.968352665722264,
+  "edge_f1": 0.7562189786904576,
+  "node_acc": 0.8105902777777778,
+  "per_target": {
+    "identity": {
+      "n": 26,
+      "acc": 0.7692307692307693,
+      "pred": {
+        "identity": 22,
+        "keep_callees": 1,
+        "delete_methods": 1,
+        "reverse_edges": 1,
+        "keep_callers": 1
+      }
+    },
+    "reverse_edges": {
+      "n": 26,
+      "acc": 0.8846153846153846,
+      "pred": {
+        "reverse_edges": 23,
+        "keep_callees": 2,
+        "delete_tests": 1
+      }
+    },
+    "reverse_order": {
+      "n": 26,
+      "acc": 0.6923076923076923,
+      "pred": {
+        "reverse_order": 19,
+        "reverse_edges": 6,
+        "reverse_order+delete_selected": 1
+      }
+    },
+    "delete_selected": {
+      "n": 26,
+      "acc": 0.9615384615384616,
+      "pred": {
+        "delete_selected": 25,
+        "identity": 1
+      }
+    },
+    "keep_callees": {
+      "n": 26,
+      "acc": 0.9615384615384616,
+      "pred": {
+        "keep_callees": 25,
+        "keep_callers": 1
+      }
+    },
+    "mark_reachable": {
+      "n": 26,
+      "acc": 0.038461538461538464,
+      "pred": {
+        "identity": 24,
+        "keep_callees": 1,
+        "mark_reachable": 1
+      }
+    },
+    "delete_tests": {
+      "n": 26,
+      "acc": 1.0,
+      "pred": {
+        "delete_tests": 26
+      }
+    },
+    "selected_first": {
+      "n": 26,
+      "acc": 0.8461538461538461,
+      "pred": {
+        "selected_first": 22,
+        "delete_selected": 3,
+        "delete_classes": 1
+      }
+    },
+    "delete_classes": {
+      "n": 26,
+      "acc": 0.8846153846153846,
+      "pred": {
+        "delete_classes": 23,
+        "delete_selected": 2,
+        "keep_callers": 1
+      }
+    },
+    "reverse_edges+reverse_order": {
+      "n": 26,
+      "acc": 0.11538461538461539,
+      "pred": {
+        "identity": 7,
+        "keep_callers": 4,
+        "delete_tests": 4,
+        "reverse_edges+reverse_order": 3,
+        "keep_callees": 3,
+        "delete_classes": 2,
+        "delete_selected": 1,
+        "reverse_edges+keep_callees": 1,
+        "delete_methods": 1
+      }
+    },
+    "reverse_edges+delete_selected": {
+      "n": 25,
+      "acc": 1.0,
+      "pred": {
+        "reverse_edges+delete_selected": 25
+      }
+    },
+    "reverse_order+keep_callees": {
+      "n": 25,
+      "acc": 0.96,
+      "pred": {
+        "reverse_order+keep_callees": 24,
+        "keep_callers": 1
+      }
+    },
+    "reverse_order+mark_reachable": {
+      "n": 25,
+      "acc": 0.04,
+      "pred": {
+        "reverse_order": 11,
+        "identity": 5,
+        "delete_selected": 3,
+        "delete_methods": 2,
+        "reverse_order+delete_selected": 1,
+        "reverse_order+mark_reachable": 1,
+        "keep_callers": 1,
+        "delete_classes": 1
+      }
+    },
+    "reverse_edges+delete_tests": {
+      "n": 25,
+      "acc": 0.72,
+      "pred": {
+        "reverse_edges+delete_tests": 18,
+        "keep_callees": 4,
+        "delete_methods": 1,
+        "delete_tests": 1,
+        "keep_callers": 1
+      }
+    }
+  },
+  "two_step": {
+    "n": 126,
+    "correct": 71,
+    "first_only": 11,
+    "second_only": 1,
+    "source_copy": 12,
+    "other": 31
+  },
+  "acc_by_changed_cells": [
+    {
+      "from": 0,
+      "to": 1,
+      "n": 26,
+      "acc": 0.7692307692307693
+    },
+    {
+      "from": 1,
+      "to": 8,
+      "n": 81,
+      "acc": 0.6790123456790124
+    },
+    {
+      "from": 8,
+      "to": 32,
+      "n": 78,
+      "acc": 0.9102564102564102
+    },
+    {
+      "from": 32,
+      "to": 96,
+      "n": 175,
+      "acc": 0.6171428571428571
+    },
+    {
+      "from": 96,
+      "to": 1000000000.0,
+      "n": 0,
+      "acc": NaN
+    }
+  ],
+  "marking_acc_by_reach_depth": {
+    "depth_1": {
+      "n": 14,
+      "acc": 0.07142857142857142
+    },
+    "depth_2_plus": {
+      "n": 12,
+      "acc": 0.0
+    }
+  },
+  "exact_256_parse_rate": 0.8388888888888889,
+  "elapsed_s": 645.8859548568726,
+  "arm": "gemma4_ar_lora_r64_s42",
+  "manifest": "unseen_para_bal360"
+}

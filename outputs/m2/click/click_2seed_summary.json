@@ -1,0 +1,64 @@
+{
+  "manifests": {
+    "seen_bal360": {
+      "lora_dg_2seed": {
+        "acc_kway_mean": 0.906944,
+        "acc_kway_half_range": 0.023611,
+        "exact_mean": 0.616667,
+        "exact_half_range": 0.002778,
+        "edge_f1_mean": 0.946932,
+        "edge_f1_half_range": 0.01975
+      },
+      "best_nondg_2seed": {
+        "arm": "nondg_frozen_inst",
+        "acc_kway_mean": 0.720833,
+        "exact_mean": 0.073611
+      }
+    },
+    "unseen_para_bal360": {
+      "lora_dg_2seed": {
+        "acc_kway_mean": 0.770833,
+        "acc_kway_half_range": 0.045833,
+        "exact_mean": 0.469444,
+        "exact_half_range": 0.083333,
+        "edge_f1_mean": 0.840084,
+        "edge_f1_half_range": 0.056407
+      },
+      "best_nondg_2seed": {
+        "arm": "nondg_enc_lora",
+        "acc_kway_mean": 0.461111,
+        "exact_mean": 0.0375
+      }
+    },
+    "unseen_infer_360": {
+      "lora_dg_2seed": {
+        "acc_kway_mean": 0.627778,
+        "acc_kway_half_range": 0.038889,
+        "exact_mean": 0.383333,
+        "exact_half_range": 0.0,
+        "edge_f1_mean": 0.800445,
+        "edge_f1_half_range": 0.052358
+      },
+      "best_nondg_2seed": {
+        "arm": "nondg_enc_lora",
+        "acc_kway_mean": 0.244444,
+        "exact_mean": 0.0
+      }
+    },
+    "refeed_heldout_comp_bal360": {
+      "lora_dg_2seed": {
+        "acc_kway_mean": 0.834722,
+        "acc_kway_half_range": 0.018056,
+        "exact_mean": 0.472222,
+        "exact_half_range": 0.063889,
+        "edge_f1_mean": 0.983937,
+        "edge_f1_half_range": 0.00602
+      },
+      "best_nondg_2seed": {
+        "arm": "nondg_frozen_inst",
+        "acc_kway_mean": 0.409722,
+        "exact_mean": 0.0
+      }
+    }
+  }
+}

@@ -1,0 +1,168 @@
+{
+ "n": 360,
+ "acc_kway": 0.9305555555555556,
+ "chance": 0.045454545454545456,
+ "exact": 0.6194444444444445,
+ "cell_acc": 0.9932942708333333,
+ "changed_acc": 0.9586449658571108,
+ "unchanged_acc": 0.9949382497517743,
+ "edge_f1": 0.9666824086254198,
+ "node_acc": 0.9668402777777778,
+ "per_target": {
+  "identity": {
+   "n": 26,
+   "acc": 0.7307692307692307,
+   "pred": {
+    "identity": 20,
+    "keep_callees": 4,
+    "delete_tests": 1,
+    "keep_callers": 1
+   }
+  },
+  "reverse_edges": {
+   "n": 26,
+   "acc": 1.0,
+   "pred": {
+    "reverse_edges": 26
+   }
+  },
+  "reverse_order": {
+   "n": 26,
+   "acc": 1.0,
+   "pred": {
+    "reverse_order": 26
+   }
+  },
+  "delete_selected": {
+   "n": 26,
+   "acc": 1.0,
+   "pred": {
+    "delete_selected": 26
+   }
+  },
+  "keep_callees": {
+   "n": 26,
+   "acc": 1.0,
+   "pred": {
+    "keep_callees": 26
+   }
+  },
+  "mark_reachable": {
+   "n": 26,
+   "acc": 0.5769230769230769,
+   "pred": {
+    "mark_reachable": 15,
+    "identity": 11
+   }
+  },
+  "delete_tests": {
+   "n": 26,
+   "acc": 1.0,
+   "pred": {
+    "delete_tests": 26
+   }
+  },
+  "selected_first": {
+   "n": 26,
+   "acc": 1.0,
+   "pred": {
+    "selected_first": 26
+   }
+  },
+  "delete_classes": {
+   "n": 26,
+   "acc": 1.0,
+   "pred": {
+    "delete_classes": 26
+   }
+  },
+  "reverse_edges+reverse_order": {
+   "n": 26,
+   "acc": 1.0,
+   "pred": {
+    "reverse_edges+reverse_order": 26
+   }
+  },
+  "reverse_edges+delete_selected": {
+   "n": 25,
+   "acc": 1.0,
+   "pred": {
+    "reverse_edges+delete_selected": 25
+   }
+  },
+  "reverse_order+keep_callees": {
+   "n": 25,
+   "acc": 1.0,
+   "pred": {
+    "reverse_order+keep_callees": 25
+   }
+  },
+  "reverse_order+mark_reachable": {
+   "n": 25,
+   "acc": 0.72,
+   "pred": {
+    "reverse_order+mark_reachable": 18,
+    "reverse_order": 7
+   }
+  },
+  "reverse_edges+delete_tests": {
+   "n": 25,
+   "acc": 1.0,
+   "pred": {
+    "reverse_edges+delete_tests": 25
+   }
+  }
+ },
+ "two_step": {
+  "n": 126,
+  "correct": 119,
+  "first_only": 7,
+  "second_only": 0,
+  "source_copy": 0,
+  "other": 0
+ },
+ "acc_by_changed_cells": [
+  {
+   "from": 0,
+   "to": 1,
+   "n": 26,
+   "acc": 0.7307692307692307
+  },
+  {
+   "from": 1,
+   "to": 8,
+   "n": 93,
+   "acc": 0.8817204301075269
+  },
+  {
+   "from": 8,
+   "to": 32,
+   "n": 82,
+   "acc": 1.0
+  },
+  {
+   "from": 32,
+   "to": 96,
+   "n": 159,
+   "acc": 0.9559748427672956
+  },
+  {
+   "from": 96,
+   "to": 1000000000.0,
+   "n": 0,
+   "acc": NaN
+  }
+ ],
+ "marking_acc_by_reach_depth": {
+  "depth_1": {
+   "n": 9,
+   "acc": 1.0
+  },
+  "depth_2_plus": {
+   "n": 17,
+   "acc": 0.35294117647058826
+  }
+ },
+ "manifest": "seen_bal360",
+ "pack": "gridA_test360_click.npz"
+}

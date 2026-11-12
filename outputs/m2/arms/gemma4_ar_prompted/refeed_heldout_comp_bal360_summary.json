@@ -1,0 +1,122 @@
+{
+  "n": 360,
+  "acc_kway": 0.005555555555555556,
+  "chance": 0.045454545454545456,
+  "exact": 0.0,
+  "cell_acc": 0.9080512152777778,
+  "changed_acc": 0.41468527329312416,
+  "unchanged_acc": 0.982796923480455,
+  "edge_f1": 0.18964624220880874,
+  "node_acc": 0.5024305555555556,
+  "per_target": {
+    "reverse_order+delete_selected": {
+      "n": 72,
+      "acc": 0.0,
+      "pred": {
+        "identity": 34,
+        "keep_callees": 15,
+        "keep_callers": 8,
+        "delete_tests": 6,
+        "delete_selected": 5,
+        "delete_classes": 2,
+        "delete_methods": 2
+      }
+    },
+    "reverse_edges+keep_callees": {
+      "n": 72,
+      "acc": 0.0,
+      "pred": {
+        "keep_callees": 26,
+        "delete_methods": 19,
+        "keep_callers": 16,
+        "delete_selected": 6,
+        "reverse_order+keep_callees": 2,
+        "delete_classes": 2,
+        "reverse_edges+delete_selected": 1
+      }
+    },
+    "reverse_edges+mark_reachable": {
+      "n": 72,
+      "acc": 0.0,
+      "pred": {
+        "delete_methods": 21,
+        "delete_classes": 14,
+        "keep_callees": 12,
+        "delete_selected": 11,
+        "keep_callers": 8,
+        "reverse_edges+delete_selected": 3,
+        "reverse_edges+keep_callees": 2,
+        "reverse_order+delete_selected": 1
+      }
+    },
+    "reverse_order+delete_tests": {
+      "n": 72,
+      "acc": 0.0,
+      "pred": {
+        "delete_tests": 25,
+        "identity": 19,
+        "keep_callees": 15,
+        "reverse_order+keep_callees": 7,
+        "keep_callers": 4,
+        "delete_classes": 2
+      }
+    },
+    "delete_tests+mark_reachable": {
+      "n": 72,
+      "acc": 0.027777777777777776,
+      "pred": {
+        "delete_tests": 36,
+        "identity": 30,
+        "delete_tests+mark_reachable": 2,
+        "mark_ancestors": 1,
+        "keep_callers": 1,
+        "delete_selected": 1,
+        "keep_callees": 1
+      }
+    }
+  },
+  "two_step": {
+    "n": 360,
+    "correct": 2,
+    "first_only": 36,
+    "second_only": 56,
+    "source_copy": 83,
+    "other": 183
+  },
+  "acc_by_changed_cells": [
+    {
+      "from": 0,
+      "to": 1,
+      "n": 0,
+      "acc": NaN
+    },
+    {
+      "from": 1,
+      "to": 8,
+      "n": 13,
+      "acc": 0.0
+    },
+    {
+      "from": 8,
+      "to": 32,
+      "n": 73,
+      "acc": 0.0273972602739726
+    },
+    {
+      "from": 32,
+      "to": 96,
+      "n": 274,
+      "acc": 0.0
+    },
+    {
+      "from": 96,
+      "to": 1000000000.0,
+      "n": 0,
+      "acc": NaN
+    }
+  ],
+  "exact_256_parse_rate": 0.9944444444444445,
+  "elapsed_s": 1999.5245938301086,
+  "arm": "gemma4_ar_prompted",
+  "manifest": "refeed_heldout_comp_bal360"
+}

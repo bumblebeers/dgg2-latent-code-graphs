@@ -1,4 +1,4 @@
-From e5f2f5678c4765ab92905f8b0769f3bbb7939d86 Mon Sep 17 00:00:00 2001
+From 92e0636d9b4f70970a6af429fbd6c06d57cd5fbf Mon Sep 17 00:00:00 2001
 From: bumblebeers <21022766+bumblebeers@users.noreply.github.com>
 Date: Thu, 12 Nov 2026 15:27:47 -0600
 Subject: [PATCH] [DiffusionGemma] Fix dropped multimodal attention mask in
@@ -15,10 +15,10 @@ add a regression unit test verifying multimodal prefill mask propagation.
  3 files changed, 32 insertions(+), 2 deletions(-)
 
 diff --git a/src/transformers/models/diffusion_gemma/modeling_diffusion_gemma.py b/src/transformers/models/diffusion_gemma/modeling_diffusion_gemma.py
-index 8ee43ba5dd65..337d82e6414d 100644
+index 8ee43ba5d..337d82e64 100644
 --- a/src/transformers/models/diffusion_gemma/modeling_diffusion_gemma.py
 +++ b/src/transformers/models/diffusion_gemma/modeling_diffusion_gemma.py
-@@ -1110,7 +1110,7 @@ def forward(
+@@ -1110,7 +1110,7 @@ class DiffusionGemmaEncoderModel(DiffusionGemmaPreTrainedModel):
              position_ids = position_ids.unsqueeze(0)
  
          if not isinstance(causal_mask_mapping := attention_mask, dict):
@@ -28,10 +28,10 @@ index 8ee43ba5dd65..337d82e6414d 100644
                  inputs_embeds=inputs_embeds,
                  attention_mask=attention_mask,
 diff --git a/src/transformers/models/diffusion_gemma/modular_diffusion_gemma.py b/src/transformers/models/diffusion_gemma/modular_diffusion_gemma.py
-index 69d86fe80d8d..bc42ccf72139 100644
+index 69d86fe80..bc42ccf72 100644
 --- a/src/transformers/models/diffusion_gemma/modular_diffusion_gemma.py
 +++ b/src/transformers/models/diffusion_gemma/modular_diffusion_gemma.py
-@@ -938,7 +938,7 @@ def forward(
+@@ -938,7 +938,7 @@ class DiffusionGemmaEncoderModel(DiffusionGemmaPreTrainedModel, Gemma4Model):
              position_ids = position_ids.unsqueeze(0)
  
          if not isinstance(causal_mask_mapping := attention_mask, dict):
@@ -41,10 +41,10 @@ index 69d86fe80d8d..bc42ccf72139 100644
                  inputs_embeds=inputs_embeds,
                  attention_mask=attention_mask,
 diff --git a/tests/models/diffusion_gemma/test_modeling_diffusion_gemma.py b/tests/models/diffusion_gemma/test_modeling_diffusion_gemma.py
-index aba74c651e1d..7eae62d695e8 100644
+index aba74c651..627edb467 100644
 --- a/tests/models/diffusion_gemma/test_modeling_diffusion_gemma.py
 +++ b/tests/models/diffusion_gemma/test_modeling_diffusion_gemma.py
-@@ -220,6 +220,36 @@ def test_model(self):
+@@ -220,6 +220,36 @@ class DiffusionGemmaVisionText2TextModelTest(
          result = model(inputs_dict["input_ids"])
          self.assertEqual(result.last_hidden_state.shape, expected_shape)
  
@@ -63,7 +63,7 @@ index aba74c651e1d..7eae62d695e8 100644
 +        orig_forward = model.encoder.language_model.forward
 +
 +        def spy_forward(*args, **kwargs):
-+            passed_mask["attention_mask"] = kwargs.get("attention_mask", None)
++            passed_mask["attention_mask"] = kwargs.get("attention_mask")
 +            return orig_forward(*args, **kwargs)
 +
 +        model.encoder.language_model.forward = spy_forward
@@ -81,3 +81,6 @@ index aba74c651e1d..7eae62d695e8 100644
      def test_vision_axial_rope(self):
          # override -> uses gemma4Vision backbone which also overrides this test
  
+-- 
+2.56.0
+
