@@ -1,0 +1,1121 @@
+{
+  "arm_name": "cg_lora_dg_seed1337_ep3",
+  "manifests": {
+    "seen_bal360": {
+      "n": 360,
+      "acc_kway": 0.9305555555555556,
+      "chance": 0.045454545454545456,
+      "exact": 0.6194444444444445,
+      "cell_acc": 0.9932942708333333,
+      "changed_acc": 0.9586449658571108,
+      "unchanged_acc": 0.9949382497517743,
+      "edge_f1": 0.9666824086254198,
+      "node_acc": 0.9668402777777778,
+      "per_target": {
+        "identity": {
+          "n": 26,
+          "acc": 0.7307692307692307,
+          "pred": {
+            "identity": 20,
+            "keep_callees": 4,
+            "delete_tests": 1,
+            "keep_callers": 1
+          }
+        },
+        "reverse_edges": {
+          "n": 26,
+          "acc": 1.0,
+          "pred": {
+            "reverse_edges": 26
+          }
+        },
+        "reverse_order": {
+          "n": 26,
+          "acc": 1.0,
+          "pred": {
+            "reverse_order": 26
+          }
+        },
+        "delete_selected": {
+          "n": 26,
+          "acc": 1.0,
+          "pred": {
+            "delete_selected": 26
+          }
+        },
+        "keep_callees": {
+          "n": 26,
+          "acc": 1.0,
+          "pred": {
+            "keep_callees": 26
+          }
+        },
+        "mark_reachable": {
+          "n": 26,
+          "acc": 0.5769230769230769,
+          "pred": {
+            "mark_reachable": 15,
+            "identity": 11
+          }
+        },
+        "delete_tests": {
+          "n": 26,
+          "acc": 1.0,
+          "pred": {
+            "delete_tests": 26
+          }
+        },
+        "selected_first": {
+          "n": 26,
+          "acc": 1.0,
+          "pred": {
+            "selected_first": 26
+          }
+        },
+        "delete_classes": {
+          "n": 26,
+          "acc": 1.0,
+          "pred": {
+            "delete_classes": 26
+          }
+        },
+        "reverse_edges+reverse_order": {
+          "n": 26,
+          "acc": 1.0,
+          "pred": {
+            "reverse_edges+reverse_order": 26
+          }
+        },
+        "reverse_edges+delete_selected": {
+          "n": 25,
+          "acc": 1.0,
+          "pred": {
+            "reverse_edges+delete_selected": 25
+          }
+        },
+        "reverse_order+keep_callees": {
+          "n": 25,
+          "acc": 1.0,
+          "pred": {
+            "reverse_order+keep_callees": 25
+          }
+        },
+        "reverse_order+mark_reachable": {
+          "n": 25,
+          "acc": 0.72,
+          "pred": {
+            "reverse_order+mark_reachable": 18,
+            "reverse_order": 7
+          }
+        },
+        "reverse_edges+delete_tests": {
+          "n": 25,
+          "acc": 1.0,
+          "pred": {
+            "reverse_edges+delete_tests": 25
+          }
+        }
+      },
+      "two_step": {
+        "n": 126,
+        "correct": 119,
+        "first_only": 7,
+        "second_only": 0,
+        "source_copy": 0,
+        "other": 0
+      },
+      "acc_by_changed_cells": [
+        {
+          "from": 0,
+          "to": 1,
+          "n": 26,
+          "acc": 0.7307692307692307
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "n": 93,
+          "acc": 0.8817204301075269
+        },
+        {
+          "from": 8,
+          "to": 32,
+          "n": 82,
+          "acc": 1.0
+        },
+        {
+          "from": 32,
+          "to": 96,
+          "n": 159,
+          "acc": 0.9559748427672956
+        },
+        {
+          "from": 96,
+          "to": 1000000000.0,
+          "n": 0,
+          "acc": NaN
+        }
+      ],
+      "marking_acc_by_reach_depth": {
+        "depth_1": {
+          "n": 9,
+          "acc": 1.0
+        },
+        "depth_2_plus": {
+          "n": 17,
+          "acc": 0.35294117647058826
+        }
+      }
+    },
+    "unseen_para_bal360": {
+      "n": 360,
+      "acc_kway": 0.8166666666666667,
+      "chance": 0.045454545454545456,
+      "exact": 0.5527777777777778,
+      "cell_acc": 0.9803059895833334,
+      "changed_acc": 0.9059461458042227,
+      "unchanged_acc": 0.9857116452456524,
+      "edge_f1": 0.8964916938821823,
+      "node_acc": 0.9098958333333333,
+      "per_target": {
+        "identity": {
+          "n": 26,
+          "acc": 0.5,
+          "pred": {
+            "identity": 13,
+            "reverse_edges": 6,
+            "keep_callees": 5,
+            "keep_callers": 2
+          }
+        },
+        "reverse_edges": {
+          "n": 26,
+          "acc": 1.0,
+          "pred": {
+            "reverse_edges": 26
+          }
+        },
+        "reverse_order": {
+          "n": 26,
+          "acc": 0.7692307692307693,
+          "pred": {
+            "reverse_order": 20,
+            "reverse_edges": 6
+          }
+        },
+        "delete_selected": {
+          "n": 26,
+          "acc": 1.0,
+          "pred": {
+            "delete_selected": 26
+          }
+        },
+        "keep_callees": {
+          "n": 26,
+          "acc": 0.7692307692307693,
+          "pred": {
+            "keep_callees": 20,
+            "identity": 6
+          }
+        },
+        "mark_reachable": {
+          "n": 26,
+          "acc": 0.5769230769230769,
+          "pred": {
+            "mark_reachable": 15,
+            "identity": 11
+          }
+        },
+        "delete_tests": {
+          "n": 26,
+          "acc": 0.5,
+          "pred": {
+            "delete_tests": 13,
+            "identity": 4,
+            "keep_callees": 3,
+            "keep_callers": 2,
+            "reverse_order+keep_callees": 2,
+            "delete_classes": 2
+          }
+        },
+        "selected_first": {
+          "n": 26,
+          "acc": 1.0,
+          "pred": {
+            "selected_first": 26
+          }
+        },
+        "delete_classes": {
+          "n": 26,
+          "acc": 0.5769230769230769,
+          "pred": {
+            "delete_classes": 15,
+            "identity": 4,
+            "keep_callers": 4,
+            "reverse_edges+keep_callees": 1,
+            "keep_callees": 1,
+            "delete_tests": 1
+          }
+        },
+        "reverse_edges+reverse_order": {
+          "n": 26,
+          "acc": 1.0,
+          "pred": {
+            "reverse_edges+reverse_order": 26
+          }
+        },
+        "reverse_edges+delete_selected": {
+          "n": 25,
+          "acc": 1.0,
+          "pred": {
+            "reverse_edges+delete_selected": 25
+          }
+        },
+        "reverse_order+keep_callees": {
+          "n": 25,
+          "acc": 1.0,
+          "pred": {
+            "reverse_order+keep_callees": 25
+          }
+        },
+        "reverse_order+mark_reachable": {
+          "n": 25,
+          "acc": 0.76,
+          "pred": {
+            "reverse_order+mark_reachable": 19,
+            "reverse_order": 6
+          }
+        },
+        "reverse_edges+delete_tests": {
+          "n": 25,
+          "acc": 1.0,
+          "pred": {
+            "reverse_edges+delete_tests": 25
+          }
+        }
+      },
+      "two_step": {
+        "n": 126,
+        "correct": 120,
+        "first_only": 6,
+        "second_only": 0,
+        "source_copy": 0,
+        "other": 0
+      },
+      "acc_by_changed_cells": [
+        {
+          "from": 0,
+          "to": 1,
+          "n": 26,
+          "acc": 0.5
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "n": 93,
+          "acc": 0.6881720430107527
+        },
+        {
+          "from": 8,
+          "to": 32,
+          "n": 82,
+          "acc": 0.8536585365853658
+        },
+        {
+          "from": 32,
+          "to": 96,
+          "n": 159,
+          "acc": 0.9245283018867925
+        },
+        {
+          "from": 96,
+          "to": 1000000000.0,
+          "n": 0,
+          "acc": NaN
+        }
+      ],
+      "marking_acc_by_reach_depth": {
+        "depth_1": {
+          "n": 9,
+          "acc": 1.0
+        },
+        "depth_2_plus": {
+          "n": 17,
+          "acc": 0.35294117647058826
+        }
+      }
+    },
+    "unseen_infer_360": {
+      "n": 360,
+      "acc_kway": 0.6666666666666666,
+      "chance": 0.045454545454545456,
+      "exact": 0.38333333333333336,
+      "cell_acc": 0.9782877604166667,
+      "changed_acc": 0.7735609122755167,
+      "unchanged_acc": 0.9834514425536879,
+      "edge_f1": 0.8528031777168609,
+      "node_acc": 0.9527777777777777,
+      "per_target": {
+        "identity": {
+          "n": 40,
+          "acc": 0.0,
+          "pred": {
+            "reverse_edges": 40
+          }
+        },
+        "reverse_edges": {
+          "n": 40,
+          "acc": 1.0,
+          "pred": {
+            "reverse_edges": 40
+          }
+        },
+        "reverse_order": {
+          "n": 40,
+          "acc": 1.0,
+          "pred": {
+            "reverse_order": 40
+          }
+        },
+        "delete_selected": {
+          "n": 40,
+          "acc": 1.0,
+          "pred": {
+            "delete_selected": 40
+          }
+        },
+        "keep_callees": {
+          "n": 40,
+          "acc": 1.0,
+          "pred": {
+            "keep_callees": 40
+          }
+        },
+        "mark_reachable": {
+          "n": 40,
+          "acc": 0.65,
+          "pred": {
+            "mark_reachable": 26,
+            "identity": 14
+          }
+        },
+        "delete_tests": {
+          "n": 40,
+          "acc": 0.1,
+          "pred": {
+            "identity": 24,
+            "delete_classes": 12,
+            "delete_tests": 4
+          }
+        },
+        "delete_classes": {
+          "n": 40,
+          "acc": 0.25,
+          "pred": {
+            "identity": 30,
+            "delete_classes": 10
+          }
+        },
+        "selected_first": {
+          "n": 40,
+          "acc": 1.0,
+          "pred": {
+            "selected_first": 40
+          }
+        }
+      },
+      "two_step": null,
+      "acc_by_changed_cells": [
+        {
+          "from": 0,
+          "to": 1,
+          "n": 40,
+          "acc": 0.0
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "n": 143,
+          "acc": 0.5314685314685315
+        },
+        {
+          "from": 8,
+          "to": 32,
+          "n": 78,
+          "acc": 0.8333333333333334
+        },
+        {
+          "from": 32,
+          "to": 96,
+          "n": 99,
+          "acc": 1.0
+        },
+        {
+          "from": 96,
+          "to": 1000000000.0,
+          "n": 0,
+          "acc": NaN
+        }
+      ],
+      "marking_acc_by_reach_depth": {
+        "depth_1": {
+          "n": 18,
+          "acc": 0.9444444444444444
+        },
+        "depth_2_plus": {
+          "n": 22,
+          "acc": 0.4090909090909091
+        }
+      }
+    },
+    "refeed_heldout_comp_bal360": {
+      "n": 360,
+      "acc_kway": 0.8166666666666667,
+      "chance": 0.045454545454545456,
+      "exact": 0.5361111111111111,
+      "cell_acc": 0.9958550347222223,
+      "changed_acc": 0.9514245883541917,
+      "unchanged_acc": 0.999538450372511,
+      "edge_f1": 0.9899566353694611,
+      "node_acc": 0.9506944444444444,
+      "per_target": {
+        "reverse_order+delete_selected": {
+          "n": 72,
+          "acc": 1.0,
+          "pred": {
+            "reverse_order+delete_selected": 72
+          }
+        },
+        "reverse_edges+keep_callees": {
+          "n": 72,
+          "acc": 1.0,
+          "pred": {
+            "reverse_edges+keep_callees": 72
+          }
+        },
+        "reverse_edges+mark_reachable": {
+          "n": 72,
+          "acc": 0.4861111111111111,
+          "pred": {
+            "reverse_edges": 37,
+            "reverse_edges+mark_reachable": 35
+          }
+        },
+        "reverse_order+delete_tests": {
+          "n": 72,
+          "acc": 0.9722222222222222,
+          "pred": {
+            "reverse_order+delete_tests": 70,
+            "reverse_order+delete_selected": 2
+          }
+        },
+        "delete_tests+mark_reachable": {
+          "n": 72,
+          "acc": 0.625,
+          "pred": {
+            "delete_tests+mark_reachable": 45,
+            "delete_tests": 27
+          }
+        }
+      },
+      "two_step": {
+        "n": 360,
+        "correct": 294,
+        "first_only": 64,
+        "second_only": 0,
+        "source_copy": 0,
+        "other": 2
+      },
+      "acc_by_changed_cells": [
+        {
+          "from": 0,
+          "to": 1,
+          "n": 0,
+          "acc": NaN
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "n": 13,
+          "acc": 0.9230769230769231
+        },
+        {
+          "from": 8,
+          "to": 32,
+          "n": 99,
+          "acc": 0.7373737373737373
+        },
+        {
+          "from": 32,
+          "to": 96,
+          "n": 248,
+          "acc": 0.842741935483871
+        },
+        {
+          "from": 96,
+          "to": 1000000000.0,
+          "n": 0,
+          "acc": NaN
+        }
+      ]
+    }
+  },
+  "seen_bal360": {
+    "n": 360,
+    "acc_kway": 0.9305555555555556,
+    "chance": 0.045454545454545456,
+    "exact": 0.6194444444444445,
+    "cell_acc": 0.9932942708333333,
+    "changed_acc": 0.9586449658571108,
+    "unchanged_acc": 0.9949382497517743,
+    "edge_f1": 0.9666824086254198,
+    "node_acc": 0.9668402777777778,
+    "per_target": {
+      "identity": {
+        "n": 26,
+        "acc": 0.7307692307692307,
+        "pred": {
+          "identity": 20,
+          "keep_callees": 4,
+          "delete_tests": 1,
+          "keep_callers": 1
+        }
+      },
+      "reverse_edges": {
+        "n": 26,
+        "acc": 1.0,
+        "pred": {
+          "reverse_edges": 26
+        }
+      },
+      "reverse_order": {
+        "n": 26,
+        "acc": 1.0,
+        "pred": {
+          "reverse_order": 26
+        }
+      },
+      "delete_selected": {
+        "n": 26,
+        "acc": 1.0,
+        "pred": {
+          "delete_selected": 26
+        }
+      },
+      "keep_callees": {
+        "n": 26,
+        "acc": 1.0,
+        "pred": {
+          "keep_callees": 26
+        }
+      },
+      "mark_reachable": {
+        "n": 26,
+        "acc": 0.5769230769230769,
+        "pred": {
+          "mark_reachable": 15,
+          "identity": 11
+        }
+      },
+      "delete_tests": {
+        "n": 26,
+        "acc": 1.0,
+        "pred": {
+          "delete_tests": 26
+        }
+      },
+      "selected_first": {
+        "n": 26,
+        "acc": 1.0,
+        "pred": {
+          "selected_first": 26
+        }
+      },
+      "delete_classes": {
+        "n": 26,
+        "acc": 1.0,
+        "pred": {
+          "delete_classes": 26
+        }
+      },
+      "reverse_edges+reverse_order": {
+        "n": 26,
+        "acc": 1.0,
+        "pred": {
+          "reverse_edges+reverse_order": 26
+        }
+      },
+      "reverse_edges+delete_selected": {
+        "n": 25,
+        "acc": 1.0,
+        "pred": {
+          "reverse_edges+delete_selected": 25
+        }
+      },
+      "reverse_order+keep_callees": {
+        "n": 25,
+        "acc": 1.0,
+        "pred": {
+          "reverse_order+keep_callees": 25
+        }
+      },
+      "reverse_order+mark_reachable": {
+        "n": 25,
+        "acc": 0.72,
+        "pred": {
+          "reverse_order+mark_reachable": 18,
+          "reverse_order": 7
+        }
+      },
+      "reverse_edges+delete_tests": {
+        "n": 25,
+        "acc": 1.0,
+        "pred": {
+          "reverse_edges+delete_tests": 25
+        }
+      }
+    },
+    "two_step": {
+      "n": 126,
+      "correct": 119,
+      "first_only": 7,
+      "second_only": 0,
+      "source_copy": 0,
+      "other": 0
+    },
+    "acc_by_changed_cells": [
+      {
+        "from": 0,
+        "to": 1,
+        "n": 26,
+        "acc": 0.7307692307692307
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "n": 93,
+        "acc": 0.8817204301075269
+      },
+      {
+        "from": 8,
+        "to": 32,
+        "n": 82,
+        "acc": 1.0
+      },
+      {
+        "from": 32,
+        "to": 96,
+        "n": 159,
+        "acc": 0.9559748427672956
+      },
+      {
+        "from": 96,
+        "to": 1000000000.0,
+        "n": 0,
+        "acc": NaN
+      }
+    ],
+    "marking_acc_by_reach_depth": {
+      "depth_1": {
+        "n": 9,
+        "acc": 1.0
+      },
+      "depth_2_plus": {
+        "n": 17,
+        "acc": 0.35294117647058826
+      }
+    }
+  },
+  "unseen_para_bal360": {
+    "n": 360,
+    "acc_kway": 0.8166666666666667,
+    "chance": 0.045454545454545456,
+    "exact": 0.5527777777777778,
+    "cell_acc": 0.9803059895833334,
+    "changed_acc": 0.9059461458042227,
+    "unchanged_acc": 0.9857116452456524,
+    "edge_f1": 0.8964916938821823,
+    "node_acc": 0.9098958333333333,
+    "per_target": {
+      "identity": {
+        "n": 26,
+        "acc": 0.5,
+        "pred": {
+          "identity": 13,
+          "reverse_edges": 6,
+          "keep_callees": 5,
+          "keep_callers": 2
+        }
+      },
+      "reverse_edges": {
+        "n": 26,
+        "acc": 1.0,
+        "pred": {
+          "reverse_edges": 26
+        }
+      },
+      "reverse_order": {
+        "n": 26,
+        "acc": 0.7692307692307693,
+        "pred": {
+          "reverse_order": 20,
+          "reverse_edges": 6
+        }
+      },
+      "delete_selected": {
+        "n": 26,
+        "acc": 1.0,
+        "pred": {
+          "delete_selected": 26
+        }
+      },
+      "keep_callees": {
+        "n": 26,
+        "acc": 0.7692307692307693,
+        "pred": {
+          "keep_callees": 20,
+          "identity": 6
+        }
+      },
+      "mark_reachable": {
+        "n": 26,
+        "acc": 0.5769230769230769,
+        "pred": {
+          "mark_reachable": 15,
+          "identity": 11
+        }
+      },
+      "delete_tests": {
+        "n": 26,
+        "acc": 0.5,
+        "pred": {
+          "delete_tests": 13,
+          "identity": 4,
+          "keep_callees": 3,
+          "keep_callers": 2,
+          "reverse_order+keep_callees": 2,
+          "delete_classes": 2
+        }
+      },
+      "selected_first": {
+        "n": 26,
+        "acc": 1.0,
+        "pred": {
+          "selected_first": 26
+        }
+      },
+      "delete_classes": {
+        "n": 26,
+        "acc": 0.5769230769230769,
+        "pred": {
+          "delete_classes": 15,
+          "identity": 4,
+          "keep_callers": 4,
+          "reverse_edges+keep_callees": 1,
+          "keep_callees": 1,
+          "delete_tests": 1
+        }
+      },
+      "reverse_edges+reverse_order": {
+        "n": 26,
+        "acc": 1.0,
+        "pred": {
+          "reverse_edges+reverse_order": 26
+        }
+      },
+      "reverse_edges+delete_selected": {
+        "n": 25,
+        "acc": 1.0,
+        "pred": {
+          "reverse_edges+delete_selected": 25
+        }
+      },
+      "reverse_order+keep_callees": {
+        "n": 25,
+        "acc": 1.0,
+        "pred": {
+          "reverse_order+keep_callees": 25
+        }
+      },
+      "reverse_order+mark_reachable": {
+        "n": 25,
+        "acc": 0.76,
+        "pred": {
+          "reverse_order+mark_reachable": 19,
+          "reverse_order": 6
+        }
+      },
+      "reverse_edges+delete_tests": {
+        "n": 25,
+        "acc": 1.0,
+        "pred": {
+          "reverse_edges+delete_tests": 25
+        }
+      }
+    },
+    "two_step": {
+      "n": 126,
+      "correct": 120,
+      "first_only": 6,
+      "second_only": 0,
+      "source_copy": 0,
+      "other": 0
+    },
+    "acc_by_changed_cells": [
+      {
+        "from": 0,
+        "to": 1,
+        "n": 26,
+        "acc": 0.5
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "n": 93,
+        "acc": 0.6881720430107527
+      },
+      {
+        "from": 8,
+        "to": 32,
+        "n": 82,
+        "acc": 0.8536585365853658
+      },
+      {
+        "from": 32,
+        "to": 96,
+        "n": 159,
+        "acc": 0.9245283018867925
+      },
+      {
+        "from": 96,
+        "to": 1000000000.0,
+        "n": 0,
+        "acc": NaN
+      }
+    ],
+    "marking_acc_by_reach_depth": {
+      "depth_1": {
+        "n": 9,
+        "acc": 1.0
+      },
+      "depth_2_plus": {
+        "n": 17,
+        "acc": 0.35294117647058826
+      }
+    }
+  },
+  "unseen_infer_360": {
+    "n": 360,
+    "acc_kway": 0.6666666666666666,
+    "chance": 0.045454545454545456,
+    "exact": 0.38333333333333336,
+    "cell_acc": 0.9782877604166667,
+    "changed_acc": 0.7735609122755167,
+    "unchanged_acc": 0.9834514425536879,
+    "edge_f1": 0.8528031777168609,
+    "node_acc": 0.9527777777777777,
+    "per_target": {
+      "identity": {
+        "n": 40,
+        "acc": 0.0,
+        "pred": {
+          "reverse_edges": 40
+        }
+      },
+      "reverse_edges": {
+        "n": 40,
+        "acc": 1.0,
+        "pred": {
+          "reverse_edges": 40
+        }
+      },
+      "reverse_order": {
+        "n": 40,
+        "acc": 1.0,
+        "pred": {
+          "reverse_order": 40
+        }
+      },
+      "delete_selected": {
+        "n": 40,
+        "acc": 1.0,
+        "pred": {
+          "delete_selected": 40
+        }
+      },
+      "keep_callees": {
+        "n": 40,
+        "acc": 1.0,
+        "pred": {
+          "keep_callees": 40
+        }
+      },
+      "mark_reachable": {
+        "n": 40,
+        "acc": 0.65,
+        "pred": {
+          "mark_reachable": 26,
+          "identity": 14
+        }
+      },
+      "delete_tests": {
+        "n": 40,
+        "acc": 0.1,
+        "pred": {
+          "identity": 24,
+          "delete_classes": 12,
+          "delete_tests": 4
+        }
+      },
+      "delete_classes": {
+        "n": 40,
+        "acc": 0.25,
+        "pred": {
+          "identity": 30,
+          "delete_classes": 10
+        }
+      },
+      "selected_first": {
+        "n": 40,
+        "acc": 1.0,
+        "pred": {
+          "selected_first": 40
+        }
+      }
+    },
+    "two_step": null,
+    "acc_by_changed_cells": [
+      {
+        "from": 0,
+        "to": 1,
+        "n": 40,
+        "acc": 0.0
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "n": 143,
+        "acc": 0.5314685314685315
+      },
+      {
+        "from": 8,
+        "to": 32,
+        "n": 78,
+        "acc": 0.8333333333333334
+      },
+      {
+        "from": 32,
+        "to": 96,
+        "n": 99,
+        "acc": 1.0
+      },
+      {
+        "from": 96,
+        "to": 1000000000.0,
+        "n": 0,
+        "acc": NaN
+      }
+    ],
+    "marking_acc_by_reach_depth": {
+      "depth_1": {
+        "n": 18,
+        "acc": 0.9444444444444444
+      },
+      "depth_2_plus": {
+        "n": 22,
+        "acc": 0.4090909090909091
+      }
+    }
+  },
+  "refeed_heldout_comp_bal360": {
+    "n": 360,
+    "acc_kway": 0.8166666666666667,
+    "chance": 0.045454545454545456,
+    "exact": 0.5361111111111111,
+    "cell_acc": 0.9958550347222223,
+    "changed_acc": 0.9514245883541917,
+    "unchanged_acc": 0.999538450372511,
+    "edge_f1": 0.9899566353694611,
+    "node_acc": 0.9506944444444444,
+    "per_target": {
+      "reverse_order+delete_selected": {
+        "n": 72,
+        "acc": 1.0,
+        "pred": {
+          "reverse_order+delete_selected": 72
+        }
+      },
+      "reverse_edges+keep_callees": {
+        "n": 72,
+        "acc": 1.0,
+        "pred": {
+          "reverse_edges+keep_callees": 72
+        }
+      },
+      "reverse_edges+mark_reachable": {
+        "n": 72,
+        "acc": 0.4861111111111111,
+        "pred": {
+          "reverse_edges": 37,
+          "reverse_edges+mark_reachable": 35
+        }
+      },
+      "reverse_order+delete_tests": {
+        "n": 72,
+        "acc": 0.9722222222222222,
+        "pred": {
+          "reverse_order+delete_tests": 70,
+          "reverse_order+delete_selected": 2
+        }
+      },
+      "delete_tests+mark_reachable": {
+        "n": 72,
+        "acc": 0.625,
+        "pred": {
+          "delete_tests+mark_reachable": 45,
+          "delete_tests": 27
+        }
+      }
+    },
+    "two_step": {
+      "n": 360,
+      "correct": 294,
+      "first_only": 64,
+      "second_only": 0,
+      "source_copy": 0,
+      "other": 2
+    },
+    "acc_by_changed_cells": [
+      {
+        "from": 0,
+        "to": 1,
+        "n": 0,
+        "acc": NaN
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "n": 13,
+        "acc": 0.9230769230769231
+      },
+      {
+        "from": 8,
+        "to": 32,
+        "n": 99,
+        "acc": 0.7373737373737373
+      },
+      {
+        "from": 32,
+        "to": 96,
+        "n": 248,
+        "acc": 0.842741935483871
+      },
+      {
+        "from": 96,
+        "to": 1000000000.0,
+        "n": 0,
+        "acc": NaN
+      }
+    ]
+  }
+}

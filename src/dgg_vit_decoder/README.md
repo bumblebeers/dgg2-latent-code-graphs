@@ -22,5 +22,17 @@
 ## Installation
 
 ```bash
-pip install -e src/dgg_vit_decoder
+pip install git+https://github.com/bumblebeers/dgg-vit-decoder.git
+```
+
+## Quickstart
+
+```python
+import torch
+from dgg_vit_decoder import ImageDecoder, psnr
+
+decoder = ImageDecoder(d_in=1152, d_model=768, depth=4, heads=12).eval()
+h_v = torch.randn(1, 256, 1152)
+rgb_pred = decoder(h_v)  # -> (1, 3, 768, 768) in [0, 1]
+score_db = psnr(rgb_pred, torch.rand_like(rgb_pred))
 ```

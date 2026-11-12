@@ -43,20 +43,22 @@ This repository contains the benchmark specification, pre-registration (`PREREG.
 
 ## Quickstart & Independent Verification
 
+All benchmark packs (`data/gridA_*.npz`, `data/nodeB_*.json.gz`, `data/graphs/*.json.gz`), probe weights (`reader.npz`), summary JSON reports (`outputs/`), and decoded grid predictions (`outputs/m2/decoded_grids_all_arms.npz`) are included directly in this repository so verification runs **out-of-the-box on a fresh offline clone**:
+
 ```bash
 # 1. Install core dependencies and standalone packages
 pip install -e .
 pip install -e src/dgg_latent -e src/dgg_codebook -e src/dgg_vit_decoder
 
-# 2. Download benchmark packs (if not already in ./data) from Hugging Face:
-python3 -c "from huggingface_hub import snapshot_download; snapshot_download('bumblebeer/dgg2-code-graph-benchmarks', repo_type='dataset', local_dir='data')"
-
-# 3. Verify immutable pre-registration hashes (PREREG.json)
+# 2. Verify immutable pre-registration hashes (PREREG.json)
 python3 cg/cg_prereg.py --check
 
-# 4. Run offline Experiment A self-test & unit/e2e test suite (CPU-only, no 26B GPU needed)
+# 3. Run offline Experiment A self-test & unit/e2e test suite (CPU-only, no 26B GPU needed)
 python3 cg/cg_score_preds.py --self-test
 pytest -q tests/unit tests/e2e
+
+# 4. (Optional) Pull raw .npy prediction arrays & MiniLM symbol embeddings from Hugging Face into repo root (.):
+python3 -c "from huggingface_hub import snapshot_download; snapshot_download('bumblebeer/dgg2-code-graph-benchmarks', repo_type='dataset', local_dir='.', allow_patterns=['emb*.npz', 'predictions/*'])"
 ```
 
 ## License

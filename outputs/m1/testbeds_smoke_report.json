@@ -1,0 +1,20 @@
+{
+  "gate_A3_testbed": {
+    "pack": "data/gridA_test360_httpx.npz",
+    "manifest": "seen_bal360",
+    "items": 360,
+    "total_cells": 92160,
+    "changed_cells": 9104,
+    "changed_cell_fraction": 0.09878472222222222,
+    "source_copy_changed_cell_acc": 0.0,
+    "prereg_threshold": "changed_acc > 0.0 on seen_bal360",
+    "status": "READY_AND_VERIFIED"
+  },
+  "gate_B1_testbed": {
+    "dataset": "data/nodeB_test360_httpx.json.gz",
+    "items": 360,
+    "delete_candidate_count": 360,
+    "prereg_threshold": "delete items localised on >= 50% of items",
+    "status": "READY_AND_VERIFIED"
+  }
+}

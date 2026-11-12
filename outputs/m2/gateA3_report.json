@@ -1,0 +1,15 @@
+{
+  "manifest": "seen_bal360",
+  "arm": "nondg_enc_lora_s42",
+  "seed": 42,
+  "n_items": 360,
+  "acc_kway": 0.7333333333333333,
+  "cell_acc": 0.9563910590277778,
+  "changed_acc": 0.8999584756465492,
+  "unchanged_acc": 0.9617292327044171,
+  "edge_f1": 0.5872909488495583,
+  "node_acc": 0.890625,
+  "gate_a3_passed": true,
+  "status": "PASS",
+  "prereg_rule": "changed_acc > 0.0 (clearly above source copy = 0.0)"
+}

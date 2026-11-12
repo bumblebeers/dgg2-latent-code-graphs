@@ -28,5 +28,18 @@
 ## Installation
 
 ```bash
-pip install -e src/dgg_latent
+pip install git+https://github.com/bumblebeers/dgg-latent.git
+```
+
+## Quickstart
+
+```python
+import torch
+from dgg_latent import DualReadoutSoftCanvasHead, install_dg_attn_fix, loss_hv
+
+install_dg_attn_fix()  # patches DiffusionGemmaEncoderModel prefill mask handling
+head = DualReadoutSoftCanvasHead(d_in=2816, d_bot=768, d_out=1152).eval()
+h_dec, e_soft, conf = torch.randn(2, 256, 2816), torch.randn(2, 256, 2816), torch.rand(2, 256, 1)
+pred_hv = head(h_dec, e_soft=e_soft, confidence=conf)  # -> (2, 256, 1152)
+loss = loss_hv(pred_hv, target_hv=torch.randn(2, 256, 1152))
 ```

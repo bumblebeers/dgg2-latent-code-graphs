@@ -18,5 +18,18 @@
 ## Installation
 
 ```bash
-pip install -e src/dgg_codebook
+pip install git+https://github.com/bumblebeers/dgg-codebook.git
+```
+
+## Quickstart
+
+```python
+import torch
+from dgg_codebook import build_multimodal_target_distribution, compute_expected_vocabulary_embedding
+
+mode_ids = torch.randint(0, 262144, (2, 256, 8))
+mode_weights = torch.softmax(torch.randn(2, 256, 8), dim=-1)
+ids, q_tilde = build_multimodal_target_distribution(mode_ids, mode_weights, w_thresh=0.05)
+embed_table = torch.randn(262144, 64)
+e_soft = compute_expected_vocabulary_embedding(ids, q_tilde, embed_table)  # -> (2, 256, 64)
 ```

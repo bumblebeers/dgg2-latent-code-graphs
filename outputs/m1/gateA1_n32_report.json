@@ -1,0 +1,17 @@
+{
+ "grid_size": 32,
+ "cells_per_token": 4,
+ "cell_acc": 0.9996437355324074,
+ "per_class": {
+  "background": 1.0,
+  "call_edge": 1.0,
+  "function": 1.0,
+  "method": 1.0,
+  "class": 1.0,
+  "test": 1.0,
+  "selected": 0.85,
+  "marked": 0.8349928876244666
+ },
+ "exact_grid": 0.725,
+ "PASS": false
+}

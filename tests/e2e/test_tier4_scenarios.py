@@ -132,12 +132,13 @@ def test_scenario_standalone_library_packaging(repo_root):
 @pytest.mark.m4
 def test_scenario_upstream_transformers_patch_verification(repo_root):
     """Scenario 4: Upstream Transformers patch fixing multimodal attention mask dropping."""
-    # Check that dg_attn_fix contract is documented and accessible
-    parent_script = PARENT_REPO / "scripts" / "dg_attn_fix.py"
-    packet_zip = repo_root / "codegraph_handoff_packet_v3.zip"
+    shim_file = repo_root / "src" / "dg_attn_fix.py"
+    patch_file = repo_root / "src" / "patches" / "0001-fix-diffusion-gemma-prefill-multimodal-masks.patch"
 
-    patch_verified = parent_script.exists() or packet_zip.exists()
-    assert patch_verified, "Upstream attention fix must exist in parent scripts or packet"
+    assert shim_file.exists(), "Runtime drop-in shim src/dg_attn_fix.py must exist in repository"
+    assert patch_file.exists(), "Git format-patch file must exist in src/patches/"
+    patch_txt = patch_file.read_text(encoding="utf-8")
+    assert "causal_mask_mapping = self.create_masks_for_generate(" in patch_txt
 
 
 # ==============================================================================

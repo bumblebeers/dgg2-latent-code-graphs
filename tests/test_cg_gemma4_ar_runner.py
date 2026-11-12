@@ -123,14 +123,14 @@ def test_parse_16x16_grid_corrupted_fallback():
 
 
 def test_palette_legend_completeness():
-    assert "0=empty" in PALETTE_LEGEND
-    assert "1=mod_header" in PALETTE_LEGEND
-    assert "2=function" in PALETTE_LEGEND
-    assert "3=class" in PALETTE_LEGEND
-    assert "4=method" in PALETTE_LEGEND
-    assert "5=test" in PALETTE_LEGEND
-    assert "6=call_edge" in PALETTE_LEGEND
-    assert "7=marked" in PALETTE_LEGEND
+    assert "0 = background" in PALETTE_LEGEND
+    assert "1 = call_edge" in PALETTE_LEGEND
+    assert "2 = function" in PALETTE_LEGEND
+    assert "3 = method" in PALETTE_LEGEND
+    assert "4 = class" in PALETTE_LEGEND
+    assert "5 = test" in PALETTE_LEGEND
+    assert "6 = selected" in PALETTE_LEGEND
+    assert "7 = marked" in PALETTE_LEGEND
 
 
 def test_build_in_context_examples():

@@ -1,0 +1,40 @@
+{
+ "encoder": "st:sentence-transformers/all-MiniLM-L6-v2",
+ "dataset": "nodeB_test360_httpx.json.gz",
+ "items": 360,
+ "candidates_per_item": 8,
+ "spread": {
+  "dim": 384,
+  "raw_cos_mean": 0.23121380805969238,
+  "centered_cos_mean": -0.0014648156939074397,
+  "participation_ratio": 47.82791343711991,
+  "pc1_share": 0.09481237937913667
+ },
+ "duplicate_slot_rate": 0.0052191840277777775,
+ "source_to_edit_distance_over_nn_gap_median": {
+  "rename": 0.33802348375320435,
+  "add_param": 0.20271188020706177,
+  "delete": 1.2829525470733643,
+  "add_decorator": 0.5259100198745728
+ },
+ "min_candidate_distance_over_nn_gap": {
+  "p05": 0.07098037004470825,
+  "median": 0.15416614711284637,
+  "frac_zero": 0.0
+ },
+ "oracle_nearest_candidate_acc_at_noise": {
+  "0.1": 1.0,
+  "0.25": 1.0,
+  "0.5": 0.996875,
+  "1.0": 0.959375
+ },
+ "checks": {
+  "participation_ratio >= 20.0": true,
+  "centered_cos_mean <= 0.2": true,
+  "duplicate_slot_rate <= 0.05": true,
+  "median visibility >= 0.1": true,
+  "oracle acc @0.25 >= 0.9": true,
+  "no identical candidates": true
+ },
+ "PASS": true
+}

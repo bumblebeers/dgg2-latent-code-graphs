@@ -1,0 +1,312 @@
+{
+  "cg_lora_dg_seed42_ep3": {
+    "seen_bal360": {
+      "acc_kway": 0.9083333333333333,
+      "cell_acc": 0.9883572048611111,
+      "changed_acc": 0.948301580085883,
+      "exact": 0.6638888888888889,
+      "edge_f1": 0.9299926260859325,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "seen_shuf360": {
+      "acc_kway": 0.008333333333333333,
+      "cell_acc": 0.8793619791666667,
+      "changed_acc": 0.4099602472564538,
+      "exact": 0.0,
+      "edge_f1": 0.19806215858917256,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "unseen_para_bal360": {
+      "acc_kway": 0.7527777777777778,
+      "cell_acc": 0.9684895833333333,
+      "changed_acc": 0.8712602654148576,
+      "exact": 0.43333333333333335,
+      "edge_f1": 0.7922801700461563,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "unseen_infer_360": {
+      "acc_kway": 0.5888888888888889,
+      "cell_acc": 0.9598741319444445,
+      "changed_acc": 0.8503735257528501,
+      "exact": 0.425,
+      "edge_f1": 0.7499329142634081,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_keep_callers_360": {
+      "acc_kway": 0.0,
+      "cell_acc": 0.9620985243055555,
+      "changed_acc": 0.8268593365339962,
+      "exact": 0.0,
+      "edge_f1": 0.0,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_mark_ancestors_360": {
+      "acc_kway": 0.0,
+      "cell_acc": 0.9751302083333333,
+      "changed_acc": 0.0,
+      "exact": 0.0,
+      "edge_f1": 0.999928774928775,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_delete_methods_360": {
+      "acc_kway": 0.10277777777777777,
+      "cell_acc": 0.9109483506944445,
+      "changed_acc": 0.29944810980725184,
+      "exact": 0.0,
+      "edge_f1": 0.23684064084213174,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_reverse_order+delete_selected_360": {
+      "acc_kway": 0.9861111111111112,
+      "cell_acc": 0.9971137152777778,
+      "changed_acc": 0.9935167709450476,
+      "exact": 0.5305555555555556,
+      "edge_f1": 0.9782072606500094,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_reverse_edges+keep_callees_360": {
+      "acc_kway": 0.002777777777777778,
+      "cell_acc": 0.9602973090277778,
+      "changed_acc": 0.8550547563043558,
+      "exact": 0.0,
+      "edge_f1": 0.07199154240820908,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_reverse_edges+mark_reachable_360": {
+      "acc_kway": 0.0,
+      "cell_acc": 0.9747721354166666,
+      "changed_acc": 0.895044558602254,
+      "exact": 0.0,
+      "edge_f1": 0.9961468438250557,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_reverse_order+delete_tests_360": {
+      "acc_kway": 0.9722222222222222,
+      "cell_acc": 0.995703125,
+      "changed_acc": 0.9917481922513341,
+      "exact": 0.3194444444444444,
+      "edge_f1": 0.9719562660659556,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_delete_tests+mark_reachable_360": {
+      "acc_kway": 0.35555555555555557,
+      "cell_acc": 0.9925889756944445,
+      "changed_acc": 0.8049236488819822,
+      "exact": 0.17222222222222222,
+      "edge_f1": 0.9995297168945667,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "refeed_heldout_comp_bal360": {
+      "acc_kway": 0.8305555555555556,
+      "cell_acc": 0.9943467881944444,
+      "changed_acc": 0.9314257241386037,
+      "exact": 0.45555555555555555,
+      "edge_f1": 0.9783229544545787,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "refeed_chain_heldout_ops_360": {
+      "acc_kway": 0.475,
+      "cell_acc": 0.9735134548611111,
+      "changed_acc": 0.38503737919961495,
+      "exact": 0.0,
+      "edge_f1": 0.8388307168715676,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "open_seen_360": {
+      "acc_kway": null,
+      "cell_acc": null,
+      "changed_acc": null,
+      "exact": null,
+      "edge_f1": null,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "open_unseen_360": {
+      "acc_kway": null,
+      "cell_acc": null,
+      "changed_acc": null,
+      "exact": null,
+      "edge_f1": null,
+      "status": "VERIFIED_EXACT_MATCH"
+    }
+  },
+  "cg_lora_dg_seed1337_ep3": {
+    "seen_bal360": {
+      "acc_kway": 0.9305555555555556,
+      "cell_acc": 0.9930230034722223,
+      "changed_acc": 0.9635636449652992,
+      "exact": 0.5805555555555556,
+      "edge_f1": 0.962501331754966,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "seen_shuf360": {
+      "acc_kway": 0.002777777777777778,
+      "cell_acc": 0.8837890625,
+      "changed_acc": 0.4093831993755147,
+      "exact": 0.0,
+      "edge_f1": 0.21770750409310302,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "unseen_para_bal360": {
+      "acc_kway": 0.8166666666666667,
+      "cell_acc": 0.9801215277777777,
+      "changed_acc": 0.9034596231870987,
+      "exact": 0.5083333333333333,
+      "edge_f1": 0.8903381593582781,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "unseen_infer_360": {
+      "acc_kway": 0.6388888888888888,
+      "cell_acc": 0.9761284722222222,
+      "changed_acc": 0.7525352733117001,
+      "exact": 0.4,
+      "edge_f1": 0.8450570664200368,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_keep_callers_360": {
+      "acc_kway": 0.0,
+      "cell_acc": 0.9625868055555555,
+      "changed_acc": 0.8313876764339793,
+      "exact": 0.0,
+      "edge_f1": 0.0,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_mark_ancestors_360": {
+      "acc_kway": 0.0,
+      "cell_acc": 0.9754991319444445,
+      "changed_acc": 0.0014814814814814814,
+      "exact": 0.0,
+      "edge_f1": 0.9994736344452737,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_delete_methods_360": {
+      "acc_kway": 0.16111111111111112,
+      "cell_acc": 0.9207573784722223,
+      "changed_acc": 0.3059176629906926,
+      "exact": 0.0,
+      "edge_f1": 0.2672016576934164,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_reverse_order+delete_selected_360": {
+      "acc_kway": 1.0,
+      "cell_acc": 0.9995659722222222,
+      "changed_acc": 0.9974697099879034,
+      "exact": 0.8972222222222223,
+      "edge_f1": 0.995785636039936,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_reverse_edges+keep_callees_360": {
+      "acc_kway": 0.002777777777777778,
+      "cell_acc": 0.96162109375,
+      "changed_acc": 0.7953115556655798,
+      "exact": 0.0,
+      "edge_f1": 0.017414021164021163,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_reverse_edges+mark_reachable_360": {
+      "acc_kway": 0.0,
+      "cell_acc": 0.9720160590277778,
+      "changed_acc": 0.8773434003526934,
+      "exact": 0.0,
+      "edge_f1": 0.9745627525276442,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_reverse_order+delete_tests_360": {
+      "acc_kway": 1.0,
+      "cell_acc": 0.99931640625,
+      "changed_acc": 0.9960307537317037,
+      "exact": 0.8388888888888889,
+      "edge_f1": 0.9941500268381758,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_delete_tests+mark_reachable_360": {
+      "acc_kway": 0.48055555555555557,
+      "cell_acc": 0.9935329861111111,
+      "changed_acc": 0.8356747033830367,
+      "exact": 0.2611111111111111,
+      "edge_f1": 0.9984418820041747,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "open_unseen_360": {
+      "acc_kway": null,
+      "cell_acc": null,
+      "changed_acc": null,
+      "exact": null,
+      "edge_f1": null,
+      "status": "VERIFIED_EXACT_MATCH"
+    }
+  },
+  "cg_frozen_dg_ep3": {
+    "seen_bal360": {
+      "acc_kway": 0.002777777777777778,
+      "cell_acc": 0.8926974826388889,
+      "changed_acc": 0.6185587323186124,
+      "exact": 0.0,
+      "edge_f1": 0.0,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "seen_shuf360": {
+      "acc_kway": 0.002777777777777778,
+      "cell_acc": 0.8925347222222222,
+      "changed_acc": 0.6195926569987833,
+      "exact": 0.0,
+      "edge_f1": 0.0,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "unseen_para_bal360": {
+      "acc_kway": 0.0,
+      "cell_acc": 0.8926649305555555,
+      "changed_acc": 0.6186602584803069,
+      "exact": 0.0,
+      "edge_f1": 0.0,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "unseen_infer_360": {
+      "acc_kway": 0.0,
+      "cell_acc": 0.8886067708333333,
+      "changed_acc": 0.6606309721941335,
+      "exact": 0.0,
+      "edge_f1": 0.0,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_keep_callers_360": {
+      "acc_kway": 0.0,
+      "cell_acc": 0.9762044270833333,
+      "changed_acc": 0.9958640378737266,
+      "exact": 0.0,
+      "edge_f1": 0.0,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_mark_ancestors_360": {
+      "acc_kway": 0.0,
+      "cell_acc": 0.8675130208333334,
+      "changed_acc": 0.0,
+      "exact": 0.0,
+      "edge_f1": 0.0,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_delete_methods_360": {
+      "acc_kway": 0.030555555555555555,
+      "cell_acc": 0.95166015625,
+      "changed_acc": 0.9935697518675984,
+      "exact": 0.0,
+      "edge_f1": 0.05277777777777778,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_reverse_order+delete_selected_360": {
+      "acc_kway": 0.0,
+      "cell_acc": 0.8902777777777777,
+      "changed_acc": 0.4539938296855194,
+      "exact": 0.0,
+      "edge_f1": 0.0,
+      "status": "VERIFIED_EXACT_MATCH"
+    },
+    "heldout_reverse_edges+keep_callees_360": {
+      "acc_kway": 0.0,
+      "cell_acc": 0.9764105902777778,
+      "changed_acc": 0.9203787745423669,
+      "exact": 0.0,
+      "edge_f1": 0.0,
+      "status": "VERIFIED_EXACT_MATCH"
+    }
+  }
+}

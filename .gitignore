@@ -1,12 +1,12 @@
-# Generated artifacts, weights, and large dataset packs
-outputs/
+# Large model weights, raw continuous prediction caches, and scratch
 scratch/
 *.pt
 *.safetensors
 *.npy
-*.npz
-*.json.gz
+emb.npz
+emb_train.npz
 data/hv/
+outputs/external_review/
 *.zip
 *.tar.gz
 *.tar

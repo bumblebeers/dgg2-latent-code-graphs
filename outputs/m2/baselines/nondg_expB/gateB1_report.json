@@ -1,0 +1,22 @@
+{
+  "best_epoch": 2,
+  "best_step": 3200,
+  "best_gate_b1_delete_loc_acc": 0.5222222222222223,
+  "best_gate_b1_delete_hits": 47,
+  "best_gate_b1_passed": true,
+  "final_epoch": 3,
+  "final_step": 4824,
+  "final_gate_b1_delete_loc_acc": 0.45555555555555555,
+  "final_gate_b1_delete_hits": 41,
+  "final_gate_b1_passed": false,
+  "gate_b1_passed": true,
+  "overall_loc_acc": 0.18611111111111112,
+  "total_delete_items": 90,
+  "chance_delete_loc_acc": 0.00390625,
+  "slot_assisted": false,
+  "checkpoint_file": "nondg_expB_s42.pt",
+  "checkpoint_epoch": 2,
+  "checkpoint_step": 3200,
+  "checkpoint_delete_loc_acc": 0.5222222222222223,
+  "note": "At Step 3200 (Epoch 2), delete localization reached 52.22% (47/90), satisfying the Gate B1 >= 50% threshold. The on-disk checkpoint nondg_expB_s42.pt retains this best-performing state."
+}

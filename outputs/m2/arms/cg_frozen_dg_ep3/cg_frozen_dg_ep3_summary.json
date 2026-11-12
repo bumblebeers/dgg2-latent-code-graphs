@@ -1,0 +1,2597 @@
+{
+  "arm_name": "cg_frozen_dg_ep3",
+  "manifests": {
+    "seen_bal360": {
+      "n": 360,
+      "acc_kway": 0.002777777777777778,
+      "chance": 0.045454545454545456,
+      "exact": 0.0,
+      "cell_acc": 0.8926974826388889,
+      "changed_acc": 0.6185587323186124,
+      "unchanged_acc": 0.9319772441142017,
+      "edge_f1": 0.0,
+      "node_acc": 0.16527777777777777,
+      "per_target": {
+        "identity": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 17,
+            "keep_callers": 9
+          }
+        },
+        "reverse_edges": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 16,
+            "keep_callers": 9,
+            "reverse_order+keep_callees": 1
+          }
+        },
+        "reverse_order": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callers": 13,
+            "keep_callees": 12,
+            "delete_methods": 1
+          }
+        },
+        "delete_selected": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 18,
+            "keep_callers": 5,
+            "reverse_order+keep_callees": 2,
+            "delete_methods": 1
+          }
+        },
+        "keep_callees": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 16,
+            "keep_callers": 8,
+            "delete_methods": 2
+          }
+        },
+        "mark_reachable": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 17,
+            "keep_callers": 7,
+            "delete_methods": 1,
+            "reverse_order+keep_callees": 1
+          }
+        },
+        "delete_tests": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 17,
+            "keep_callers": 9
+          }
+        },
+        "selected_first": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 18,
+            "keep_callers": 8
+          }
+        },
+        "delete_classes": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 13,
+            "keep_callers": 12,
+            "reverse_order+keep_callees": 1
+          }
+        },
+        "reverse_edges+reverse_order": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callers": 13,
+            "keep_callees": 11,
+            "delete_methods": 2
+          }
+        },
+        "reverse_edges+delete_selected": {
+          "n": 25,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 17,
+            "keep_callers": 8
+          }
+        },
+        "reverse_order+keep_callees": {
+          "n": 25,
+          "acc": 0.04,
+          "pred": {
+            "keep_callees": 14,
+            "keep_callers": 9,
+            "reverse_order+keep_callees": 1,
+            "delete_methods": 1
+          }
+        },
+        "reverse_order+mark_reachable": {
+          "n": 25,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 15,
+            "keep_callers": 9,
+            "delete_methods": 1
+          }
+        },
+        "reverse_edges+delete_tests": {
+          "n": 25,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 14,
+            "keep_callers": 8,
+            "delete_methods": 2,
+            "reverse_order+keep_callees": 1
+          }
+        }
+      },
+      "two_step": {
+        "n": 126,
+        "correct": 1,
+        "first_only": 0,
+        "second_only": 14,
+        "source_copy": 0,
+        "other": 111
+      },
+      "acc_by_changed_cells": [
+        {
+          "from": 0,
+          "to": 1,
+          "n": 26,
+          "acc": 0.0
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "n": 81,
+          "acc": 0.0
+        },
+        {
+          "from": 8,
+          "to": 32,
+          "n": 78,
+          "acc": 0.0
+        },
+        {
+          "from": 32,
+          "to": 96,
+          "n": 175,
+          "acc": 0.005714285714285714
+        },
+        {
+          "from": 96,
+          "to": 1000000000.0,
+          "n": 0,
+          "acc": NaN
+        }
+      ],
+      "marking_acc_by_reach_depth": {
+        "depth_1": {
+          "n": 14,
+          "acc": 0.0
+        },
+        "depth_2_plus": {
+          "n": 12,
+          "acc": 0.0
+        }
+      }
+    },
+    "seen_shuf360": {
+      "n": 360,
+      "acc_kway": 0.002777777777777778,
+      "chance": 0.045454545454545456,
+      "exact": 0.0,
+      "cell_acc": 0.8925347222222222,
+      "changed_acc": 0.6195926569987833,
+      "unchanged_acc": 0.9317177240291351,
+      "edge_f1": 0.0,
+      "node_acc": 0.16475694444444444,
+      "per_target": {
+        "identity": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 15,
+            "keep_callers": 11
+          }
+        },
+        "reverse_edges": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 16,
+            "keep_callers": 10
+          }
+        },
+        "reverse_order": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callers": 14,
+            "keep_callees": 10,
+            "delete_methods": 1,
+            "reverse_order+keep_callees": 1
+          }
+        },
+        "delete_selected": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 17,
+            "keep_callers": 6,
+            "reverse_order+keep_callees": 2,
+            "delete_methods": 1
+          }
+        },
+        "keep_callees": {
+          "n": 26,
+          "acc": 0.038461538461538464,
+          "pred": {
+            "keep_callees": 15,
+            "keep_callers": 9,
+            "delete_methods": 2
+          }
+        },
+        "mark_reachable": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 16,
+            "keep_callers": 8,
+            "delete_methods": 1,
+            "reverse_order+keep_callees": 1
+          }
+        },
+        "delete_tests": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 17,
+            "keep_callers": 9
+          }
+        },
+        "selected_first": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 19,
+            "keep_callers": 7
+          }
+        },
+        "delete_classes": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 15,
+            "keep_callers": 11
+          }
+        },
+        "reverse_edges+reverse_order": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callers": 12,
+            "keep_callees": 11,
+            "delete_methods": 3
+          }
+        },
+        "reverse_edges+delete_selected": {
+          "n": 25,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 16,
+            "keep_callers": 8,
+            "reverse_order+keep_callees": 1
+          }
+        },
+        "reverse_order+keep_callees": {
+          "n": 25,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 15,
+            "keep_callers": 9,
+            "delete_methods": 1
+          }
+        },
+        "reverse_order+mark_reachable": {
+          "n": 25,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 15,
+            "keep_callers": 9,
+            "delete_methods": 1
+          }
+        },
+        "reverse_edges+delete_tests": {
+          "n": 25,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 13,
+            "keep_callers": 9,
+            "delete_methods": 2,
+            "reverse_order+keep_callees": 1
+          }
+        }
+      },
+      "two_step": {
+        "n": 126,
+        "correct": 0,
+        "first_only": 0,
+        "second_only": 15,
+        "source_copy": 0,
+        "other": 111
+      },
+      "acc_by_changed_cells": [
+        {
+          "from": 0,
+          "to": 1,
+          "n": 26,
+          "acc": 0.0
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "n": 81,
+          "acc": 0.0
+        },
+        {
+          "from": 8,
+          "to": 32,
+          "n": 78,
+          "acc": 0.01282051282051282
+        },
+        {
+          "from": 32,
+          "to": 96,
+          "n": 175,
+          "acc": 0.0
+        },
+        {
+          "from": 96,
+          "to": 1000000000.0,
+          "n": 0,
+          "acc": NaN
+        }
+      ],
+      "marking_acc_by_reach_depth": {
+        "depth_1": {
+          "n": 14,
+          "acc": 0.0
+        },
+        "depth_2_plus": {
+          "n": 12,
+          "acc": 0.0
+        }
+      }
+    },
+    "unseen_para_bal360": {
+      "n": 360,
+      "acc_kway": 0.0,
+      "chance": 0.045454545454545456,
+      "exact": 0.0,
+      "cell_acc": 0.8926649305555555,
+      "changed_acc": 0.6186602584803069,
+      "unchanged_acc": 0.9318986755361544,
+      "edge_f1": 0.0,
+      "node_acc": 0.1675347222222222,
+      "per_target": {
+        "identity": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 16,
+            "keep_callers": 10
+          }
+        },
+        "reverse_edges": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 16,
+            "keep_callers": 9,
+            "reverse_order+keep_callees": 1
+          }
+        },
+        "reverse_order": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callers": 14,
+            "keep_callees": 10,
+            "reverse_order+keep_callees": 2
+          }
+        },
+        "delete_selected": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 19,
+            "keep_callers": 6,
+            "delete_methods": 1
+          }
+        },
+        "keep_callees": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 15,
+            "keep_callers": 9,
+            "delete_methods": 2
+          }
+        },
+        "mark_reachable": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 16,
+            "keep_callers": 8,
+            "delete_methods": 1,
+            "reverse_order+keep_callees": 1
+          }
+        },
+        "delete_tests": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 17,
+            "keep_callers": 9
+          }
+        },
+        "selected_first": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 18,
+            "keep_callers": 8
+          }
+        },
+        "delete_classes": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callers": 13,
+            "keep_callees": 11,
+            "reverse_order+keep_callees": 2
+          }
+        },
+        "reverse_edges+reverse_order": {
+          "n": 26,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 13,
+            "keep_callers": 11,
+            "delete_methods": 2
+          }
+        },
+        "reverse_edges+delete_selected": {
+          "n": 25,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 16,
+            "keep_callers": 8,
+            "reverse_order+keep_callees": 1
+          }
+        },
+        "reverse_order+keep_callees": {
+          "n": 25,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 15,
+            "keep_callers": 9,
+            "delete_methods": 1
+          }
+        },
+        "reverse_order+mark_reachable": {
+          "n": 25,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 17,
+            "keep_callers": 7,
+            "delete_methods": 1
+          }
+        },
+        "reverse_edges+delete_tests": {
+          "n": 25,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 14,
+            "keep_callers": 9,
+            "delete_methods": 2
+          }
+        }
+      },
+      "two_step": {
+        "n": 126,
+        "correct": 0,
+        "first_only": 0,
+        "second_only": 15,
+        "source_copy": 0,
+        "other": 111
+      },
+      "acc_by_changed_cells": [
+        {
+          "from": 0,
+          "to": 1,
+          "n": 26,
+          "acc": 0.0
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "n": 81,
+          "acc": 0.0
+        },
+        {
+          "from": 8,
+          "to": 32,
+          "n": 78,
+          "acc": 0.0
+        },
+        {
+          "from": 32,
+          "to": 96,
+          "n": 175,
+          "acc": 0.0
+        },
+        {
+          "from": 96,
+          "to": 1000000000.0,
+          "n": 0,
+          "acc": NaN
+        }
+      ],
+      "marking_acc_by_reach_depth": {
+        "depth_1": {
+          "n": 14,
+          "acc": 0.0
+        },
+        "depth_2_plus": {
+          "n": 12,
+          "acc": 0.0
+        }
+      }
+    },
+    "unseen_infer_360": {
+      "n": 360,
+      "acc_kway": 0.0,
+      "chance": 0.045454545454545456,
+      "exact": 0.0,
+      "cell_acc": 0.8886067708333333,
+      "changed_acc": 0.6606309721941335,
+      "unchanged_acc": 0.9148720789901794,
+      "edge_f1": 0.0,
+      "node_acc": 0.1371527777777778,
+      "per_target": {
+        "identity": {
+          "n": 40,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 21,
+            "keep_callers": 16,
+            "delete_methods": 2,
+            "reverse_order+keep_callees": 1
+          }
+        },
+        "reverse_edges": {
+          "n": 40,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 22,
+            "keep_callers": 14,
+            "reverse_order+keep_callees": 3,
+            "delete_methods": 1
+          }
+        },
+        "reverse_order": {
+          "n": 40,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 24,
+            "keep_callers": 13,
+            "delete_methods": 3
+          }
+        },
+        "delete_selected": {
+          "n": 40,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 25,
+            "keep_callers": 11,
+            "delete_methods": 2,
+            "reverse_order+keep_callees": 2
+          }
+        },
+        "keep_callees": {
+          "n": 40,
+          "acc": 0.0,
+          "pred": {
+            "keep_callers": 19,
+            "keep_callees": 18,
+            "delete_methods": 3
+          }
+        },
+        "mark_reachable": {
+          "n": 40,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 25,
+            "keep_callers": 14,
+            "delete_methods": 1
+          }
+        },
+        "delete_tests": {
+          "n": 40,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 28,
+            "keep_callers": 12
+          }
+        },
+        "delete_classes": {
+          "n": 40,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 22,
+            "keep_callers": 15,
+            "reverse_order+keep_callees": 2,
+            "delete_methods": 1
+          }
+        },
+        "selected_first": {
+          "n": 40,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 23,
+            "keep_callers": 16,
+            "delete_methods": 1
+          }
+        }
+      },
+      "two_step": null,
+      "acc_by_changed_cells": [
+        {
+          "from": 0,
+          "to": 1,
+          "n": 40,
+          "acc": 0.0
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "n": 122,
+          "acc": 0.0
+        },
+        {
+          "from": 8,
+          "to": 32,
+          "n": 95,
+          "acc": 0.0
+        },
+        {
+          "from": 32,
+          "to": 96,
+          "n": 103,
+          "acc": 0.0
+        },
+        {
+          "from": 96,
+          "to": 1000000000.0,
+          "n": 0,
+          "acc": NaN
+        }
+      ],
+      "marking_acc_by_reach_depth": {
+        "depth_1": {
+          "n": 23,
+          "acc": 0.0
+        },
+        "depth_2_plus": {
+          "n": 17,
+          "acc": 0.0
+        }
+      }
+    },
+    "heldout_keep_callers_360": {
+      "n": 360,
+      "acc_kway": 0.0,
+      "chance": 0.045454545454545456,
+      "exact": 0.0,
+      "cell_acc": 0.9762044270833333,
+      "changed_acc": 0.9958640378737266,
+      "unchanged_acc": 0.973913682231149,
+      "edge_f1": 0.0,
+      "node_acc": 0.7795138888888888,
+      "per_target": {
+        "keep_callers": {
+          "n": 360,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 216,
+            "keep_callers": 130,
+            "delete_methods": 12,
+            "reverse_order+keep_callees": 2
+          }
+        }
+      },
+      "two_step": null,
+      "acc_by_changed_cells": [
+        {
+          "from": 0,
+          "to": 1,
+          "n": 0,
+          "acc": NaN
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "n": 0,
+          "acc": NaN
+        },
+        {
+          "from": 8,
+          "to": 32,
+          "n": 318,
+          "acc": 0.0
+        },
+        {
+          "from": 32,
+          "to": 96,
+          "n": 42,
+          "acc": 0.0
+        },
+        {
+          "from": 96,
+          "to": 1000000000.0,
+          "n": 0,
+          "acc": NaN
+        }
+      ]
+    },
+    "heldout_mark_ancestors_360": {
+      "n": 360,
+      "acc_kway": 0.0,
+      "chance": 0.045454545454545456,
+      "exact": 0.0,
+      "cell_acc": 0.8675130208333334,
+      "changed_acc": 0.0,
+      "unchanged_acc": 0.881565398339623,
+      "edge_f1": 0.0,
+      "node_acc": 0.003993055555555555,
+      "per_target": {
+        "mark_ancestors": {
+          "n": 360,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 216,
+            "keep_callers": 128,
+            "delete_methods": 12,
+            "reverse_order+keep_callees": 4
+          }
+        }
+      },
+      "two_step": null,
+      "acc_by_changed_cells": [
+        {
+          "from": 0,
+          "to": 1,
+          "n": 0,
+          "acc": NaN
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "n": 353,
+          "acc": 0.0
+        },
+        {
+          "from": 8,
+          "to": 32,
+          "n": 7,
+          "acc": 0.0
+        },
+        {
+          "from": 32,
+          "to": 96,
+          "n": 0,
+          "acc": NaN
+        },
+        {
+          "from": 96,
+          "to": 1000000000.0,
+          "n": 0,
+          "acc": NaN
+        }
+      ],
+      "marking_acc_by_reach_depth": {
+        "depth_1": {
+          "n": 193,
+          "acc": 0.0
+        },
+        "depth_2_plus": {
+          "n": 167,
+          "acc": 0.0
+        }
+      }
+    },
+    "heldout_delete_methods_360": {
+      "n": 360,
+      "acc_kway": 0.030555555555555555,
+      "chance": 0.045454545454545456,
+      "exact": 0.0,
+      "cell_acc": 0.95166015625,
+      "changed_acc": 0.9935697518675984,
+      "unchanged_acc": 0.9481094561458897,
+      "edge_f1": 0.05277777777777778,
+      "node_acc": 0.5125,
+      "per_target": {
+        "delete_methods": {
+          "n": 360,
+          "acc": 0.030555555555555555,
+          "pred": {
+            "keep_callees": 217,
+            "keep_callers": 126,
+            "delete_methods": 11,
+            "reverse_order+keep_callees": 6
+          }
+        }
+      },
+      "two_step": null,
+      "acc_by_changed_cells": [
+        {
+          "from": 0,
+          "to": 1,
+          "n": 0,
+          "acc": NaN
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "n": 1,
+          "acc": 0.0
+        },
+        {
+          "from": 8,
+          "to": 32,
+          "n": 358,
+          "acc": 0.030726256983240222
+        },
+        {
+          "from": 32,
+          "to": 96,
+          "n": 1,
+          "acc": 0.0
+        },
+        {
+          "from": 96,
+          "to": 1000000000.0,
+          "n": 0,
+          "acc": NaN
+        }
+      ]
+    },
+    "heldout_reverse_order+delete_selected_360": {
+      "n": 360,
+      "acc_kway": 0.0,
+      "chance": 0.045454545454545456,
+      "exact": 0.0,
+      "cell_acc": 0.8902777777777777,
+      "changed_acc": 0.4539938296855194,
+      "unchanged_acc": 0.9717092347113325,
+      "edge_f1": 0.0,
+      "node_acc": 0.07083333333333333,
+      "per_target": {
+        "reverse_order+delete_selected": {
+          "n": 360,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 214,
+            "keep_callers": 129,
+            "delete_methods": 11,
+            "reverse_order+keep_callees": 6
+          }
+        }
+      },
+      "two_step": {
+        "n": 360,
+        "correct": 0,
+        "first_only": 0,
+        "second_only": 0,
+        "source_copy": 0,
+        "other": 360
+      },
+      "acc_by_changed_cells": [
+        {
+          "from": 0,
+          "to": 1,
+          "n": 0,
+          "acc": NaN
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "n": 0,
+          "acc": NaN
+        },
+        {
+          "from": 8,
+          "to": 32,
+          "n": 18,
+          "acc": 0.0
+        },
+        {
+          "from": 32,
+          "to": 96,
+          "n": 342,
+          "acc": 0.0
+        },
+        {
+          "from": 96,
+          "to": 1000000000.0,
+          "n": 0,
+          "acc": NaN
+        }
+      ]
+    },
+    "heldout_reverse_edges+keep_callees_360": {
+      "n": 360,
+      "acc_kway": 0.0,
+      "chance": 0.045454545454545456,
+      "exact": 0.0,
+      "cell_acc": 0.9764105902777778,
+      "changed_acc": 0.9203787745423669,
+      "unchanged_acc": 0.9845414233048492,
+      "edge_f1": 0.0,
+      "node_acc": 0.7793402777777778,
+      "per_target": {
+        "reverse_edges+keep_callees": {
+          "n": 360,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 221,
+            "keep_callers": 127,
+            "delete_methods": 11,
+            "reverse_order+keep_callees": 1
+          }
+        }
+      },
+      "two_step": {
+        "n": 360,
+        "correct": 0,
+        "first_only": 0,
+        "second_only": 221,
+        "source_copy": 0,
+        "other": 139
+      },
+      "acc_by_changed_cells": [
+        {
+          "from": 0,
+          "to": 1,
+          "n": 0,
+          "acc": NaN
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "n": 0,
+          "acc": NaN
+        },
+        {
+          "from": 8,
+          "to": 32,
+          "n": 83,
+          "acc": 0.0
+        },
+        {
+          "from": 32,
+          "to": 96,
+          "n": 277,
+          "acc": 0.0
+        },
+        {
+          "from": 96,
+          "to": 1000000000.0,
+          "n": 0,
+          "acc": NaN
+        }
+      ]
+    },
+    "heldout_reverse_edges+mark_reachable_360": {
+      "n": 360,
+      "acc_kway": 0.0,
+      "chance": 0.045454545454545456,
+      "exact": 0.0,
+      "cell_acc": 0.8677734375,
+      "changed_acc": 0.4489710190968553,
+      "unchanged_acc": 0.9448207884520727,
+      "edge_f1": 0.0,
+      "node_acc": 0.0046875,
+      "per_target": {
+        "reverse_edges+mark_reachable": {
+          "n": 360,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 215,
+            "keep_callers": 126,
+            "delete_methods": 12,
+            "reverse_order+keep_callees": 7
+          }
+        }
+      },
+      "two_step": {
+        "n": 360,
+        "correct": 0,
+        "first_only": 0,
+        "second_only": 0,
+        "source_copy": 0,
+        "other": 360
+      },
+      "acc_by_changed_cells": [
+        {
+          "from": 0,
+          "to": 1,
+          "n": 0,
+          "acc": NaN
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "n": 0,
+          "acc": NaN
+        },
+        {
+          "from": 8,
+          "to": 32,
+          "n": 0,
+          "acc": NaN
+        },
+        {
+          "from": 32,
+          "to": 96,
+          "n": 360,
+          "acc": 0.0
+        },
+        {
+          "from": 96,
+          "to": 1000000000.0,
+          "n": 0,
+          "acc": NaN
+        }
+      ]
+    },
+    "heldout_reverse_order+delete_tests_360": {
+      "n": 360,
+      "acc_kway": 0.0,
+      "chance": 0.045454545454545456,
+      "exact": 0.0,
+      "cell_acc": 0.8894422743055556,
+      "changed_acc": 0.4672297661352402,
+      "unchanged_acc": 0.9723975777530854,
+      "edge_f1": 0.0003968253968253969,
+      "node_acc": 0.16927083333333334,
+      "per_target": {
+        "reverse_order+delete_tests": {
+          "n": 360,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 207,
+            "keep_callers": 132,
+            "delete_methods": 12,
+            "reverse_order+keep_callees": 9
+          }
+        }
+      },
+      "two_step": {
+        "n": 360,
+        "correct": 0,
+        "first_only": 0,
+        "second_only": 0,
+        "source_copy": 0,
+        "other": 360
+      },
+      "acc_by_changed_cells": [
+        {
+          "from": 0,
+          "to": 1,
+          "n": 0,
+          "acc": NaN
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "n": 0,
+          "acc": NaN
+        },
+        {
+          "from": 8,
+          "to": 32,
+          "n": 2,
+          "acc": 0.0
+        },
+        {
+          "from": 32,
+          "to": 96,
+          "n": 358,
+          "acc": 0.0
+        },
+        {
+          "from": 96,
+          "to": 1000000000.0,
+          "n": 0,
+          "acc": NaN
+        }
+      ]
+    },
+    "heldout_delete_tests+mark_reachable_360": {
+      "n": 360,
+      "acc_kway": 0.0,
+      "chance": 0.045454545454545456,
+      "exact": 0.0,
+      "cell_acc": 0.8895616319444445,
+      "changed_acc": 0.6321159781576449,
+      "unchanged_acc": 0.8991772131858387,
+      "edge_f1": 0.0,
+      "node_acc": 0.17083333333333334,
+      "per_target": {
+        "delete_tests+mark_reachable": {
+          "n": 360,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 206,
+            "keep_callers": 132,
+            "reverse_order+keep_callees": 12,
+            "delete_methods": 10
+          }
+        }
+      },
+      "two_step": {
+        "n": 360,
+        "correct": 0,
+        "first_only": 0,
+        "second_only": 0,
+        "source_copy": 0,
+        "other": 360
+      },
+      "acc_by_changed_cells": [
+        {
+          "from": 0,
+          "to": 1,
+          "n": 0,
+          "acc": NaN
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "n": 81,
+          "acc": 0.0
+        },
+        {
+          "from": 8,
+          "to": 32,
+          "n": 279,
+          "acc": 0.0
+        },
+        {
+          "from": 32,
+          "to": 96,
+          "n": 0,
+          "acc": NaN
+        },
+        {
+          "from": 96,
+          "to": 1000000000.0,
+          "n": 0,
+          "acc": NaN
+        }
+      ]
+    },
+    "refeed_heldout_comp_bal360": {
+      "n": 360,
+      "acc_kway": 0.0,
+      "chance": 0.045454545454545456,
+      "exact": 0.0,
+      "cell_acc": 0.9028971354166667,
+      "changed_acc": 0.5880175491924823,
+      "unchanged_acc": 0.9542627878355506,
+      "edge_f1": 0.0,
+      "node_acc": 0.23680555555555555,
+      "per_target": {
+        "reverse_order+delete_selected": {
+          "n": 72,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 42,
+            "keep_callers": 28,
+            "delete_methods": 2
+          }
+        },
+        "reverse_edges+keep_callees": {
+          "n": 72,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 47,
+            "keep_callers": 21,
+            "delete_methods": 4
+          }
+        },
+        "reverse_edges+mark_reachable": {
+          "n": 72,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 37,
+            "keep_callers": 33,
+            "delete_methods": 2
+          }
+        },
+        "reverse_order+delete_tests": {
+          "n": 72,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 52,
+            "keep_callers": 18,
+            "delete_methods": 1,
+            "reverse_order+keep_callees": 1
+          }
+        },
+        "delete_tests+mark_reachable": {
+          "n": 72,
+          "acc": 0.0,
+          "pred": {
+            "keep_callees": 43,
+            "keep_callers": 27,
+            "delete_methods": 2
+          }
+        }
+      },
+      "two_step": {
+        "n": 360,
+        "correct": 0,
+        "first_only": 0,
+        "second_only": 47,
+        "source_copy": 0,
+        "other": 313
+      },
+      "acc_by_changed_cells": [
+        {
+          "from": 0,
+          "to": 1,
+          "n": 0,
+          "acc": NaN
+        },
+        {
+          "from": 1,
+          "to": 8,
+          "n": 13,
+          "acc": 0.0
+        },
+        {
+          "from": 8,
+          "to": 32,
+          "n": 73,
+          "acc": 0.0
+        },
+        {
+          "from": 32,
+          "to": 96,
+          "n": 274,
+          "acc": 0.0
+        },
+        {
+          "from": 96,
+          "to": 1000000000.0,
+          "n": 0,
+          "acc": NaN
+        }
+      ]
+    }
+  },
+  "seen_bal360": {
+    "n": 360,
+    "acc_kway": 0.002777777777777778,
+    "chance": 0.045454545454545456,
+    "exact": 0.0,
+    "cell_acc": 0.8926974826388889,
+    "changed_acc": 0.6185587323186124,
+    "unchanged_acc": 0.9319772441142017,
+    "edge_f1": 0.0,
+    "node_acc": 0.16527777777777777,
+    "per_target": {
+      "identity": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 17,
+          "keep_callers": 9
+        }
+      },
+      "reverse_edges": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 16,
+          "keep_callers": 9,
+          "reverse_order+keep_callees": 1
+        }
+      },
+      "reverse_order": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callers": 13,
+          "keep_callees": 12,
+          "delete_methods": 1
+        }
+      },
+      "delete_selected": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 18,
+          "keep_callers": 5,
+          "reverse_order+keep_callees": 2,
+          "delete_methods": 1
+        }
+      },
+      "keep_callees": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 16,
+          "keep_callers": 8,
+          "delete_methods": 2
+        }
+      },
+      "mark_reachable": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 17,
+          "keep_callers": 7,
+          "delete_methods": 1,
+          "reverse_order+keep_callees": 1
+        }
+      },
+      "delete_tests": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 17,
+          "keep_callers": 9
+        }
+      },
+      "selected_first": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 18,
+          "keep_callers": 8
+        }
+      },
+      "delete_classes": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 13,
+          "keep_callers": 12,
+          "reverse_order+keep_callees": 1
+        }
+      },
+      "reverse_edges+reverse_order": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callers": 13,
+          "keep_callees": 11,
+          "delete_methods": 2
+        }
+      },
+      "reverse_edges+delete_selected": {
+        "n": 25,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 17,
+          "keep_callers": 8
+        }
+      },
+      "reverse_order+keep_callees": {
+        "n": 25,
+        "acc": 0.04,
+        "pred": {
+          "keep_callees": 14,
+          "keep_callers": 9,
+          "reverse_order+keep_callees": 1,
+          "delete_methods": 1
+        }
+      },
+      "reverse_order+mark_reachable": {
+        "n": 25,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 15,
+          "keep_callers": 9,
+          "delete_methods": 1
+        }
+      },
+      "reverse_edges+delete_tests": {
+        "n": 25,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 14,
+          "keep_callers": 8,
+          "delete_methods": 2,
+          "reverse_order+keep_callees": 1
+        }
+      }
+    },
+    "two_step": {
+      "n": 126,
+      "correct": 1,
+      "first_only": 0,
+      "second_only": 14,
+      "source_copy": 0,
+      "other": 111
+    },
+    "acc_by_changed_cells": [
+      {
+        "from": 0,
+        "to": 1,
+        "n": 26,
+        "acc": 0.0
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "n": 81,
+        "acc": 0.0
+      },
+      {
+        "from": 8,
+        "to": 32,
+        "n": 78,
+        "acc": 0.0
+      },
+      {
+        "from": 32,
+        "to": 96,
+        "n": 175,
+        "acc": 0.005714285714285714
+      },
+      {
+        "from": 96,
+        "to": 1000000000.0,
+        "n": 0,
+        "acc": NaN
+      }
+    ],
+    "marking_acc_by_reach_depth": {
+      "depth_1": {
+        "n": 14,
+        "acc": 0.0
+      },
+      "depth_2_plus": {
+        "n": 12,
+        "acc": 0.0
+      }
+    }
+  },
+  "seen_shuf360": {
+    "n": 360,
+    "acc_kway": 0.002777777777777778,
+    "chance": 0.045454545454545456,
+    "exact": 0.0,
+    "cell_acc": 0.8925347222222222,
+    "changed_acc": 0.6195926569987833,
+    "unchanged_acc": 0.9317177240291351,
+    "edge_f1": 0.0,
+    "node_acc": 0.16475694444444444,
+    "per_target": {
+      "identity": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 15,
+          "keep_callers": 11
+        }
+      },
+      "reverse_edges": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 16,
+          "keep_callers": 10
+        }
+      },
+      "reverse_order": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callers": 14,
+          "keep_callees": 10,
+          "delete_methods": 1,
+          "reverse_order+keep_callees": 1
+        }
+      },
+      "delete_selected": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 17,
+          "keep_callers": 6,
+          "reverse_order+keep_callees": 2,
+          "delete_methods": 1
+        }
+      },
+      "keep_callees": {
+        "n": 26,
+        "acc": 0.038461538461538464,
+        "pred": {
+          "keep_callees": 15,
+          "keep_callers": 9,
+          "delete_methods": 2
+        }
+      },
+      "mark_reachable": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 16,
+          "keep_callers": 8,
+          "delete_methods": 1,
+          "reverse_order+keep_callees": 1
+        }
+      },
+      "delete_tests": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 17,
+          "keep_callers": 9
+        }
+      },
+      "selected_first": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 19,
+          "keep_callers": 7
+        }
+      },
+      "delete_classes": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 15,
+          "keep_callers": 11
+        }
+      },
+      "reverse_edges+reverse_order": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callers": 12,
+          "keep_callees": 11,
+          "delete_methods": 3
+        }
+      },
+      "reverse_edges+delete_selected": {
+        "n": 25,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 16,
+          "keep_callers": 8,
+          "reverse_order+keep_callees": 1
+        }
+      },
+      "reverse_order+keep_callees": {
+        "n": 25,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 15,
+          "keep_callers": 9,
+          "delete_methods": 1
+        }
+      },
+      "reverse_order+mark_reachable": {
+        "n": 25,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 15,
+          "keep_callers": 9,
+          "delete_methods": 1
+        }
+      },
+      "reverse_edges+delete_tests": {
+        "n": 25,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 13,
+          "keep_callers": 9,
+          "delete_methods": 2,
+          "reverse_order+keep_callees": 1
+        }
+      }
+    },
+    "two_step": {
+      "n": 126,
+      "correct": 0,
+      "first_only": 0,
+      "second_only": 15,
+      "source_copy": 0,
+      "other": 111
+    },
+    "acc_by_changed_cells": [
+      {
+        "from": 0,
+        "to": 1,
+        "n": 26,
+        "acc": 0.0
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "n": 81,
+        "acc": 0.0
+      },
+      {
+        "from": 8,
+        "to": 32,
+        "n": 78,
+        "acc": 0.01282051282051282
+      },
+      {
+        "from": 32,
+        "to": 96,
+        "n": 175,
+        "acc": 0.0
+      },
+      {
+        "from": 96,
+        "to": 1000000000.0,
+        "n": 0,
+        "acc": NaN
+      }
+    ],
+    "marking_acc_by_reach_depth": {
+      "depth_1": {
+        "n": 14,
+        "acc": 0.0
+      },
+      "depth_2_plus": {
+        "n": 12,
+        "acc": 0.0
+      }
+    }
+  },
+  "unseen_para_bal360": {
+    "n": 360,
+    "acc_kway": 0.0,
+    "chance": 0.045454545454545456,
+    "exact": 0.0,
+    "cell_acc": 0.8926649305555555,
+    "changed_acc": 0.6186602584803069,
+    "unchanged_acc": 0.9318986755361544,
+    "edge_f1": 0.0,
+    "node_acc": 0.1675347222222222,
+    "per_target": {
+      "identity": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 16,
+          "keep_callers": 10
+        }
+      },
+      "reverse_edges": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 16,
+          "keep_callers": 9,
+          "reverse_order+keep_callees": 1
+        }
+      },
+      "reverse_order": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callers": 14,
+          "keep_callees": 10,
+          "reverse_order+keep_callees": 2
+        }
+      },
+      "delete_selected": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 19,
+          "keep_callers": 6,
+          "delete_methods": 1
+        }
+      },
+      "keep_callees": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 15,
+          "keep_callers": 9,
+          "delete_methods": 2
+        }
+      },
+      "mark_reachable": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 16,
+          "keep_callers": 8,
+          "delete_methods": 1,
+          "reverse_order+keep_callees": 1
+        }
+      },
+      "delete_tests": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 17,
+          "keep_callers": 9
+        }
+      },
+      "selected_first": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 18,
+          "keep_callers": 8
+        }
+      },
+      "delete_classes": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callers": 13,
+          "keep_callees": 11,
+          "reverse_order+keep_callees": 2
+        }
+      },
+      "reverse_edges+reverse_order": {
+        "n": 26,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 13,
+          "keep_callers": 11,
+          "delete_methods": 2
+        }
+      },
+      "reverse_edges+delete_selected": {
+        "n": 25,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 16,
+          "keep_callers": 8,
+          "reverse_order+keep_callees": 1
+        }
+      },
+      "reverse_order+keep_callees": {
+        "n": 25,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 15,
+          "keep_callers": 9,
+          "delete_methods": 1
+        }
+      },
+      "reverse_order+mark_reachable": {
+        "n": 25,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 17,
+          "keep_callers": 7,
+          "delete_methods": 1
+        }
+      },
+      "reverse_edges+delete_tests": {
+        "n": 25,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 14,
+          "keep_callers": 9,
+          "delete_methods": 2
+        }
+      }
+    },
+    "two_step": {
+      "n": 126,
+      "correct": 0,
+      "first_only": 0,
+      "second_only": 15,
+      "source_copy": 0,
+      "other": 111
+    },
+    "acc_by_changed_cells": [
+      {
+        "from": 0,
+        "to": 1,
+        "n": 26,
+        "acc": 0.0
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "n": 81,
+        "acc": 0.0
+      },
+      {
+        "from": 8,
+        "to": 32,
+        "n": 78,
+        "acc": 0.0
+      },
+      {
+        "from": 32,
+        "to": 96,
+        "n": 175,
+        "acc": 0.0
+      },
+      {
+        "from": 96,
+        "to": 1000000000.0,
+        "n": 0,
+        "acc": NaN
+      }
+    ],
+    "marking_acc_by_reach_depth": {
+      "depth_1": {
+        "n": 14,
+        "acc": 0.0
+      },
+      "depth_2_plus": {
+        "n": 12,
+        "acc": 0.0
+      }
+    }
+  },
+  "unseen_infer_360": {
+    "n": 360,
+    "acc_kway": 0.0,
+    "chance": 0.045454545454545456,
+    "exact": 0.0,
+    "cell_acc": 0.8886067708333333,
+    "changed_acc": 0.6606309721941335,
+    "unchanged_acc": 0.9148720789901794,
+    "edge_f1": 0.0,
+    "node_acc": 0.1371527777777778,
+    "per_target": {
+      "identity": {
+        "n": 40,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 21,
+          "keep_callers": 16,
+          "delete_methods": 2,
+          "reverse_order+keep_callees": 1
+        }
+      },
+      "reverse_edges": {
+        "n": 40,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 22,
+          "keep_callers": 14,
+          "reverse_order+keep_callees": 3,
+          "delete_methods": 1
+        }
+      },
+      "reverse_order": {
+        "n": 40,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 24,
+          "keep_callers": 13,
+          "delete_methods": 3
+        }
+      },
+      "delete_selected": {
+        "n": 40,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 25,
+          "keep_callers": 11,
+          "delete_methods": 2,
+          "reverse_order+keep_callees": 2
+        }
+      },
+      "keep_callees": {
+        "n": 40,
+        "acc": 0.0,
+        "pred": {
+          "keep_callers": 19,
+          "keep_callees": 18,
+          "delete_methods": 3
+        }
+      },
+      "mark_reachable": {
+        "n": 40,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 25,
+          "keep_callers": 14,
+          "delete_methods": 1
+        }
+      },
+      "delete_tests": {
+        "n": 40,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 28,
+          "keep_callers": 12
+        }
+      },
+      "delete_classes": {
+        "n": 40,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 22,
+          "keep_callers": 15,
+          "reverse_order+keep_callees": 2,
+          "delete_methods": 1
+        }
+      },
+      "selected_first": {
+        "n": 40,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 23,
+          "keep_callers": 16,
+          "delete_methods": 1
+        }
+      }
+    },
+    "two_step": null,
+    "acc_by_changed_cells": [
+      {
+        "from": 0,
+        "to": 1,
+        "n": 40,
+        "acc": 0.0
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "n": 122,
+        "acc": 0.0
+      },
+      {
+        "from": 8,
+        "to": 32,
+        "n": 95,
+        "acc": 0.0
+      },
+      {
+        "from": 32,
+        "to": 96,
+        "n": 103,
+        "acc": 0.0
+      },
+      {
+        "from": 96,
+        "to": 1000000000.0,
+        "n": 0,
+        "acc": NaN
+      }
+    ],
+    "marking_acc_by_reach_depth": {
+      "depth_1": {
+        "n": 23,
+        "acc": 0.0
+      },
+      "depth_2_plus": {
+        "n": 17,
+        "acc": 0.0
+      }
+    }
+  },
+  "heldout_keep_callers_360": {
+    "n": 360,
+    "acc_kway": 0.0,
+    "chance": 0.045454545454545456,
+    "exact": 0.0,
+    "cell_acc": 0.9762044270833333,
+    "changed_acc": 0.9958640378737266,
+    "unchanged_acc": 0.973913682231149,
+    "edge_f1": 0.0,
+    "node_acc": 0.7795138888888888,
+    "per_target": {
+      "keep_callers": {
+        "n": 360,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 216,
+          "keep_callers": 130,
+          "delete_methods": 12,
+          "reverse_order+keep_callees": 2
+        }
+      }
+    },
+    "two_step": null,
+    "acc_by_changed_cells": [
+      {
+        "from": 0,
+        "to": 1,
+        "n": 0,
+        "acc": NaN
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "n": 0,
+        "acc": NaN
+      },
+      {
+        "from": 8,
+        "to": 32,
+        "n": 318,
+        "acc": 0.0
+      },
+      {
+        "from": 32,
+        "to": 96,
+        "n": 42,
+        "acc": 0.0
+      },
+      {
+        "from": 96,
+        "to": 1000000000.0,
+        "n": 0,
+        "acc": NaN
+      }
+    ]
+  },
+  "heldout_mark_ancestors_360": {
+    "n": 360,
+    "acc_kway": 0.0,
+    "chance": 0.045454545454545456,
+    "exact": 0.0,
+    "cell_acc": 0.8675130208333334,
+    "changed_acc": 0.0,
+    "unchanged_acc": 0.881565398339623,
+    "edge_f1": 0.0,
+    "node_acc": 0.003993055555555555,
+    "per_target": {
+      "mark_ancestors": {
+        "n": 360,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 216,
+          "keep_callers": 128,
+          "delete_methods": 12,
+          "reverse_order+keep_callees": 4
+        }
+      }
+    },
+    "two_step": null,
+    "acc_by_changed_cells": [
+      {
+        "from": 0,
+        "to": 1,
+        "n": 0,
+        "acc": NaN
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "n": 353,
+        "acc": 0.0
+      },
+      {
+        "from": 8,
+        "to": 32,
+        "n": 7,
+        "acc": 0.0
+      },
+      {
+        "from": 32,
+        "to": 96,
+        "n": 0,
+        "acc": NaN
+      },
+      {
+        "from": 96,
+        "to": 1000000000.0,
+        "n": 0,
+        "acc": NaN
+      }
+    ],
+    "marking_acc_by_reach_depth": {
+      "depth_1": {
+        "n": 193,
+        "acc": 0.0
+      },
+      "depth_2_plus": {
+        "n": 167,
+        "acc": 0.0
+      }
+    }
+  },
+  "heldout_delete_methods_360": {
+    "n": 360,
+    "acc_kway": 0.030555555555555555,
+    "chance": 0.045454545454545456,
+    "exact": 0.0,
+    "cell_acc": 0.95166015625,
+    "changed_acc": 0.9935697518675984,
+    "unchanged_acc": 0.9481094561458897,
+    "edge_f1": 0.05277777777777778,
+    "node_acc": 0.5125,
+    "per_target": {
+      "delete_methods": {
+        "n": 360,
+        "acc": 0.030555555555555555,
+        "pred": {
+          "keep_callees": 217,
+          "keep_callers": 126,
+          "delete_methods": 11,
+          "reverse_order+keep_callees": 6
+        }
+      }
+    },
+    "two_step": null,
+    "acc_by_changed_cells": [
+      {
+        "from": 0,
+        "to": 1,
+        "n": 0,
+        "acc": NaN
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "n": 1,
+        "acc": 0.0
+      },
+      {
+        "from": 8,
+        "to": 32,
+        "n": 358,
+        "acc": 0.030726256983240222
+      },
+      {
+        "from": 32,
+        "to": 96,
+        "n": 1,
+        "acc": 0.0
+      },
+      {
+        "from": 96,
+        "to": 1000000000.0,
+        "n": 0,
+        "acc": NaN
+      }
+    ]
+  },
+  "heldout_reverse_order+delete_selected_360": {
+    "n": 360,
+    "acc_kway": 0.0,
+    "chance": 0.045454545454545456,
+    "exact": 0.0,
+    "cell_acc": 0.8902777777777777,
+    "changed_acc": 0.4539938296855194,
+    "unchanged_acc": 0.9717092347113325,
+    "edge_f1": 0.0,
+    "node_acc": 0.07083333333333333,
+    "per_target": {
+      "reverse_order+delete_selected": {
+        "n": 360,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 214,
+          "keep_callers": 129,
+          "delete_methods": 11,
+          "reverse_order+keep_callees": 6
+        }
+      }
+    },
+    "two_step": {
+      "n": 360,
+      "correct": 0,
+      "first_only": 0,
+      "second_only": 0,
+      "source_copy": 0,
+      "other": 360
+    },
+    "acc_by_changed_cells": [
+      {
+        "from": 0,
+        "to": 1,
+        "n": 0,
+        "acc": NaN
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "n": 0,
+        "acc": NaN
+      },
+      {
+        "from": 8,
+        "to": 32,
+        "n": 18,
+        "acc": 0.0
+      },
+      {
+        "from": 32,
+        "to": 96,
+        "n": 342,
+        "acc": 0.0
+      },
+      {
+        "from": 96,
+        "to": 1000000000.0,
+        "n": 0,
+        "acc": NaN
+      }
+    ]
+  },
+  "heldout_reverse_edges+keep_callees_360": {
+    "n": 360,
+    "acc_kway": 0.0,
+    "chance": 0.045454545454545456,
+    "exact": 0.0,
+    "cell_acc": 0.9764105902777778,
+    "changed_acc": 0.9203787745423669,
+    "unchanged_acc": 0.9845414233048492,
+    "edge_f1": 0.0,
+    "node_acc": 0.7793402777777778,
+    "per_target": {
+      "reverse_edges+keep_callees": {
+        "n": 360,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 221,
+          "keep_callers": 127,
+          "delete_methods": 11,
+          "reverse_order+keep_callees": 1
+        }
+      }
+    },
+    "two_step": {
+      "n": 360,
+      "correct": 0,
+      "first_only": 0,
+      "second_only": 221,
+      "source_copy": 0,
+      "other": 139
+    },
+    "acc_by_changed_cells": [
+      {
+        "from": 0,
+        "to": 1,
+        "n": 0,
+        "acc": NaN
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "n": 0,
+        "acc": NaN
+      },
+      {
+        "from": 8,
+        "to": 32,
+        "n": 83,
+        "acc": 0.0
+      },
+      {
+        "from": 32,
+        "to": 96,
+        "n": 277,
+        "acc": 0.0
+      },
+      {
+        "from": 96,
+        "to": 1000000000.0,
+        "n": 0,
+        "acc": NaN
+      }
+    ]
+  },
+  "heldout_reverse_edges+mark_reachable_360": {
+    "n": 360,
+    "acc_kway": 0.0,
+    "chance": 0.045454545454545456,
+    "exact": 0.0,
+    "cell_acc": 0.8677734375,
+    "changed_acc": 0.4489710190968553,
+    "unchanged_acc": 0.9448207884520727,
+    "edge_f1": 0.0,
+    "node_acc": 0.0046875,
+    "per_target": {
+      "reverse_edges+mark_reachable": {
+        "n": 360,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 215,
+          "keep_callers": 126,
+          "delete_methods": 12,
+          "reverse_order+keep_callees": 7
+        }
+      }
+    },
+    "two_step": {
+      "n": 360,
+      "correct": 0,
+      "first_only": 0,
+      "second_only": 0,
+      "source_copy": 0,
+      "other": 360
+    },
+    "acc_by_changed_cells": [
+      {
+        "from": 0,
+        "to": 1,
+        "n": 0,
+        "acc": NaN
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "n": 0,
+        "acc": NaN
+      },
+      {
+        "from": 8,
+        "to": 32,
+        "n": 0,
+        "acc": NaN
+      },
+      {
+        "from": 32,
+        "to": 96,
+        "n": 360,
+        "acc": 0.0
+      },
+      {
+        "from": 96,
+        "to": 1000000000.0,
+        "n": 0,
+        "acc": NaN
+      }
+    ]
+  },
+  "heldout_reverse_order+delete_tests_360": {
+    "n": 360,
+    "acc_kway": 0.0,
+    "chance": 0.045454545454545456,
+    "exact": 0.0,
+    "cell_acc": 0.8894422743055556,
+    "changed_acc": 0.4672297661352402,
+    "unchanged_acc": 0.9723975777530854,
+    "edge_f1": 0.0003968253968253969,
+    "node_acc": 0.16927083333333334,
+    "per_target": {
+      "reverse_order+delete_tests": {
+        "n": 360,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 207,
+          "keep_callers": 132,
+          "delete_methods": 12,
+          "reverse_order+keep_callees": 9
+        }
+      }
+    },
+    "two_step": {
+      "n": 360,
+      "correct": 0,
+      "first_only": 0,
+      "second_only": 0,
+      "source_copy": 0,
+      "other": 360
+    },
+    "acc_by_changed_cells": [
+      {
+        "from": 0,
+        "to": 1,
+        "n": 0,
+        "acc": NaN
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "n": 0,
+        "acc": NaN
+      },
+      {
+        "from": 8,
+        "to": 32,
+        "n": 2,
+        "acc": 0.0
+      },
+      {
+        "from": 32,
+        "to": 96,
+        "n": 358,
+        "acc": 0.0
+      },
+      {
+        "from": 96,
+        "to": 1000000000.0,
+        "n": 0,
+        "acc": NaN
+      }
+    ]
+  },
+  "heldout_delete_tests+mark_reachable_360": {
+    "n": 360,
+    "acc_kway": 0.0,
+    "chance": 0.045454545454545456,
+    "exact": 0.0,
+    "cell_acc": 0.8895616319444445,
+    "changed_acc": 0.6321159781576449,
+    "unchanged_acc": 0.8991772131858387,
+    "edge_f1": 0.0,
+    "node_acc": 0.17083333333333334,
+    "per_target": {
+      "delete_tests+mark_reachable": {
+        "n": 360,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 206,
+          "keep_callers": 132,
+          "reverse_order+keep_callees": 12,
+          "delete_methods": 10
+        }
+      }
+    },
+    "two_step": {
+      "n": 360,
+      "correct": 0,
+      "first_only": 0,
+      "second_only": 0,
+      "source_copy": 0,
+      "other": 360
+    },
+    "acc_by_changed_cells": [
+      {
+        "from": 0,
+        "to": 1,
+        "n": 0,
+        "acc": NaN
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "n": 81,
+        "acc": 0.0
+      },
+      {
+        "from": 8,
+        "to": 32,
+        "n": 279,
+        "acc": 0.0
+      },
+      {
+        "from": 32,
+        "to": 96,
+        "n": 0,
+        "acc": NaN
+      },
+      {
+        "from": 96,
+        "to": 1000000000.0,
+        "n": 0,
+        "acc": NaN
+      }
+    ]
+  },
+  "refeed_heldout_comp_bal360": {
+    "n": 360,
+    "acc_kway": 0.0,
+    "chance": 0.045454545454545456,
+    "exact": 0.0,
+    "cell_acc": 0.9028971354166667,
+    "changed_acc": 0.5880175491924823,
+    "unchanged_acc": 0.9542627878355506,
+    "edge_f1": 0.0,
+    "node_acc": 0.23680555555555555,
+    "per_target": {
+      "reverse_order+delete_selected": {
+        "n": 72,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 42,
+          "keep_callers": 28,
+          "delete_methods": 2
+        }
+      },
+      "reverse_edges+keep_callees": {
+        "n": 72,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 47,
+          "keep_callers": 21,
+          "delete_methods": 4
+        }
+      },
+      "reverse_edges+mark_reachable": {
+        "n": 72,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 37,
+          "keep_callers": 33,
+          "delete_methods": 2
+        }
+      },
+      "reverse_order+delete_tests": {
+        "n": 72,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 52,
+          "keep_callers": 18,
+          "delete_methods": 1,
+          "reverse_order+keep_callees": 1
+        }
+      },
+      "delete_tests+mark_reachable": {
+        "n": 72,
+        "acc": 0.0,
+        "pred": {
+          "keep_callees": 43,
+          "keep_callers": 27,
+          "delete_methods": 2
+        }
+      }
+    },
+    "two_step": {
+      "n": 360,
+      "correct": 0,
+      "first_only": 0,
+      "second_only": 47,
+      "source_copy": 0,
+      "other": 313
+    },
+    "acc_by_changed_cells": [
+      {
+        "from": 0,
+        "to": 1,
+        "n": 0,
+        "acc": NaN
+      },
+      {
+        "from": 1,
+        "to": 8,
+        "n": 13,
+        "acc": 0.0
+      },
+      {
+        "from": 8,
+        "to": 32,
+        "n": 73,
+        "acc": 0.0
+      },
+      {
+        "from": 32,
+        "to": 96,
+        "n": 274,
+        "acc": 0.0
+      },
+      {
+        "from": 96,
+        "to": 1000000000.0,
+        "n": 0,
+        "acc": NaN
+      }
+    ]
+  }
+}

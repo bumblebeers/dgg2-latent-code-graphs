@@ -107,7 +107,15 @@ def find_hf_token() -> Optional[str]:
 # Palette Legend & Grid Text Formatting
 # -----------------------------------------------------------------------------
 PALETTE_LEGEND = (
-    "8-class palette legend: 0=empty, 1=mod_header, 2=function, 3=class, 4=method, 5=test, 6=call_edge, 7=marked\n"
+    "8-class palette legend:\n"
+    "0 = background (no symbol on diagonal / no call edge off-diagonal)\n"
+    "1 = call_edge (off-diagonal cell (r, c) == 1 means symbol r calls symbol c)\n"
+    "2 = function (diagonal (i, i))\n"
+    "3 = method (diagonal (i, i))\n"
+    "4 = class (diagonal (i, i))\n"
+    "5 = test (diagonal (i, i))\n"
+    "6 = selected (diagonal (i, i): highlighted target symbol for selected-node / reachability edits)\n"
+    "7 = marked (diagonal (i, i): symbol highlighted by mark_reachable / mark_ancestors)\n"
     "Each call graph is represented on a 16x16 grid of integers from 0 to 7."
 )
 
@@ -294,12 +302,19 @@ def load_gemma4_model_lora(
     )
 
     # Matched LoRA config: r=64, alpha=128, dropout=0.0 on language MoE layers
-    target_modules = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+    # Target only language model linear projections (stripping vision, audio, and multimodal projectors)
+    lm_targets = [
+        n for n, m in model.named_modules()
+        if "language_model.layers" in n
+        and type(m).__name__ == "Linear"
+        and any(n.endswith("." + t) for t in ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"])
+    ]
+    print(f"[cg_gemma4_ar] Identified {len(lm_targets)} language model linear target modules.")
     lora_config = LoraConfig(
         r=r,
         lora_alpha=alpha,
         lora_dropout=dropout,
-        target_modules=target_modules,
+        target_modules=lm_targets,
         bias="none",
         task_type="CAUSAL_LM",
     )
@@ -326,6 +341,13 @@ def load_gemma4_model_lora(
     print(f"[cg_gemma4_ar] Total Parameters:           {all_params:,}")
     if stripped_modules:
         print(f"[cg_gemma4_ar] Stripped non-LM modules: {len(stripped_modules)}")
+
+    if hasattr(peft_model, "gradient_checkpointing_enable"):
+        try:
+            peft_model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
+            print("[cg_gemma4_ar] Gradient checkpointing enabled successfully.")
+        except Exception as e:
+            print("[cg_gemma4_ar] Gradient checkpointing warning:", e)
 
     return peft_model, trainable_params, frozen_params
 
@@ -374,9 +396,9 @@ def evaluate_manifest_prompted(
                 inst = manifest["step1_instructions"][i]
                 u_text = build_prompted_user_text(legend, in_context_text, src_g, inst)
                 msg = [{"role": "user", "content": [{"type": "image"}, {"type": "text", "text": u_text}]}]
-                b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False))
+                b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False, enable_thinking=False))
 
-            inputs = processor(text=b_prompts, images=b_imgs, return_tensors="pt", padding=True).to(device)
+            inputs = processor(text=b_prompts, images=[[im] for im in b_imgs], return_tensors="pt", padding=True).to(device)
             with torch.inference_mode():
                 outputs = model.generate(
                     **inputs,
@@ -393,7 +415,8 @@ def evaluate_manifest_prompted(
                 idx = b_start + j
                 fallback = test_pack["src_grid"][manifest["img_indices"][idx]]
                 g, _ = parse_16x16_grid(text, fallback)
-                s1_grids[idx] = g
+            del inputs, outputs, gen_ids, decoded
+            torch.cuda.empty_cache()
 
         # Step 2: Feed s1_grids as input image & text
         for b_start in range(0, n_items, batch_size):
@@ -405,9 +428,9 @@ def evaluate_manifest_prompted(
                 inst = manifest["step2_instructions"][i]
                 u_text = build_prompted_user_text(legend, in_context_text, src_g, inst)
                 msg = [{"role": "user", "content": [{"type": "image"}, {"type": "text", "text": u_text}]}]
-                b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False))
+                b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False, enable_thinking=False))
 
-            inputs = processor(text=b_prompts, images=b_imgs, return_tensors="pt", padding=True).to(device)
+            inputs = processor(text=b_prompts, images=[[im] for im in b_imgs], return_tensors="pt", padding=True).to(device)
             with torch.inference_mode():
                 outputs = model.generate(
                     **inputs,
@@ -427,6 +450,10 @@ def evaluate_manifest_prompted(
                 pred_grids[idx] = g
                 if exact:
                     exact_parses += 1
+            del inputs, outputs, gen_ids, decoded
+            torch.cuda.empty_cache()
+            if (b_start // batch_size) % 2 == 0 or b_end == n_items:
+                print(f"[{manifest_name}] Step 2 Batch {b_start//batch_size + 1}/{(n_items + batch_size - 1)//batch_size} | Exact parses: {exact_parses}/{b_end} ({(exact_parses/b_end)*100:.1f}%)", flush=True)
 
     elif is_3step_chain:
         curr_grids = np.array([test_pack["src_grid"][manifest["img_indices"][i]] for i in range(n_items)], dtype=np.uint8)
@@ -442,9 +469,9 @@ def evaluate_manifest_prompted(
                     inst = manifest["chain_instructions"][i][step_idx]
                     u_text = build_prompted_user_text(legend, in_context_text, src_g, inst)
                     msg = [{"role": "user", "content": [{"type": "image"}, {"type": "text", "text": u_text}]}]
-                    b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False))
+                    b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False, enable_thinking=False))
 
-                inputs = processor(text=b_prompts, images=b_imgs, return_tensors="pt", padding=True).to(device)
+                inputs = processor(text=b_prompts, images=[[im] for im in b_imgs], return_tensors="pt", padding=True).to(device)
                 with torch.inference_mode():
                     outputs = model.generate(
                         **inputs,
@@ -464,7 +491,10 @@ def evaluate_manifest_prompted(
                     next_grids[idx] = g
                     if step_idx == chain_len - 1 and exact:
                         exact_parses += 1
+                del inputs, outputs, gen_ids, decoded
+                torch.cuda.empty_cache()
             curr_grids = next_grids
+            print(f"[{manifest_name}] Completed Chain Step {step_idx + 1}/{chain_len}", flush=True)
         pred_grids = curr_grids
 
     else:
@@ -478,9 +508,9 @@ def evaluate_manifest_prompted(
                 inst = manifest["instructions"][i]
                 u_text = build_prompted_user_text(legend, in_context_text, src_g, inst)
                 msg = [{"role": "user", "content": [{"type": "image"}, {"type": "text", "text": u_text}]}]
-                b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False))
+                b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False, enable_thinking=False))
 
-            inputs = processor(text=b_prompts, images=b_imgs, return_tensors="pt", padding=True).to(device)
+            inputs = processor(text=b_prompts, images=[[im] for im in b_imgs], return_tensors="pt", padding=True).to(device)
             with torch.inference_mode():
                 outputs = model.generate(
                     **inputs,
@@ -500,6 +530,10 @@ def evaluate_manifest_prompted(
                 pred_grids[idx] = g
                 if exact:
                     exact_parses += 1
+            del inputs, outputs, gen_ids, decoded
+            torch.cuda.empty_cache()
+            if (b_start // batch_size) % 2 == 0 or b_end == n_items:
+                print(f"[{manifest_name}] Batch {b_start//batch_size + 1}/{(n_items + batch_size - 1)//batch_size} ({b_end}/{n_items} items) | Exact parses: {exact_parses}/{b_end} ({(exact_parses/b_end)*100:.1f}%)", flush=True)
 
     exact_rate = float(exact_parses) / float(n_items)
     return pred_grids, exact_rate
@@ -544,6 +578,10 @@ def run_prompted_arm(
 
     all_summaries: Dict[str, Any] = {}
 
+    eval_batch_size = min(batch_size, 12)
+    if batch_size > 12:
+        print(f"[cg_gemma4_ar] Note: Clamping eval batch size from {batch_size} to safe KV cache limit 12")
+
     for split in target_splits:
         if split not in manifests:
             print(f"[cg_gemma4_ar] Warning: split {split} not found in manifests; skipping.")
@@ -562,7 +600,7 @@ def run_prompted_arm(
                 print(f"[cg_gemma4_ar] Open generation {s_idx+1}/4 (seed={s_val})...")
                 g_arr, ex_r = evaluate_manifest_prompted(
                     model, processor, test_pack, split, man, legend, in_context_text,
-                    batch_size=batch_size, device=device, stochastic_seed=s_val,
+                    batch_size=eval_batch_size, device=device, stochastic_seed=s_val,
                 )
                 gen_grids_list.append(g_arr)
                 exact_rates.append(ex_r)
@@ -581,7 +619,7 @@ def run_prompted_arm(
         else:
             pred_grids, exact_rate = evaluate_manifest_prompted(
                 model, processor, test_pack, split, man, legend, in_context_text,
-                batch_size=batch_size, device=device, stochastic_seed=None,
+                batch_size=eval_batch_size, device=device, stochastic_seed=None,
             )
             np.save(os.path.join(preds_dir, f"{split}.npy"), pred_grids)
             summary = CS.score_fixed(test_pack, man, pred_grids)
@@ -653,7 +691,7 @@ def run_lora_train_and_eval_arm(
     dummy_img = O.render_pil(train_pack["src_grid"][0])
     dummy_inputs = processor(
         text=processor.apply_chat_template([{"role": "user", "content": [{"type": "image"}, {"type": "text", "text": "test"}]}], add_generation_prompt=True, tokenize=False),
-        images=dummy_img,
+        images=[[dummy_img]],
         return_tensors="pt"
     )
     img_tok_id = getattr(peft_model.config, "image_token_id", 258880)
@@ -670,6 +708,11 @@ def run_lora_train_and_eval_arm(
     peft_model.train()
     step_times = []
     benchmarked = False
+    cutoff_hit = False
+    t_train_start = time.time()
+    if eval_batch_size > 12:
+        print(f"[cg_gemma4_ar] Note: Clamping eval batch size from {eval_batch_size} to safe KV cache limit 12")
+    eval_batch_size = min(eval_batch_size, 12)
 
     for ep in range(epochs):
         ep_seed = seed + ep
@@ -706,27 +749,27 @@ def run_lora_train_and_eval_arm(
 
                 # Build full conversational text with target response
                 b_full_texts = []
-                b_prefix_texts = []
                 for u_text, tgt_text in zip(b_prompts_user, b_targets):
                     msg_full = [
                         {"role": "user", "content": [{"type": "image"}, {"type": "text", "text": u_text}]},
                         {"role": "model", "content": tgt_text},
                     ]
-                    msg_prefix = [
-                        {"role": "user", "content": [{"type": "image"}, {"type": "text", "text": u_text}]},
-                    ]
                     b_full_texts.append(processor.apply_chat_template(msg_full, add_generation_prompt=False, tokenize=False))
-                    b_prefix_texts.append(processor.apply_chat_template(msg_prefix, add_generation_prompt=True, tokenize=False))
 
-                inputs_full = processor(text=b_full_texts, images=b_imgs, return_tensors="pt", padding=True).to(device)
-                inputs_prefix = processor(text=b_prefix_texts, images=b_imgs, return_tensors="pt", padding=True).to(device)
+                inputs_full = processor(text=b_full_texts, images=[[im] for im in b_imgs], return_tensors="pt", padding=True).to(device)
 
                 # Create labels with causal CE ONLY over target grid tokens; prompt/image masked with -100
                 labels = inputs_full["input_ids"].clone()
-                prefix_lens = inputs_prefix["attention_mask"].sum(dim=1)
                 for b_i in range(len(batch_items)):
-                    p_len = prefix_lens[b_i].item()
-                    labels[b_i, :p_len] = -100
+                    row = inputs_full["input_ids"][b_i].tolist()
+                    found_start = False
+                    for idx in range(len(row) - 3):
+                        if row[idx:idx+3] == [105, 4368, 107]:
+                            labels[b_i, :idx+3] = -100
+                            found_start = True
+                            break
+                    if not found_start:
+                        labels[b_i, :] = -100
                     # Also mask padding tokens
                     labels[b_i, inputs_full["attention_mask"][b_i] == 0] = -100
 
@@ -759,12 +802,41 @@ def run_lora_train_and_eval_arm(
                 mean_recent = np.mean(step_times[-20:]) if len(step_times) >= 20 else np.mean(step_times)
                 print(f"[cg_gemma4_ar] Step {global_step:04d}/{total_steps} | Loss: {accum_loss:.4f} | Speed: {mean_recent:.3f} s/step")
 
+            # Periodic checkpointing every 400 optimizer steps
+            if global_step % 400 == 0:
+                step_ckpt = os.path.join(ckpts_dir, f"step_{global_step}")
+                peft_model.save_pretrained(step_ckpt)
+                print(f"[cg_gemma4_ar] Saved intermediate checkpoint to {step_ckpt}")
+
+            # Hard wall-clock cutoff check (21:52 UTC / 15:52 CST = 1763070720)
+            if time.time() >= 1763070720:
+                print(f"\n[cg_gemma4_ar] !!! HARD WALL-CLOCK CUTOFF REACHED (21:52:00 UTC) !!!")
+                print(f"[cg_gemma4_ar] Halting training loop cleanly at step {global_step} to begin 9-split evaluation.")
+                cutoff_hit = True
+                break
+
         # Save epoch checkpoint
         ckpt_path = os.path.join(ckpts_dir, f"epoch_{ep+1}")
         peft_model.save_pretrained(ckpt_path)
         print(f"[cg_gemma4_ar] Saved checkpoint for Epoch {ep+1} to {ckpt_path}")
+        if cutoff_hit:
+            break
 
-    print(f"\n[cg_gemma4_ar] Training Complete! Total Steps: {global_step}. Starting 9-Split Evaluation...")
+    # Save final checkpoint and training metadata
+    final_ckpt = os.path.join(ckpts_dir, "final")
+    peft_model.save_pretrained(final_ckpt)
+    training_meta = {
+        "completed_steps": global_step,
+        "total_planned_steps": total_steps,
+        "completed_examples": global_step * micro_batch_size * accum_steps,
+        "final_loss": float(accum_loss),
+        "total_training_time_s": float(time.time() - t_train_start),
+        "cutoff_hit": cutoff_hit,
+    }
+    with open(os.path.join(output_dir, "training_meta.json"), "w") as meta_f:
+        json.dump(training_meta, meta_f, indent=2)
+    print(f"[cg_gemma4_ar] Saved final PEFT checkpoint and training_meta.json to {output_dir}")
+    print(f"\n[cg_gemma4_ar] Training Complete/Cutoff! Total Steps: {global_step}. Starting 9-Split Evaluation...")
 
     # Evaluation across 9 Exp A splits
     peft_model.eval()
@@ -809,7 +881,7 @@ def run_lora_train_and_eval_arm(
                         msg = [{"role": "user", "content": [{"type": "image"}, {"type": "text", "text": u_text}]}]
                         b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False))
 
-                    inputs = processor(text=b_prompts, images=b_imgs, return_tensors="pt", padding=True).to(device)
+                    inputs = processor(text=b_prompts, images=[[im] for im in b_imgs], return_tensors="pt", padding=True).to(device)
                     with torch.inference_mode():
                         outputs = peft_model.generate(
                             **inputs,
@@ -855,7 +927,7 @@ def run_lora_train_and_eval_arm(
                     msg = [{"role": "user", "content": [{"type": "image"}, {"type": "text", "text": u_text}]}]
                     b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False))
 
-                inputs = processor(text=b_prompts, images=b_imgs, return_tensors="pt", padding=True).to(device)
+                inputs = processor(text=b_prompts, images=[[im] for im in b_imgs], return_tensors="pt", padding=True).to(device)
                 with torch.inference_mode():
                     outputs = peft_model.generate(
                         **inputs,
@@ -885,7 +957,7 @@ def run_lora_train_and_eval_arm(
                     msg = [{"role": "user", "content": [{"type": "image"}, {"type": "text", "text": u_text}]}]
                     b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False))
 
-                inputs = processor(text=b_prompts, images=b_imgs, return_tensors="pt", padding=True).to(device)
+                inputs = processor(text=b_prompts, images=[[im] for im in b_imgs], return_tensors="pt", padding=True).to(device)
                 with torch.inference_mode():
                     outputs = peft_model.generate(
                         **inputs,
@@ -929,7 +1001,7 @@ def run_lora_train_and_eval_arm(
                         msg = [{"role": "user", "content": [{"type": "image"}, {"type": "text", "text": u_text}]}]
                         b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False))
 
-                    inputs = processor(text=b_prompts, images=b_imgs, return_tensors="pt", padding=True).to(device)
+                    inputs = processor(text=b_prompts, images=[[im] for im in b_imgs], return_tensors="pt", padding=True).to(device)
                     with torch.inference_mode():
                         outputs = peft_model.generate(
                             **inputs,
@@ -972,7 +1044,7 @@ def run_lora_train_and_eval_arm(
                     msg = [{"role": "user", "content": [{"type": "image"}, {"type": "text", "text": u_text}]}]
                     b_prompts.append(processor.apply_chat_template(msg, add_generation_prompt=True, tokenize=False))
 
-                inputs = processor(text=b_prompts, images=b_imgs, return_tensors="pt", padding=True).to(device)
+                inputs = processor(text=b_prompts, images=[[im] for im in b_imgs], return_tensors="pt", padding=True).to(device)
                 with torch.inference_mode():
                     outputs = peft_model.generate(
                         **inputs,
@@ -1025,8 +1097,8 @@ def main():
                         help="Path to test data pack")
     parser.add_argument("--output-dir", type=str, default=None,
                         help="Output directory (defaults to outputs/m2/arms/gemma4_ar_<mode>/)")
-    parser.add_argument("--batch-size", type=int, default=32,
-                        help="Batch size for prompted evaluation")
+    parser.add_argument("--batch-size", type=int, default=8,
+                        help="Batch size for evaluation")
     parser.add_argument("--epochs", type=int, default=3,
                         help="Number of LoRA training epochs")
     parser.add_argument("--lr", type=float, default=1e-4,
@@ -1035,9 +1107,9 @@ def main():
                         help="LoRA rank")
     parser.add_argument("--lora-alpha", type=int, default=128,
                         help="LoRA alpha")
-    parser.add_argument("--micro-batch-size", type=int, default=4,
+    parser.add_argument("--micro-batch-size", type=int, default=2,
                         help="Micro batch size for training")
-    parser.add_argument("--accum-steps", type=int, default=2,
+    parser.add_argument("--accum-steps", type=int, default=4,
                         help="Gradient accumulation steps")
     parser.add_argument("--seed", type=int, default=42,
                         help="Random seed")

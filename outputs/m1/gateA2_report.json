@@ -1,0 +1,15 @@
+{
+ "test_pack": "cand_test360_httpx_22.npy",
+ "items": 360,
+ "candidates_per_item": 22,
+ "max_centered_cosine": 0.9395677447319031,
+ "p95_centered_cosine": 0.9155817627906799,
+ "median_centered_cosine": 0.8757269978523254,
+ "min_centered_cosine": 0.7698056101799011,
+ "fraction_exceeding_0.85": 0.7277777777777777,
+ "share_above_085": 0.7277777777777777,
+ "prereg_definition": "Gate A2: Pre-flight near-tie candidate separation check (no threshold; records share > 0.85)",
+ "threshold_type": "informative_subset_partition",
+ "status": "RECORDED",
+ "verdict": "RECORDED_PER_PREREG"
+}

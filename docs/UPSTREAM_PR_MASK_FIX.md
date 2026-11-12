@@ -2,7 +2,7 @@
 
 - **Target Repository:** [huggingface/transformers](https://github.com/huggingface/transformers)
 - **Target Subsystem:** `transformers.models.diffusion_gemma.modeling_diffusion_gemma`
-- **Affected Versions:** `transformers>=5.11.0` through `5.20.2` and current `main`
+- **Affected Versions:** `transformers>=5.11.0` through `5.22.2` and current `main`
 - **Associated Patch File:** `src/patches/0001-fix-diffusion-gemma-prefill-multimodal-masks.patch`
 - **Runtime Drop-in Shim:** `src/dg_attn_fix.py`
 

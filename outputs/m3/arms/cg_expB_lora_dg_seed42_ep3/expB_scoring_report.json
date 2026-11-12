@@ -1,0 +1,202 @@
+{
+  "arm_name": "cg_expB_lora_dg_seed42_ep3",
+  "manifests": {
+    "instr_seen": {
+      "n_items": 360,
+      "site_hit": 0.26666666666666666,
+      "all_sites_hit": 0.26666666666666666,
+      "top_is_site": 0.005555555555555556,
+      "changed_recall": 0.009193121693121692,
+      "drift": 17.978013178506448,
+      "canvas_3class_acc": 0.9823,
+      "site_hit_by_edit": {
+        "rename": 0.022222222222222223,
+        "add_param": 0.03333333333333333,
+        "delete": 1.0,
+        "add_decorator": 0.011111111111111112
+      },
+      "site_outcomes": {
+        "correct": 0.26666666666666666,
+        "identity": 0.008333333333333333,
+        "wrong_arg": 0.0,
+        "other_edit": 0.725
+      },
+      "chance_site_hit": 0.125
+    },
+    "instr_unseen": {
+      "n_items": 360,
+      "site_hit": 0.2861111111111111,
+      "all_sites_hit": 0.2861111111111111,
+      "top_is_site": 0.005555555555555556,
+      "changed_recall": 0.012945156695156695,
+      "drift": 17.882864294412226,
+      "canvas_3class_acc": 0.9828,
+      "site_hit_by_edit": {
+        "rename": 0.03333333333333333,
+        "add_param": 0.03333333333333333,
+        "delete": 1.0,
+        "add_decorator": 0.07777777777777778
+      },
+      "site_outcomes": {
+        "correct": 0.2861111111111111,
+        "identity": 0.013888888888888888,
+        "wrong_arg": 0.0,
+        "other_edit": 0.7
+      },
+      "chance_site_hit": 0.125
+    },
+    "instr_shuf": {
+      "n_items": 360,
+      "site_hit": 0.25277777777777777,
+      "all_sites_hit": 0.25277777777777777,
+      "top_is_site": 0.019444444444444445,
+      "changed_recall": 0.018386243386243385,
+      "drift": 17.969458593398485,
+      "canvas_3class_acc": 0.9835,
+      "site_hit_by_edit": {
+        "rename": 0.0,
+        "add_param": 0.0,
+        "delete": 1.0,
+        "add_decorator": 0.011111111111111112
+      },
+      "site_outcomes": {
+        "correct": 0.25277777777777777,
+        "identity": 0.002777777777777778,
+        "wrong_arg": 0.0,
+        "other_edit": 0.7444444444444445
+      },
+      "chance_site_hit": 0.125
+    },
+    "nodeB_test360_httpx_unseenargs": {
+      "n_items": 360,
+      "site_hit": 0.25555555555555554,
+      "all_sites_hit": 0.25555555555555554,
+      "top_is_site": 0.0,
+      "changed_recall": 0.0048902894491129785,
+      "drift": 18.00892088017866,
+      "canvas_3class_acc": 0.9828,
+      "site_hit_by_edit": {
+        "rename": 0.011111111111111112,
+        "add_param": 0.011111111111111112,
+        "delete": 1.0,
+        "add_decorator": 0.0
+      },
+      "site_outcomes": {
+        "correct": 0.25555555555555554,
+        "identity": 0.011111111111111112,
+        "wrong_arg": 0.005555555555555556,
+        "other_edit": 0.7277777777777777
+      },
+      "chance_site_hit": 0.125
+    },
+    "nodeB_test180_httpx_renameclass": {
+      "n_items": 180,
+      "site_hit": 0.5,
+      "all_sites_hit": 0.5,
+      "top_is_site": 0.0,
+      "changed_recall": 0.002839506172839506,
+      "drift": 18.252972845396425,
+      "canvas_3class_acc": 0.984,
+      "site_hit_by_edit": {
+        "rename": 0.0,
+        "delete": 1.0
+      },
+      "site_outcomes": {
+        "correct": 0.5,
+        "identity": 0.0,
+        "wrong_arg": 0.0,
+        "other_edit": 0.5
+      },
+      "chance_site_hit": 0.25
+    },
+    "nodeB_multi_test360_httpx_k2_1pass": {
+      "n_items": 360,
+      "site_hit": 0.23194444444444445,
+      "all_sites_hit": 0.05277777777777778,
+      "top_is_site": 0.005555555555555556,
+      "changed_recall": 0.024223707049794003,
+      "drift": 18.07409909856682,
+      "canvas_3class_acc": 0.9743,
+      "site_hit_by_edit": {
+        "add_param": 0.0,
+        "add_decorator": 0.0,
+        "delete": 0.9940476190476191,
+        "rename": 0.0
+      },
+      "site_outcomes": {
+        "correct": 0.23194444444444445,
+        "identity": 0.0,
+        "wrong_arg": 0.001388888888888889,
+        "other_edit": 0.7666666666666667
+      },
+      "chance_site_hit": 0.125
+    },
+    "nodeB_multi_test360_httpx_k2_refeed": {
+      "n_items": 360,
+      "site_hit": 0.2361111111111111,
+      "all_sites_hit": 0.05277777777777778,
+      "top_is_site": 0.016666666666666666,
+      "changed_recall": 0.02545255653498407,
+      "drift": 18.6629570141548,
+      "canvas_3class_acc": 0.9779,
+      "site_hit_by_edit": {
+        "add_param": 0.0,
+        "add_decorator": 0.01092896174863388,
+        "delete": 1.0,
+        "rename": 0.0
+      },
+      "site_outcomes": {
+        "correct": 0.2361111111111111,
+        "identity": 0.0,
+        "wrong_arg": 0.002777777777777778,
+        "other_edit": 0.7611111111111111
+      },
+      "chance_site_hit": 0.125
+    },
+    "nodeB_multi_test360_httpx_k4_1pass": {
+      "n_items": 360,
+      "site_hit": 0.2652777777777778,
+      "all_sites_hit": 0.005555555555555556,
+      "top_is_site": 0.027777777777777776,
+      "changed_recall": 0.06336579879315742,
+      "drift": 18.31229643696752,
+      "canvas_3class_acc": 0.9621,
+      "site_hit_by_edit": {
+        "add_param": 0.0,
+        "delete": 1.0,
+        "rename": 0.0,
+        "add_decorator": 0.0
+      },
+      "site_outcomes": {
+        "correct": 0.2652777777777778,
+        "identity": 0.0,
+        "wrong_arg": 0.0,
+        "other_edit": 0.7347222222222223
+      },
+      "chance_site_hit": 0.125
+    },
+    "nodeB_multi_test360_httpx_k4_refeed": {
+      "n_items": 360,
+      "site_hit": 0.2659722222222222,
+      "all_sites_hit": 0.005555555555555556,
+      "top_is_site": 0.044444444444444446,
+      "changed_recall": 0.06556046048401831,
+      "secondary_hit": 0.16241692469928823,
+      "drift": 19.336926852120254,
+      "canvas_3class_acc": 0.963,
+      "site_hit_by_edit": {
+        "add_param": 0.0,
+        "delete": 1.0,
+        "rename": 0.0,
+        "add_decorator": 0.0027472527472527475
+      },
+      "site_outcomes": {
+        "correct": 0.2659722222222222,
+        "identity": 0.0,
+        "wrong_arg": 0.0,
+        "other_edit": 0.7340277777777777
+      },
+      "chance_site_hit": 0.125
+    }
+  }
+}
