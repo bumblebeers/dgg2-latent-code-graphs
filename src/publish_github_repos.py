@@ -69,11 +69,18 @@ def audit_tree(tree_dir: Path) -> None:
 
 
 def copy_clean_dir(src: Path, dst: Path) -> None:
-    ignore = shutil.ignore_patterns(
-        "__pycache__", "*.pyc", "*.pyo", "build", "dist", "*.egg-info",
-        ".pytest_cache", ".ipynb_checkpoints", "*.json.gz", "*.npz", "*.npy", "*.pt"
-    )
-    shutil.copytree(src, dst, ignore=ignore)
+    def _ignore(cur_dir: str, names: list[str]) -> set[str]:
+        base = shutil.ignore_patterns(
+            "__pycache__", "*.pyc", "*.pyo", "build", "dist", "*.egg-info",
+            ".pytest_cache", ".ipynb_checkpoints", "*.json.gz", "*.npz", "*.npy", "*.pt"
+        )(cur_dir, names)
+        cur_p = Path(cur_dir)
+        for n in names:
+            if (cur_p / n).is_symlink():
+                base.add(n)
+        return base
+
+    shutil.copytree(src, dst, ignore=_ignore)
 
 
 def stage_main_repo(commit_message: str, push: bool = True) -> None:
