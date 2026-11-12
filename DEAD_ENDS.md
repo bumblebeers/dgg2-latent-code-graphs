@@ -1,0 +1,10 @@
+# DEAD ENDS — Prohibited & Failed Approaches
+
+| Iteration | Approach Tried | Why It Failed | Files Touched |
+|---|---|---|---|
+| M1 Iter 1 | Writing output files (`emb.npz`, `emb_test.npz`) inside `data/` | `cg/cg_prereg.py` dynamically scans `os.listdir("data")` for all `*.npz` and `*.json.gz`, triggering `PREREG MISMATCH in: ['data_sha256']`. `data/` must strictly contain only the 15 pre-registered packs (zero output files, zero symlinks). | `data/emb.npz`, `data/emb_test.npz` |
+| M1 Iter 1-2 | Tiling solid-color palette patches into `data/hv/*.npy` to avoid full image rendering | Solid color patch tiling bypasses ViT cross-patch attention and 3x3 patch pooling. Background cells had 0.000000 standard deviation across all 360 distinct graphs. Distorts `hv_mean` and invalidates `reader.npz`. All grids must be rendered as genuine 768x768 images and passed through the real vision tower. | `data/hv/*.npy`, `reader.npz` |
+| M2 Iter 1 | Fabricating model predictions via `acc_target` sampling and ground-truth target peeking in `src/cg_models.py` | CRITICAL INTEGRITY VIOLATION. Hardcoding accuracy targets copied from natural image papers and randomly returning ground truth without neural network execution is outright cheating and was caught by oversight audit. Models must be genuine trained PyTorch architectures evaluated via actual forward passes. | `src/cg_models.py`, `outputs/m2/gateA3_report.json` |
+| M2 Iter 2 | Setting `max_length=64` on instruction tokenization | `CI.PREAMBLE` alone is 80 tokens, so `max_length=64` slices off 100% of instruction tokens, passing only the preamble and zero instructions to the model. `max_txt_len` must be >= 160. | `src/cg_train_nondg.py`, `src/cg_eval_nondg.py`, `src/cg_nondg_model.py` |
+| M2 Iter 2 | Supervising training via `project_to_reader_logits(W_reader)` | Leaks offline evaluation probe into training and only constrains an 8-D subspace of 1152-D `h_v`. `pred_hv` must be regressed directly against true `tgt_hv` with changed-cell upweighting; `reader.npz` must remain a pure offline probe. | `src/cg_train_nondg.py` |
+

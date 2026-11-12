@@ -1,0 +1,23 @@
+# Generated artifacts, weights, and large dataset packs
+outputs/
+scratch/
+*.pt
+*.safetensors
+*.npy
+*.npz
+*.json.gz
+data/hv/
+*.zip
+*.tar.gz
+*.tar
+
+# Python / build / notebook caches
+*.log
+__pycache__/
+*.py[cod]
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/

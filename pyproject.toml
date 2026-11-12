@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dgg2-latent-code-graphs"
+version = "0.1.0"
+description = "DiffusionGemma Latent Code Graphs and Continuous Symbol Embeddings"
+authors = [{name = "bumblebeers", email = "21022766+bumblebeers@users.noreply.github.com"}]
+requires-python = ">=3.10"
+
+[project.urls]
+Homepage = "https://github.com/bumblebeers/dgg2-latent-code-graphs"
+Repository = "https://github.com/bumblebeers/dgg2-latent-code-graphs"
+
+[tool.pytest.ini_options]
+pythonpath = [".", "cg", "src", "src/dgg_latent", "src/dgg_codebook", "src/dgg_vit_decoder"]
+testpaths = ["tests"]

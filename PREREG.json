@@ -1,0 +1,470 @@
+{
+ "experiment_A_grid": {
+  "interface": "cg_sec27_spec.py (same shape as dgg2_sec27_spec.py); runner base: colab_runner_sec27_part0_1_2.py",
+  "generation_readout": "stock_generate_with_readout, readout_source == final_sc_denoising_step; no two-pass readout",
+  "candidate_states_in_order": [
+   "identity",
+   "reverse_edges",
+   "reverse_order",
+   "delete_selected",
+   "keep_callees",
+   "mark_reachable",
+   "delete_tests",
+   "selected_first",
+   "delete_classes",
+   "keep_callers",
+   "mark_ancestors",
+   "delete_methods",
+   "reverse_edges+reverse_order",
+   "reverse_edges+delete_selected",
+   "reverse_order+keep_callees",
+   "reverse_order+mark_reachable",
+   "reverse_edges+delete_tests",
+   "reverse_order+delete_selected",
+   "reverse_edges+keep_callees",
+   "reverse_edges+mark_reachable",
+   "reverse_order+delete_tests",
+   "delete_tests+mark_reachable"
+  ],
+  "chance_nearest_candidate": 0.045454545454545456,
+  "all_states_test_cache": [
+   "identity",
+   "reverse_edges",
+   "reverse_order",
+   "delete_selected",
+   "keep_callees",
+   "mark_reachable",
+   "delete_tests",
+   "selected_first",
+   "delete_classes",
+   "keep_callers",
+   "mark_ancestors",
+   "delete_methods",
+   "reverse_edges+reverse_order",
+   "reverse_edges+delete_selected",
+   "reverse_order+keep_callees",
+   "reverse_order+mark_reachable",
+   "reverse_edges+delete_tests",
+   "reverse_order+delete_selected",
+   "reverse_edges+keep_callees",
+   "reverse_edges+mark_reachable",
+   "reverse_order+delete_tests",
+   "delete_tests+mark_reachable",
+   "delete_one_test#0",
+   "delete_one_test#1",
+   "delete_one_test#2",
+   "delete_one_callee#0",
+   "delete_one_callee#1",
+   "delete_one_callee#2",
+   "cut_one_call#0",
+   "cut_one_call#1",
+   "cut_one_call#2",
+   "all#delete_one_callee",
+   "all#cut_one_call"
+  ],
+  "train_states_cache": [
+   "identity",
+   "reverse_edges",
+   "reverse_order",
+   "delete_selected",
+   "keep_callees",
+   "mark_reachable",
+   "delete_tests",
+   "selected_first",
+   "delete_classes",
+   "reverse_edges+reverse_order",
+   "reverse_edges+delete_selected",
+   "reverse_order+keep_callees",
+   "reverse_order+mark_reachable",
+   "reverse_edges+delete_tests",
+   "delete_one_test#0",
+   "delete_one_test#1",
+   "delete_one_test#2",
+   "delete_one_callee#0",
+   "delete_one_callee#1",
+   "delete_one_callee#2",
+   "cut_one_call#0",
+   "cut_one_call#1",
+   "cut_one_call#2"
+  ],
+  "train_ops": [
+   "identity",
+   "reverse_edges",
+   "reverse_order",
+   "delete_selected",
+   "keep_callees",
+   "mark_reachable",
+   "delete_tests",
+   "selected_first",
+   "delete_classes",
+   "reverse_edges+reverse_order",
+   "reverse_edges+delete_selected",
+   "reverse_order+keep_callees",
+   "reverse_order+mark_reachable",
+   "reverse_edges+delete_tests",
+   "delete_one_test",
+   "delete_one_callee",
+   "cut_one_call"
+  ],
+  "heldout_ops": [
+   "keep_callers",
+   "mark_ancestors",
+   "delete_methods",
+   "reverse_order+delete_selected",
+   "reverse_edges+keep_callees",
+   "reverse_edges+mark_reachable",
+   "reverse_order+delete_tests",
+   "delete_tests+mark_reachable"
+  ],
+  "heldout_kinds": {
+   "mirror_of_trained": [
+    "keep_callers",
+    "mark_ancestors"
+   ],
+   "new_family_member": [
+    "delete_methods"
+   ]
+  },
+  "heldout_chains_for_refeed": {
+   "keep_callers": [
+    "reverse_edges",
+    "keep_callees",
+    "reverse_edges"
+   ],
+   "mark_ancestors": [
+    "reverse_edges",
+    "mark_reachable",
+    "reverse_edges"
+   ]
+  },
+  "open_ended_ops": [
+   "delete_one_test",
+   "delete_one_callee",
+   "cut_one_call"
+  ],
+  "open_valid_answers_per_source": [
+   2,
+   3
+  ],
+  "op_family": {
+   "identity": "fixed",
+   "reverse_edges": "fixed",
+   "reverse_order": "fixed",
+   "delete_selected": "selected",
+   "keep_callees": "neighbourhood",
+   "mark_reachable": "multi_hop",
+   "delete_tests": "attribute",
+   "selected_first": "selected",
+   "delete_classes": "attribute",
+   "reverse_edges+reverse_order": "comp_fixed_fixed",
+   "reverse_edges+delete_selected": "comp_fixed_content",
+   "reverse_order+keep_callees": "comp_fixed_content",
+   "reverse_order+mark_reachable": "comp_fixed_content",
+   "reverse_edges+delete_tests": "comp_fixed_content",
+   "delete_one_test": "open",
+   "delete_one_callee": "open",
+   "cut_one_call": "open",
+   "keep_callers": "heldout_neighbourhood",
+   "mark_ancestors": "heldout_multi_hop",
+   "delete_methods": "heldout_attribute",
+   "reverse_order+delete_selected": "heldout_comp_fixed_content",
+   "reverse_edges+keep_callees": "heldout_comp_fixed_content",
+   "reverse_edges+mark_reachable": "heldout_comp_fixed_content",
+   "reverse_order+delete_tests": "heldout_comp_fixed_content",
+   "delete_tests+mark_reachable": "heldout_comp_content_content"
+  },
+  "min_candidate_cell_difference": 2,
+  "instruction_strings": {
+   "total": 182,
+   "sha256_of_all_strings": "631477122daf6335d2a35e5c74a7b114db6be0baf038f382e610ea1d34312f59",
+   "preamble_sha256": "b1bdd72ff558d312fbfbf7b0655f49cc894fc278a15a6bbef85b6ee066524e95"
+  },
+  "train": {
+   "pack": "gridA_train1608.npz",
+   "repos": [
+    "fastapi",
+    "rich",
+    "requests"
+   ],
+   "sources": 1608,
+   "schedule": "cg_sec27_spec.build_cg_contrastive_schedule(pack, epoch_seed=seed + epoch, ops_per_source_per_epoch=8), 3 epochs",
+   "optimizer_steps_at_batch_8": 4824
+  },
+  "test": {
+   "primary": "gridA_test360_httpx.npz",
+   "second_repo": "gridA_test360_click.npz",
+   "manifests": "cg_sec27_spec.build_cg_eval_manifests(pack)",
+   "scoring": "cg_score_preds.py on dumped h_v"
+  },
+  "arms": [
+   "LoRA DG (seeds 42, 1337)",
+   "Frozen DG",
+   "Non-DG + frozen instruction (2 seeds)",
+   "Non-DG + encoder LoRA (2 seeds)",
+   "shuffled-instruction manifest",
+   "source copy",
+   "reader ceiling on true h_v"
+  ],
+  "gate_A1_cell_probe": {
+   "overall_cell_acc_min": 0.99,
+   "every_class_acc_min": 0.95,
+   "reader_fit_states": [
+    "identity",
+    "mark_reachable",
+    "delete_tests"
+   ],
+   "fallback": "8 symbols per grid, 96 px cells"
+  },
+  "gate_A2_candidate_separation": "report the share of test items whose two closest candidates have centred h_v cosine > 0.85; h_v K-way accuracy is then reported on all items and on the <= 0.85 subset",
+  "primary_metrics": [
+   "K-way nearest-candidate accuracy on reader grids (ties count as wrong)",
+   "exact grid match",
+   "changed-cell accuracy",
+   "edge F1",
+   "open-ended: valid / none / all / ambiguous, and diversity over 4 generations"
+  ],
+  "stated_before_running": {
+   "mirror_heldout": "expected weak in a single pass, like Section 27 darken (8.2%); the 3-step re-feed chain is the test of whether iteration recovers them",
+   "family_heldout": "delete_methods is the analogue of Section 27 blue_tint (60.2%)",
+   "heldout_compositions": "single pass may fail as Section 27 Geo x Geo did (0.0-0.5%); 2-step re-feed is reported next to it",
+   "open_ended": "the non-DG baselines are deterministic regressors and are expected to land on none or ambiguous; whether LoRA DG commits to one valid answer is the open question"
+  },
+  "training_seeds": [
+   42,
+   1337
+  ]
+ },
+ "experiment_B_node_vectors": {
+  "candidate_edits_function": [
+   "identity",
+   "rename",
+   "add_param",
+   "delete",
+   "add_decorator",
+   "rename(wrong arg)",
+   "add_param(wrong arg)",
+   "add_decorator(wrong arg)"
+  ],
+  "candidate_edits_class_heldout": [
+   "identity",
+   "rename",
+   "delete",
+   "rename(wrong arg)"
+  ],
+  "argument_banks": {
+   "rename": {
+    "seen": [
+     "{n}_impl",
+     "{n}_internal",
+     "do_{n}",
+     "{n}_v2",
+     "{n}_legacy",
+     "safe_{n}",
+     "{n}_helper",
+     "base_{n}"
+    ],
+    "unseen": [
+     "{n}_core",
+     "run_{n}",
+     "{n}_ex",
+     "old_{n}"
+    ]
+   },
+   "params": {
+    "seen": [
+     [
+      "timeout",
+      "None"
+     ],
+     [
+      "verbose",
+      "False"
+     ],
+     [
+      "strict",
+      "True"
+     ],
+     [
+      "retries",
+      "3"
+     ],
+     [
+      "logger",
+      "None"
+     ],
+     [
+      "dry_run",
+      "False"
+     ],
+     [
+      "encoding",
+      "'utf-8'"
+     ],
+     [
+      "limit",
+      "100"
+     ]
+    ],
+    "unseen": [
+     [
+      "cache",
+      "None"
+     ],
+     [
+      "debug",
+      "False"
+     ],
+     [
+      "max_depth",
+      "5"
+     ],
+     [
+      "callback",
+      "None"
+     ]
+    ]
+   },
+   "decorators": {
+    "seen": [
+     "deprecated",
+     "functools.lru_cache(maxsize=None)",
+     "trace_calls",
+     "retry(3)",
+     "profile",
+     "synchronized"
+    ],
+    "unseen": [
+     "timed",
+     "validate_args",
+     "memoize"
+    ]
+   }
+  },
+  "templates_sha256": "8e01128465247863f2a5184aa52e03332d74afca5d8572f3113afbc9eed5946b",
+  "n_slots": 256,
+  "train": {
+   "pack": "nodeB_train1608.json.gz",
+   "repos": [
+    "fastapi",
+    "rich",
+    "requests"
+   ]
+  },
+  "test": {
+   "primary": "nodeB_test360_httpx.json.gz",
+   "unseen_arguments": "nodeB_test360_httpx_unseenargs.json.gz",
+   "heldout_edit_rename_class": "nodeB_test180_httpx_renameclass.json.gz",
+   "second_repo": "nodeB_test360_click.json.gz"
+  },
+  "gate_B0_encoder": {
+   "participation_ratio_min": 20.0,
+   "centered_cos_mean_max": 0.2,
+   "duplicate_slot_rate_max": 0.05,
+   "median_visibility_min": 0.1,
+   "oracle_acc_at_noise_0.25_min": 0.9
+  },
+  "gate_B1_baseline": "non-DG baseline, seen phrasings, httpx test: `delete` items localised (largest predicted change is the primary slot) on >= 50% of items; otherwise switch to the slot-assisted instruction variant and say so",
+  "loss_weighting": "changed slots share 0.5 of each example's loss weight, unchanged slots share 0.5; all arms",
+  "canvas_teacher": "one token per slot: unchanged / edited / deleted (hard cross-entropy)",
+  "primary_metrics": [
+   "primary-slot nearest-candidate accuracy (Euclidean, standardised space; chance 1/8)",
+   "localisation top-1 and recall@5 of changed slots",
+   "right-edit-wrong-argument rate"
+  ],
+  "training_seeds": [
+   42,
+   1337
+  ]
+ },
+ "extension_larger_grids": {
+  "sizes": {
+   "32": {
+    "cells_per_token": 4,
+    "train": "gridA_n32_train1608.npz",
+    "test": "gridA_n32_test360_httpx.npz"
+   },
+   "48": {
+    "cells_per_token": 9,
+    "train": "gridA_n48_train1608.npz",
+    "test": "gridA_n48_test360_httpx.npz"
+   }
+  },
+  "same_as_experiment_A": [
+   "fixed operations and splits (no open-ended operations at these sizes)",
+   "instruction banks with cg_sec27_spec.preamble(pack)",
+   "manifests",
+   "schedule",
+   "metrics"
+  ],
+  "gate_A1_per_size": {
+   "overall_cell_acc_min": 0.99,
+   "every_class_acc_min": 0.95,
+   "if_failed": "report the reader accuracy at that size as the result; do not train"
+  },
+  "training_seeds": [
+   42
+  ]
+ },
+ "extension_multi_symbol_edits": {
+  "train": {
+   "pack": "nodeB_multi_train1608.json.gz",
+   "symbols_per_instruction": [
+    1,
+    2
+   ]
+  },
+  "test": {
+   "seen_count": "nodeB_multi_test360_httpx_k2.json.gz",
+   "heldout_count": "nodeB_multi_test360_httpx_k4.json.gz",
+   "single": "nodeB_test360_httpx.json.gz"
+  },
+  "refeed_variant": "the single-symbol model applied once per site sentence (sites[k]['instr_seen'][0]), feeding its output vectors back as the next input",
+  "primary_metrics": [
+   "all-sites-correct rate",
+   "per-site nearest-candidate accuracy",
+   "changed-slot recall"
+  ],
+  "runs_only_if": "gates B0 and B1 passed and the single-symbol run trains",
+  "training_seeds": [
+   42
+  ]
+ },
+ "data_sha256": {
+  "gridA_n32_test360_httpx.npz": "df2ec673aa332790608c6b63ab96d0bacc68e37885066061f261d7ab638a5e3e",
+  "gridA_n32_train1608.npz": "907627a67a48cc39edcdf96a90f2b42b2756d394a7c97e21f379509468d24fb3",
+  "gridA_n48_test360_httpx.npz": "5451655ef292f8cd59187fa5f5210120baf5b082131763c8c9346668c92c7fc4",
+  "gridA_n48_train1608.npz": "6155364da6712d2af3e4a1ac4e51e0da10acbcb6bc242583fe5fba44d1423b56",
+  "gridA_test360_click.npz": "98bbd90c9a0890604966f662a4c70e68aad872ad6e976ae0d17119490ce1068b",
+  "gridA_test360_httpx.npz": "baaceeee81947ae27012f113e0e21ba26b0e4fc00e3e9853416d3175e875f084",
+  "gridA_train1608.npz": "193434e7290bff4e509fd26c1b7ad97eee3f02692ec27dad719de8deb5ae7ae4",
+  "nodeB_multi_test360_httpx_k2.json.gz": "1150f4763410437c7494809e8cfbda602004bada7359cb93729f25241f258cad",
+  "nodeB_multi_test360_httpx_k4.json.gz": "884c30e50789bbd19f0c28279c326d8110543b37cc72a8c060adbd938c42b26b",
+  "nodeB_multi_train1608.json.gz": "d4cdd71077b7385a00baf5385621335ddf93e8d77cbf4fdffb0630e4fad3dcbe",
+  "nodeB_test180_httpx_renameclass.json.gz": "8f30dd81ff05f2b5402e199433fe701fd19561d45955362fc5742ebe4cfb676a",
+  "nodeB_test360_click.json.gz": "ab249ef737e0acf22643239740788a0f04971c398b66b91a2302207f4eaeea49",
+  "nodeB_test360_httpx.json.gz": "5e4294f84a053e3aa84de3eb1ba036e2fb69d65facf930c08034824eccc99665",
+  "nodeB_test360_httpx_unseenargs.json.gz": "ec22e88aa0abccbcfaee7d7ccfb522211778ff6a8a4b5002759e64515e012741",
+  "nodeB_train1608.json.gz": "66763fabd81322febdd3f579310fcdd66d359c58d3c29ab5f843bdbd8ea268e6"
+ },
+ "graph_sha256": {
+  "click.json.gz": "551259b218672628aa540f182f0308d26a60b17d22a42afbd2496e8c78153b70",
+  "fastapi.json.gz": "ee2532f873b902f1e72bbd5849079f834d5262c313f9f4255cf7cbdd8a875799",
+  "httpx.json.gz": "647fde487180a68d1db6aeddbf056c4a69f5b8c8b008f486b2a8a5ffc4c52bb1",
+  "requests.json.gz": "6e5fa4784d47f9d6cf416433a932f84c7d95fb12f873e5c4d79190e29788e645",
+  "rich.json.gz": "a699248efa45a95685803cd1012f84530e7b107ef9256b66f78f924a606d464c"
+ },
+ "code_sha256": {
+  "cg_contact_sheet.py": "ac3969bd44b7cc1b9ca2eb64be22ffedc69af575f35067c5785a268e3fbd0d4e",
+  "cg_extract.py": "0c49f0d07fb5bc32bba38be0e59e9192c222c9bee245307429570b32b80fdb26",
+  "cg_grid_dataset.py": "32e0673575cef491ebeee3c81a950ebf323e390e173d42ab12696d3a0439a8cc",
+  "cg_hv_probe.py": "fe09c1d9c45c036f8e3f33a7b4036378ebd76b0e88b927a4db0a83a34a7ae2c1",
+  "cg_instructions.py": "e266a296663b5c13c9cc5b39c917ca61673aeaf2091cc8bafdf6202dcfdf7678",
+  "cg_metrics.py": "d2c806cd8810d72928db1b492511c3f7c9a644ae3141e6bd8c0ce5a33ca5cc6c",
+  "cg_node_dataset.py": "6bde950a951990139519e37ff442015716ac525afe87f9ca4f299b26739d0231",
+  "cg_node_gate.py": "b962270bd4f408cc96f5ae6faf0e47dcae393053b8ff7eccff07d7da26cb9a08",
+  "cg_node_metrics.py": "5f2183cf297a0c2ed41698b59dc970a5eb9c1871b1201ae6e7ec383c99d7e7e0",
+  "cg_ops.py": "1435897bb4fd87ff0af9d9e2dd9c1cc23261154a70627a40b9ff1a703580abb4",
+  "cg_score_preds.py": "7ed90511e8bb6e48a5dc421f2303bcb096756acfef70144cb2fec0d2f9ee096f",
+  "cg_sec27_spec.py": "8ef072dbe87175c9ecae31ca98bb58affce488dce584a12851a8baed9c93350c"
+ }
+}

@@ -1,0 +1,19 @@
+{
+  "id": "unclebumblebeer/dgg2-latent-code-graphs-demo",
+  "title": "DiffusionGemma 2: Latent Code Graphs & Embeddings Demo",
+  "code_file": "dgg2_latent_code_graphs_demo.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": "false",
+  "enable_gpu": "true",
+  "enable_tpu": "false",
+  "enable_internet": "true",
+  "dataset_sources": [
+    "unclebumblebeer/dgg2-code-graph-benchmarks"
+  ],
+  "competition_sources": [
+    "gemma-4-developer-agent-paper"
+  ],
+  "kernel_sources": [],
+  "model_sources": []
+}
